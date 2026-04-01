@@ -76,7 +76,9 @@ export default function Hero() {
                 Get a Free Quote
               </a>
               <a
-                href="/contact"
+                href="https://calendly.com/federico-smoothfenceusa/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
                   inline-flex items-center justify-center
                   rounded-full
@@ -91,7 +93,7 @@ export default function Hero() {
                   focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream
                 "
               >
-                Contact Us
+                📅 Schedule a Visit
               </a>
             </div>
           </div>
