@@ -1,0 +1,157 @@
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
+
+type QuotePayload = {
+  fullName: string;
+  phone: string;
+  email: string;
+  address: string;
+  fenceType: string;
+  linearFeet?: string;
+  hoa: string;
+  preferredDate?: string;
+  message: string;
+};
+
+type FieldErrors = Partial<Record<keyof QuotePayload, string>>;
+
+export const runtime = "nodejs";
+
+const requiredFields: Array<keyof QuotePayload> = [
+  "fullName",
+  "phone",
+  "email",
+  "address",
+  "fenceType",
+  "hoa",
+  "message",
+];
+
+const templateLine = (label: string, value?: string) =>
+  value ? `<p><strong>${label}:</strong> ${value}</p>` : "";
+
+const templateLineText = (label: string, value?: string) =>
+  value ? `${label}: ${value}` : "";
+
+export async function POST(request: Request) {
+  let payload: QuotePayload;
+
+  try {
+    payload = await request.json();
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "Invalid JSON payload" },
+      { status: 400 }
+    );
+  }
+
+  const fieldErrors: FieldErrors = {};
+
+  for (const field of requiredFields) {
+    const value = payload[field];
+    if (typeof value !== "string" || value.trim().length === 0) {
+      fieldErrors[field] = "This field is required.";
+    }
+  }
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Validation failed",
+        details: fieldErrors,
+      },
+      { status: 400 }
+    );
+  }
+
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const leadsToEmail = process.env.LEADS_TO_EMAIL;
+  const emailFrom = process.env.EMAIL_FROM;
+
+  if (!resendApiKey || !leadsToEmail || !emailFrom) {
+    console.error("Missing email configuration");
+    return NextResponse.json(
+      { ok: false, error: "Email service is not configured correctly." },
+      { status: 500 }
+    );
+  }
+
+  const resend = new Resend(resendApiKey);
+  const subject = `Nueva solicitud de cotización - ${payload.fullName}`;
+
+  const textBody = [
+    "Detalles del prospecto:",
+    templateLineText("Nombre Completo", payload.fullName),
+    templateLineText("Teléfono", payload.phone),
+    templateLineText("Correo", payload.email),
+    templateLineText("Dirección", payload.address),
+    templateLineText("Tipo de Cerca", payload.fenceType),
+    templateLineText("Pies lineales", payload.linearFeet),
+    templateLineText("HOA", payload.hoa),
+    templateLineText("Fecha preferida", payload.preferredDate),
+    "",
+    "Mensaje:",
+    payload.message,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const htmlBody = `
+    <div>
+      <h2>Solicitud de cotización</h2>
+      ${templateLine("Nombre Completo", payload.fullName)}
+      ${templateLine("Teléfono", payload.phone)}
+      ${templateLine("Correo", payload.email)}
+      ${templateLine("Dirección", payload.address)}
+      ${templateLine("Tipo de Cerca", payload.fenceType)}
+      ${templateLine("Pies lineales", payload.linearFeet)}
+      ${templateLine("HOA", payload.hoa)}
+      ${templateLine("Fecha preferida", payload.preferredDate)}
+      <p><strong>Mensaje:</strong></p>
+      <p>${payload.message}</p>
+    </div>
+  `;
+
+  const { error } = await resend.emails.send({
+    from: emailFrom,
+    to: [leadsToEmail],
+    subject,
+    replyTo: payload.email,
+    text: textBody,
+    html: htmlBody,
+  });
+
+  if (error) {
+    console.error("Resend error:", error);
+    return NextResponse.json(
+      { ok: false, error: "No se pudo enviar el correo." },
+      { status: 502 }
+    );
+  }
+
+  // ── Save lead to Google Sheets CRM (fire-and-forget) ──
+  const sheetsWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (sheetsWebhook) {
+    fetch(sheetsWebhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fullName: payload.fullName,
+        phone: payload.phone,
+        email: payload.email,
+        address: payload.address,
+        fenceType: payload.fenceType,
+        linearFeet: payload.linearFeet ?? "",
+        hoa: payload.hoa,
+        preferredDate: payload.preferredDate ?? "",
+        message: payload.message,
+        submittedAt: new Date().toISOString(),
+      }),
+    }).catch((err) => console.error("Sheets webhook error:", err));
+  }
+
+  return NextResponse.json({ ok: true }, { status: 200 });
+}
+
+
