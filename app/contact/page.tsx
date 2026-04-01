@@ -51,11 +51,33 @@ export default function ContactPage() {
 
               <div className="mt-8 space-y-3 text-sm">
                 <p className="font-semibold uppercase tracking-wide text-brand-green">
-                  Prefer to call?
+                  Prefer to schedule directly?
                 </p>
-                <p>(123) 456-7890</p>
-                <p>hello@smoothfenceusa.com</p>
-                <p>Palm Coast & surrounding areas</p>
+                <a
+                  href="https://calendly.com/federico-smoothfenceusa/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-brand-deep px-4 py-3 text-sm font-semibold text-white shadow transition-colors hover:bg-brand-green"
+                >
+                  📅 Schedule an Estimate Visit
+                </a>
+              </div>
+
+              <div className="mt-6 space-y-2 text-sm border-t border-brand-light pt-6">
+                <p className="font-semibold uppercase tracking-wide text-brand-green">
+                  Contact us directly
+                </p>
+                <p>
+                  <a href="tel:+13864039460" className="hover:text-brand-green transition-colors">
+                    (386) 403-9460
+                  </a>
+                </p>
+                <p>
+                  <a href="mailto:info@smoothfenceusa.com" className="hover:text-brand-green transition-colors">
+                    info@smoothfenceusa.com
+                  </a>
+                </p>
+                <p>Palm Coast &amp; surrounding areas</p>
               </div>
             </aside>
           </div>
