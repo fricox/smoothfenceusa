@@ -1,15 +1,19 @@
+"use client";
+
 import Link from "next/link";
-
-const legalLinks = [
-  { label: "Get a Free Quote", href: "/quote" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
-];
-
-const socialLinks: { label: string; href: string }[] = [];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { tr } = useLanguage();
+
+  const quickLinks = [
+    { label: tr.nav.getFreeQuote, href: "/contact" },
+    { label: tr.nav.services, href: "/services" },
+    { label: tr.nav.gallery, href: "/gallery" },
+    { label: tr.nav.estimator, href: "/estimator" },
+    { label: tr.nav.contact, href: "/contact" },
+  ];
 
   return (
     <footer className="bg-brand-deep text-brand-cream">
@@ -19,55 +23,43 @@ export default function Footer() {
             SmoothFenceUSA
           </p>
           <p className="text-sm text-brand-cream/80">
-            Custom fence installation experts serving Florida&apos;s coast with
-            durable materials, HOA guidance, and worry-free permitting.
+            {tr.footer.tagline}
           </p>
-          <div className="flex items-center gap-3 pt-3">
-            {socialLinks.map((social) => (
-              <Link
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:border-brand-yellow hover:text-brand-yellow"
-              >
-                {social.label.slice(0, 2)}
-              </Link>
-            ))}
-          </div>
+          <p className="text-xs text-brand-cream/50">{tr.topbar.hours}</p>
         </div>
 
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-light">
-            Contact
+            {tr.nav.contact}
           </p>
           <ul className="mt-3 space-y-1 text-sm text-brand-cream/80">
             <li>
-              Phone:{" "}
               <a href="tel:+13864039460" className="transition-colors hover:text-brand-yellow">
                 (386) 403-9460
               </a>
             </li>
             <li>
-              Email:{" "}
+              <a href="sms:+13864039460" className="transition-colors hover:text-brand-yellow">
+                SMS / Text us
+              </a>
+            </li>
+            <li>
               <a href="mailto:info@smoothfenceusa.com" className="transition-colors hover:text-brand-yellow">
                 info@smoothfenceusa.com
               </a>
             </li>
-            <li>Service area: Palm Coast & surrounding areas</li>
+            <li className="text-brand-cream/60">Palm Coast, FL &amp; Northeast Florida</li>
           </ul>
         </div>
 
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-light">
-            Links
+            {tr.footer.quickLinks}
           </p>
           <ul className="mt-3 space-y-1 text-sm text-brand-cream/80">
-            {legalLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="transition-colors hover:text-brand-yellow"
-                >
+            {quickLinks.map((link) => (
+              <li key={link.href + link.label}>
+                <Link href={link.href} className="transition-colors hover:text-brand-yellow">
                   {link.label}
                 </Link>
               </li>
@@ -78,11 +70,9 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <p className="px-4 py-6 text-center text-xs text-brand-cream/70">
-          © {currentYear} SmoothFenceUSA. All rights reserved.
+          © {currentYear} SmoothFenceUSA. {tr.footer.rights}
         </p>
       </div>
     </footer>
   );
 }
-
-

@@ -2,7 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export default function Hero() {
+  const { tr } = useLanguage();
+
   return (
     <section className="relative flex min-h-[70vh] w-full items-center bg-brand-cream text-brand-deep">
       <Image
@@ -21,112 +25,59 @@ export default function Hero() {
           className="grid gap-10 items-center lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
         >
           <div className="space-y-4 text-center lg:text-left">
-            <h1
-              className="
-                text-4xl sm:text-5xl lg:text-6xl
-                font-extrabold tracking-tight
-                text-brand-deep
-                animate-[fadeInUp_0.7s_ease-out]
-              "
-            >
-              Caring for fences since 2015
-            </h1>
-            <p
-              className="
-                mt-4
-                max-w-xl
-                text-lg sm:text-xl lg:text-2xl
-                font-medium
-                text-brand-deep/90
-                animate-[fadeInUp_0.7s_ease-out_0.15s]
-              "
-            >
-              Clean work. Clear updates. Zero headaches.
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-green animate-[fadeInUp_0.7s_ease-out]">
+              {tr.hero.tagline}
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-brand-deep/80">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-green" />
-                <span>Licensed &amp; insured crew</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-yellow" />
-                <span>Fast, clean installations</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-brand-deep" />
-                <span>HOA &amp; permits support</span>
-              </div>
-            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-deep animate-[fadeInUp_0.7s_ease-out]">
+              {tr.hero.heading}
+            </h1>
+            <p className="mt-4 max-w-xl text-lg sm:text-xl lg:text-2xl font-medium text-brand-deep/90 animate-[fadeInUp_0.7s_ease-out_0.15s]">
+              {tr.hero.subheading}
+            </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <a
-                href="/quote"
-                className="
-                  inline-flex items-center justify-center
-                  rounded-full
-                  bg-brand-deep px-6 py-3
-                  text-sm sm:text-base font-semibold text-white
-                  shadow-md shadow-brand-deep/20
-                  transition-transform transition-shadow duration-150
-                  hover:bg-brand-green
-                  hover:shadow-lg hover:-translate-y-[1px]
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow
-                  focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream
-                "
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full bg-brand-deep px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-md shadow-brand-deep/20 transition-transform transition-shadow duration-150 hover:bg-brand-green hover:shadow-lg hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
               >
-                Get a Free Quote
+                {tr.hero.cta}
               </a>
               <a
                 href="https://calendly.com/federico-smoothfenceusa/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="
-                  inline-flex items-center justify-center
-                  rounded-full
-                  border border-brand-deep
-                  px-6 py-3
-                  text-sm sm:text-base font-semibold text-brand-deep
-                  bg-white/80
-                  shadow-sm shadow-brand-deep/10
-                  transition-transform transition-shadow duration-150
-                  hover:bg-brand-light/20 hover:shadow-md hover:-translate-y-[1px]
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-deep
-                  focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream
-                "
+                className="inline-flex items-center justify-center rounded-full border border-brand-deep px-6 py-3 text-sm sm:text-base font-semibold text-brand-deep bg-white/80 shadow-sm shadow-brand-deep/10 transition-transform transition-shadow duration-150 hover:bg-brand-light/20 hover:shadow-md hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-deep focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
               >
-                📅 Schedule a Visit
+                {tr.hero.schedule}
               </a>
             </div>
           </div>
 
           <aside className="mx-auto w-full max-w-md rounded-3xl border border-brand-light bg-white/95 p-6 text-left shadow-lg shadow-brand-deep/10 backdrop-blur-sm">
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-green">
-              Get your free fence quote
+              {tr.form.label}
             </p>
             <h2 className="mt-2 text-2xl font-bold text-brand-deep">
-              Quick estimate for your next fence
+              {tr.hero.cta}
             </h2>
             <p className="mt-3 text-sm text-brand-deep/80">
-              Tell us about your property and fence type. We’ll respond with a clear,
-              no-pressure estimate for your project.
+              {tr.hero.subheading}
             </p>
             <div className="mt-5 space-y-3">
               <a
-                href="/quote"
+                href="/contact"
                 className="inline-flex w-full items-center justify-center rounded-full bg-brand-deep px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-green"
               >
-                Get a Free Quote
+                {tr.hero.cta}
               </a>
               <a
-                href="/contact"
+                href="https://calendly.com/federico-smoothfenceusa/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center rounded-full border border-brand-deep px-4 py-2 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-light/20"
               >
-                Contact Us
+                {tr.hero.schedule}
               </a>
             </div>
-            <p className="mt-3 text-xs text-brand-deep/60">
-              Serving Palm Coast and nearby areas with vinyl, aluminum,
-              chain-link, and wood fences.
-            </p>
           </aside>
         </motion.div>
       </div>

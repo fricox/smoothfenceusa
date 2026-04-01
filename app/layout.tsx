@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import FloatingButtons from "@/components/ui/FloatingButtons";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,12 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-brand-cream text-brand-deep antialiased`}
       >
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppButton />
-        </div>
+        <LanguageProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <FloatingButtons />
+          </div>
+        </LanguageProvider>
       </body>
     </html>
   );
