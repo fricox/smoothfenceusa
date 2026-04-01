@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Estimator", href: "/estimator" },
   { label: "About", href: "/about" },
   { label: "HOA & Permits", href: "/hoas-permits" },
   { label: "Contact", href: "/contact" },
