@@ -1,6 +1,24 @@
 export type Lang = "en" | "es";
 
-export const t = {
+export type Translation = {
+  nav: { home: string; services: string; gallery: string; estimator: string; about: string; hoaPermits: string; contact: string; getFreeQuote: string };
+  topbar: { hours: string; callUs: string; email: string };
+  hero: { tagline: string; heading: string; subheading: string; cta: string; schedule: string };
+  trust: {
+    experience: { title: string; desc: string };
+    licensed: { title: string; desc: string };
+    freeEstimate: { title: string; desc: string };
+    premium: { title: string; desc: string };
+  };
+  whyUs: { label: string; heading: string; sub: string; reasons: { title: string; desc: string }[] };
+  serviceArea: { label: string; heading: string; sub: string; ctaQuote: string; ctaMap: string };
+  cta: { heading: string; sub: string; btn: string };
+  contact: { label: string; heading: string; sub: string; whatNext: string; step1: { title: string; desc: string }; step2: { title: string; desc: string }; step3: { title: string; desc: string }; scheduleLabel: string; scheduleBtn: string; directContact: string; location: string };
+  form: { label: string; heading: string; sub: string; fullName: string; phone: string; email: string; preferredDate: string; preferredTime: string; timeOptional: string; address: string; addressPlaceholder: string; fenceType: string; fenceTypePlaceholder: string; linearFeet: string; hoa: string; hoaPlaceholder: string; message: string; disclaimer: string; send: string; sending: string; success: string; hoaOptions: { value: string; label: string }[]; fenceOptions: string[]; required: string };
+  footer: { tagline: string; quickLinks: string; hours: string; rights: string };
+};
+
+export const t: Record<Lang, Translation> = {
   en: {
     // Nav
     nav: {
@@ -233,4 +251,4 @@ export const t = {
       rights: "Todos los derechos reservados.",
     },
   },
-} as const;
+};

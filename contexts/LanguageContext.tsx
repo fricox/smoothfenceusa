@@ -1,12 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, ReactNode } from "react";
-import { type Lang, t } from "@/lib/translations";
+import { type Lang, type Translation, t } from "@/lib/translations";
 
 type LanguageContextType = {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  tr: typeof t["en"];
+  tr: Translation;
 };
 
 const LanguageContext = createContext<LanguageContextType>({
