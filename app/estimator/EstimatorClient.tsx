@@ -48,7 +48,7 @@ const fmt = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 /* ── Component ────────────────────────────────────────────── */
-export default function EstimatorClient() {
+export default function EstimatorClient({ inline = false }: { inline?: boolean }) {
   /* Step 1 state */
   const [material,    setMaterial]    = useState("vinyl");
   const [height,      setHeight]      = useState(6);
@@ -98,26 +98,27 @@ export default function EstimatorClient() {
     }
   }
 
-  return (
-    <main className="min-h-screen bg-brand-cream">
-      {/* Header */}
-      <section className="bg-brand-deep py-14 px-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
-          No commitment required
-        </p>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Instant Fence Estimator
-        </h1>
-        <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base">
-          Get a real price range in 30 seconds. Then schedule a free on-site visit to confirm everything.
-        </p>
-      </section>
-
-      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+  const cards = (
+    <div>
 
         {/* ── STEP 1: Project Details ── */}
         {step === 1 && (
           <div className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-8 space-y-8">
+
+            {/* Header */}
+            {inline && (
+              <div className="text-center border-b border-brand-light pb-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-brand-green mb-2">
+                  No commitment required
+                </p>
+                <h2 className="text-2xl font-extrabold text-brand-deep">
+                  Instant Fence Estimator
+                </h2>
+                <p className="mt-2 text-sm text-brand-deep/60">
+                  Get a real price range in 30 seconds. Then schedule a free on-site visit to confirm everything.
+                </p>
+              </div>
+            )}
 
             {/* Material */}
             <div>
@@ -208,12 +209,12 @@ export default function EstimatorClient() {
               </div>
             </label>
 
-            {/* Live estimate preview */}
+            {/* Teaser — no price shown until contact info is submitted */}
             {estimate && (
               <div className="rounded-2xl bg-brand-deep/5 border border-brand-light p-5 text-center">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-green mb-1">Estimated range</p>
-                <p className="text-3xl font-extrabold text-brand-deep">
-                  {fmt(estimate.low)} – {fmt(estimate.high)}
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-green mb-1">Your estimate is ready</p>
+                <p className="text-base font-semibold text-brand-deep">
+                  Complete the next step to reveal your personalized price range.
                 </p>
                 <p className="text-xs text-brand-deep/50 mt-1">
                   Based on {linearFeet} ft · {height} ft height · {MATERIALS.find(m=>m.id===material)?.label}
@@ -244,16 +245,14 @@ export default function EstimatorClient() {
               <p className="text-sm text-brand-deep/60 mt-1">Enter your details to receive your personalized estimate by email.</p>
             </div>
 
-            {/* Estimate summary */}
-            {estimate && (
-              <div className="rounded-2xl bg-brand-deep text-white p-4 text-center">
-                <p className="text-xs uppercase tracking-wide text-brand-cream/70 mb-1">Your estimate</p>
-                <p className="text-2xl font-extrabold">{fmt(estimate.low)} – {fmt(estimate.high)}</p>
-                <button type="button" onClick={() => setStep(1)} className="text-xs text-brand-cream/50 mt-1 hover:text-brand-yellow transition-colors">
-                  ← Edit project details
-                </button>
-              </div>
-            )}
+            {/* Teaser in step 2 — price hidden until submission */}
+            <div className="rounded-2xl bg-brand-deep text-white p-4 text-center">
+              <p className="text-xs uppercase tracking-wide text-brand-cream/70 mb-1">Your estimate is ready 🔒</p>
+              <p className="text-base font-semibold text-brand-cream/90">Fill in your info to unlock your price range</p>
+              <button type="button" onClick={() => setStep(1)} className="text-xs text-brand-cream/50 mt-1 hover:text-brand-yellow transition-colors">
+                ← Edit project details
+              </button>
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2 sm:col-span-1">
@@ -323,6 +322,26 @@ export default function EstimatorClient() {
             </div>
           </div>
         )}
+    </div>
+  );
+
+  if (inline) return cards;
+
+  return (
+    <main className="min-h-screen bg-brand-cream">
+      <section className="bg-brand-deep py-14 px-4 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
+          No commitment required
+        </p>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Instant Fence Estimator
+        </h1>
+        <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base">
+          Get a real price range in 30 seconds. Then schedule a free on-site visit to confirm everything.
+        </p>
+      </section>
+      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        {cards}
       </div>
     </main>
   );

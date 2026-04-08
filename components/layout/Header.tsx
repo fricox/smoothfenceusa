@@ -19,7 +19,7 @@ export default function Header() {
     { label: tr.nav.home, href: "/" },
     { label: tr.nav.services, href: "/services" },
     { label: tr.nav.gallery, href: "/gallery" },
-    { label: tr.nav.estimator, href: "/estimator" },
+
     { label: tr.nav.about, href: "/about" },
     { label: tr.nav.hoaPermits, href: "/hoas-permits" },
     { label: tr.nav.contact, href: "/contact" },
@@ -85,10 +85,10 @@ export default function Header() {
             <Image
               src="/logo.svg"
               alt="SmoothFenceUSA logo"
-              width={190}
-              height={60}
+              width={213}
+              height={80}
               priority
-              className="h-auto w-[160px] sm:w-[190px]"
+              className="h-auto w-[170px] sm:w-[210px]"
             />
             <span className="sr-only">SmoothFenceUSA</span>
           </Link>

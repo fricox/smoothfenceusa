@@ -40,7 +40,7 @@ export const t: Record<Lang, Translation> = {
     // Hero
     hero: {
       tagline: "Palm Coast & Northeast Florida",
-      heading: "Your fence, done right.",
+      heading: "Strong fences. Smooth process.",
       subheading:
         "Vinyl, aluminum, chain-link, and wood — installed on time, on budget, and built to last Florida's weather.",
       cta: "Get a Free Quote",
