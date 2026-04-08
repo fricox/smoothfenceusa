@@ -13,6 +13,18 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 const fmt = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
+// Add N business days to a date (skips Sat/Sun)
+function addBusinessDays(start: Date, days: number): Date {
+  const d = new Date(start);
+  let added = 0;
+  while (added < days) {
+    d.setDate(d.getDate() + 1);
+    const day = d.getDay();
+    if (day !== 0 && day !== 6) added++;
+  }
+  return d;
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const sig = req.headers.get("stripe-signature");
@@ -40,6 +52,22 @@ export async function POST(req: NextRequest) {
     const amount        = (session.amount_total || 0) / 100;
     const paidAt        = new Date().toISOString();
     const sessionId     = session.id;
+
+    // Earliest installation date: 5 business days after payment
+    const earliestDate = addBusinessDays(new Date(), 5);
+    const earliestStr  = earliestDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    // Prefilled Calendly link
+    const calendlyUrl = `https://calendly.com/federico-smoothfenceusa/installation?${new URLSearchParams({
+      name: customerName,
+      email: customerEmail,
+      a1: "Fence installation — deposit paid",
+    }).toString()}`;
 
     // ── Send emails via Resend ────────────────────────────────
     const resendApiKey = process.env.RESEND_API_KEY;
@@ -76,10 +104,16 @@ export async function POST(req: NextRequest) {
               </table>
             </div>
 
-            <p style="font-size:14px;color:#666">Your deposit secures your spot on our installation schedule. Our team will contact you within 24 hours to coordinate your installation date.</p>
+            <p style="font-size:14px;color:#666">Your deposit secures your spot on our installation schedule. The next step is to pick your installation date.</p>
+
+            <div style="background:#fbfcf9;border:2px solid #f8cf2b;border-radius:12px;padding:20px;margin:20px 0;text-align:center">
+              <p style="margin:0;font-size:12px;color:#125036;text-transform:uppercase;letter-spacing:2px;font-weight:700">📅 Earliest Installation Date</p>
+              <p style="margin:8px 0 4px;font-size:20px;font-weight:900;color:#125036">${earliestStr}</p>
+              <p style="margin:0;font-size:12px;color:#666">Minimum 5 business days required to prepare materials and permits</p>
+            </div>
 
             <div style="text-align:center;margin:28px 0">
-              <a href="https://calendly.com/federico-smoothfenceusa/30min"
+              <a href="${calendlyUrl}"
                  style="background:#679d38;color:#fff;padding:16px 32px;border-radius:50px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block">
                 📅 Schedule Your Installation
               </a>
@@ -110,7 +144,9 @@ export async function POST(req: NextRequest) {
               <tr><td style="padding:8px;color:#666">Description</td><td style="font-weight:700">${description}</td></tr>
               <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Date</td><td style="font-weight:700">${new Date(paidAt).toLocaleString("en-US")}</td></tr>
               <tr><td style="padding:8px;color:#666">Stripe Session</td><td style="font-weight:700;font-family:monospace;font-size:11px">${sessionId}</td></tr>
+              <tr style="background:#f8cf2b"><td style="padding:12px 8px;color:#125036;font-weight:700">📅 Earliest Install</td><td style="padding:12px 8px;font-weight:900;color:#125036">${earliestStr}</td></tr>
             </table>
+            <p style="font-size:12px;color:#666;margin-top:12px;text-align:center">Client will receive a Calendly link to book installation on or after the date above.</p>
             <div style="text-align:center;margin-top:20px">
               <a href="https://dashboard.stripe.com/payments" style="background:#125036;color:#fff;padding:12px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:14px;display:inline-block">View in Stripe</a>
             </div>

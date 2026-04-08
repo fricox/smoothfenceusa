@@ -1,14 +1,48 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export default function PaySuccessPage() {
+// Add N business days to a date (skips Sat/Sun)
+function addBusinessDays(start: Date, days: number): Date {
+  const d = new Date(start);
+  let added = 0;
+  while (added < days) {
+    d.setDate(d.getDate() + 1);
+    const day = d.getDay();
+    if (day !== 0 && day !== 6) added++;
+  }
+  return d;
+}
+
+function SuccessContent() {
   const { lang } = useLanguage();
   const isEs = lang === "es";
+  const params = useSearchParams();
+
+  const name  = params.get("name")  || "";
+  const email = params.get("email") || "";
+
+  const earliest = addBusinessDays(new Date(), 5);
+  const earliestStr = earliest.toLocaleDateString(isEs ? "es-US" : "en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  // Prefill Calendly with name + email so the client doesn't have to retype it
+  const calendlyBase = "https://calendly.com/federico-smoothfenceusa/installation";
+  const calendlyUrl = `${calendlyBase}?${new URLSearchParams({
+    name,
+    email,
+    a1: isEs ? "Instalación de cerca — depósito pagado" : "Fence installation — deposit paid",
+  }).toString()}`;
 
   return (
-    <main className="min-h-screen bg-brand-cream flex items-center justify-center px-4">
+    <main className="min-h-screen bg-brand-cream flex items-center justify-center px-4 py-12">
       <div className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-10 max-w-md w-full text-center space-y-6">
         <div className="text-6xl">🎉</div>
         <h1 className="text-2xl font-extrabold text-brand-deep">
@@ -16,9 +50,29 @@ export default function PaySuccessPage() {
         </h1>
         <p className="text-brand-deep/70">
           {isEs
-            ? "Gracias por tu depósito. Recibirás una confirmación por correo en breve. Nuestro equipo se pondrá en contacto contigo para coordinar la instalación."
-            : "Thank you for your deposit. You'll receive a confirmation email shortly. Our team will reach out to coordinate your installation."}
+            ? "Gracias por tu depósito. Recibirás una confirmación por correo en breve."
+            : "Thank you for your deposit. You'll receive a confirmation email shortly."}
         </p>
+
+        {/* Earliest installation date */}
+        <div className="rounded-2xl bg-brand-deep p-5 text-white">
+          <p className="text-xs uppercase tracking-widest text-brand-yellow font-bold mb-2">
+            {isEs ? "📅 Próximo paso: Agendar instalación" : "📅 Next step: Schedule installation"}
+          </p>
+          <p className="text-sm text-white/80 mb-1">
+            {isEs
+              ? "La instalación puede agendarse a partir del:"
+              : "Installation can be scheduled starting:"}
+          </p>
+          <p className="text-lg font-extrabold text-brand-yellow">
+            {earliestStr}
+          </p>
+          <p className="text-[11px] text-white/60 mt-2">
+            {isEs
+              ? "Tiempo mínimo de 5 días hábiles para preparar materiales y permisos."
+              : "Minimum 5 business days required to prepare materials and permits."}
+          </p>
+        </div>
 
         <div className="rounded-2xl bg-brand-green/10 border border-brand-light p-4">
           <p className="text-sm font-semibold text-brand-deep">
@@ -31,12 +85,12 @@ export default function PaySuccessPage() {
 
         <div className="flex flex-col gap-3">
           <a
-            href="https://calendly.com/federico-smoothfenceusa/30min"
+            href={calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full rounded-full bg-brand-deep py-3 text-sm font-bold text-white transition-all hover:bg-brand-green"
+            className="w-full rounded-full bg-brand-yellow py-4 text-sm font-bold text-brand-deep shadow-lg transition-all hover:scale-105"
           >
-            {isEs ? "📅 Agendar visita de instalación" : "📅 Schedule installation visit"}
+            {isEs ? "📅 Agendar instalación ahora" : "📅 Schedule installation now"}
           </a>
           <Link
             href="/"
@@ -47,5 +101,13 @@ export default function PaySuccessPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function PaySuccessPage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-brand-cream" />}>
+      <SuccessContent />
+    </Suspense>
   );
 }
