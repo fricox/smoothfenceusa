@@ -112,7 +112,7 @@ export default function PayPage() {
                   placeholder="500"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full rounded-2xl border border-brand-light px-4 py-3 text-lg font-bold text-brand-deep focus:outline-none focus:ring-2 focus:ring-brand-green/30"
+                  className="w-full rounded-2xl border border-brand-light bg-white px-4 py-3 text-lg font-bold text-brand-deep placeholder:text-brand-deep/40 focus:outline-none focus:ring-2 focus:ring-brand-green/30"
                 />
               </div>
             )}
@@ -128,7 +128,7 @@ export default function PayPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="John Smith"
-                className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30"
+                className="w-full rounded-2xl border border-brand-light bg-white px-4 py-3 text-sm text-brand-deep placeholder:text-brand-deep/40 focus:outline-none focus:ring-2 focus:ring-brand-green/30"
               />
             </div>
             <div>
@@ -140,7 +140,7 @@ export default function PayPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="john@email.com"
-                className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30"
+                className="w-full rounded-2xl border border-brand-light bg-white px-4 py-3 text-sm text-brand-deep placeholder:text-brand-deep/40 focus:outline-none focus:ring-2 focus:ring-brand-green/30"
               />
             </div>
             <div>
@@ -151,7 +151,7 @@ export default function PayPage() {
                 value={description}
                 onChange={(e) => setDesc(e.target.value)}
                 placeholder={isEs ? "Ej: Cerca vinyl 150ft Palm Coast" : "e.g. Vinyl fence 150ft Palm Coast"}
-                className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30"
+                className="w-full rounded-2xl border border-brand-light bg-white px-4 py-3 text-sm text-brand-deep placeholder:text-brand-deep/40 focus:outline-none focus:ring-2 focus:ring-brand-green/30"
               />
             </div>
           </div>
