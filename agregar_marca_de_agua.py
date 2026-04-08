@@ -19,6 +19,14 @@ import shutil
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
+# HEIC support (iPhone photos)
+try:
+    from pillow_heif import register_heif_opener
+    register_heif_opener()
+except ImportError:
+    print("⚠️  pillow-heif no instalado — los archivos HEIC serán omitidos.")
+    print("   Instala con: ~/.venv-sfusa/bin/pip install pillow-heif\n")
+
 # ─── CONFIG ──────────────────────────────────────────────────────────────────
 
 FOTO_FOLDER   = os.path.expanduser(
@@ -56,15 +64,18 @@ def prepare_logo(logo_src, target_width: int, opacity_pct: int) -> Image.Image:
     """Load logo, remove white background, resize, set opacity."""
     logo = Image.open(logo_src).convert("RGBA")
 
-    # Remove near-white background pixels
-    data = logo.getdata()
-    new_data = []
-    for r, g, b, a in data:
-        if r > 230 and g > 230 and b > 230:
-            new_data.append((r, g, b, 0))   # transparent
-        else:
-            new_data.append((r, g, b, a))
-    logo.putdata(new_data)
+    # Remove near-white background pixels using numpy
+    try:
+        import numpy as np
+        arr = np.array(logo)
+        white = (arr[:,:,0] > 230) & (arr[:,:,1] > 230) & (arr[:,:,2] > 230)
+        arr[white, 3] = 0
+        logo = Image.fromarray(arr)
+    except ImportError:
+        # Fallback without numpy
+        pixels = list(logo.getdata())
+        pixels = [(r,g,b,0) if r>230 and g>230 and b>230 else (r,g,b,a) for r,g,b,a in pixels]
+        logo.putdata(pixels)
 
     # Resize keeping aspect ratio
     ratio = target_width / logo.width
