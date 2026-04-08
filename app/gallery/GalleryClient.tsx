@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type FenceType = "all" | "vinyl" | "aluminum" | "chain-link" | "wood";
 
@@ -73,23 +74,25 @@ const projects: Project[] = [
   },
 ];
 
-const filters: { label: string; value: FenceType }[] = [
-  { label: "All", value: "all" },
-  { label: "PVC / Vinyl", value: "vinyl" },
-  { label: "Aluminum", value: "aluminum" },
-  { label: "Chain-Link", value: "chain-link" },
-  { label: "Wood", value: "wood" },
-];
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
+function formatDate(dateStr: string, locale: string) {
+  return new Date(dateStr).toLocaleDateString(locale, {
     month: "short",
     year: "numeric",
   });
 }
 
 export default function GalleryClient() {
+  const { lang } = useLanguage();
+  const isEs = lang === "es";
   const [active, setActive] = useState<FenceType>("all");
+
+  const filters: { label: string; value: FenceType }[] = [
+    { label: isEs ? "Todos" : "All", value: "all" },
+    { label: "PVC / Vinyl", value: "vinyl" },
+    { label: isEs ? "Aluminio" : "Aluminum", value: "aluminum" },
+    { label: isEs ? "Malla Ciclónica" : "Chain-Link", value: "chain-link" },
+    { label: isEs ? "Madera" : "Wood", value: "wood" },
+  ];
 
   const filtered = projects
     .filter((p) => active === "all" || p.type === active)
@@ -100,19 +103,21 @@ export default function GalleryClient() {
       {/* Hero */}
       <section className="bg-brand-deep py-16 px-4 text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
-          Real Projects. Real Results.
+          {isEs ? "Proyectos Reales. Resultados Reales." : "Real Projects. Real Results."}
         </p>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Before &amp; After Gallery
+          {isEs ? "Galería Antes y Después" : "Before & After Gallery"}
         </h1>
         <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base sm:text-lg">
-          See how we transform properties across Palm Coast and surrounding areas — sorted by most recent.
+          {isEs
+            ? "Mira cómo transformamos propiedades en Palm Coast y áreas cercanas — ordenados por más recientes."
+            : "See how we transform properties across Palm Coast and surrounding areas — sorted by most recent."}
         </p>
         <Link
           href="/contact"
           className="mt-8 inline-flex items-center justify-center rounded-full bg-brand-yellow px-8 py-4 text-base font-bold text-brand-deep shadow-lg transition-transform hover:scale-105 hover:shadow-xl"
         >
-          Get Your Free Estimate →
+          {isEs ? "Obtener Estimado Gratis →" : "Get Your Free Estimate →"}
         </Link>
       </section>
 
@@ -134,14 +139,16 @@ export default function GalleryClient() {
           ))}
         </div>
         <p className="text-center text-xs text-brand-deep/50 mt-3">
-          Showing {filtered.length} project{filtered.length !== 1 ? "s" : ""} — most recent first
+          {isEs
+            ? `Mostrando ${filtered.length} proyecto${filtered.length !== 1 ? "s" : ""} — más recientes primero`
+            : `Showing ${filtered.length} project${filtered.length !== 1 ? "s" : ""} — most recent first`}
         </p>
       </section>
 
       {/* Gallery Grid */}
       <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         {filtered.length === 0 ? (
-          <p className="text-center text-brand-deep/60 py-16">No projects yet for this category. Check back soon!</p>
+          <p className="text-center text-brand-deep/60 py-16">{isEs ? "Aún no hay proyectos en esta categoría. ¡Vuelve pronto!" : "No projects yet for this category. Check back soon!"}</p>
         ) : (
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project) => (
@@ -158,7 +165,7 @@ export default function GalleryClient() {
                       <span className="text-slate-400 text-xs px-2 text-center">Photo coming soon</span>
                     )}
                     <span className="absolute top-2 left-2 rounded-full bg-black/60 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wide z-10">
-                      Before
+                      {isEs ? "Antes" : "Before"}
                     </span>
                   </div>
                   {/* After */}
@@ -169,7 +176,7 @@ export default function GalleryClient() {
                       <span className="text-brand-green text-xs px-2 text-center">Photo coming soon</span>
                     )}
                     <span className="absolute top-2 right-2 rounded-full bg-brand-green px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wide z-10">
-                      After
+                      {isEs ? "Después" : "After"}
                     </span>
                   </div>
                 </div>
@@ -179,7 +186,7 @@ export default function GalleryClient() {
                     <p className="text-xs text-brand-deep/60 mt-0.5">{project.location}</p>
                   </div>
                   <span className="text-xs text-brand-deep/40 mt-0.5 whitespace-nowrap ml-2">
-                    {formatDate(project.date)}
+                    {formatDate(project.date, isEs ? "es-US" : "en-US")}
                   </span>
                 </div>
               </div>
@@ -191,17 +198,19 @@ export default function GalleryClient() {
       {/* CTA Bottom */}
       <section className="bg-brand-deep mt-8 py-16 px-4 text-center">
         <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-3">
-          Ready for your transformation?
+          {isEs ? "¿Listo para tu transformación?" : "Ready for your transformation?"}
         </h2>
         <p className="text-brand-cream/80 max-w-lg mx-auto mb-8 text-base">
-          Join hundreds of homeowners in Palm Coast who trust SmoothFenceUSA. Free estimates, no pressure.
+          {isEs
+            ? "Únete a cientos de propietarios en Palm Coast que confían en SmoothFenceUSA. Estimados gratis, sin presión."
+            : "Join hundreds of homeowners in Palm Coast who trust SmoothFenceUSA. Free estimates, no pressure."}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/contact"
             className="inline-flex items-center justify-center rounded-full bg-brand-yellow px-8 py-4 text-base font-bold text-brand-deep shadow-lg transition-transform hover:scale-105"
           >
-            Get a Free Quote →
+            {isEs ? "Cotización Gratis →" : "Get a Free Quote →"}
           </Link>
           <a
             href="https://calendly.com/federico-smoothfenceusa/30min"
@@ -209,7 +218,7 @@ export default function GalleryClient() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-base font-bold text-white transition-transform hover:scale-105 hover:bg-white/10"
           >
-            📅 Schedule a Visit
+            {isEs ? "📅 Agendar una Visita" : "📅 Schedule a Visit"}
           </a>
         </div>
         <p className="mt-6 text-brand-cream/60 text-sm">

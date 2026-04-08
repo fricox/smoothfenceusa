@@ -16,6 +16,19 @@ export type Translation = {
   contact: { label: string; heading: string; sub: string; whatNext: string; step1: { title: string; desc: string }; step2: { title: string; desc: string }; step3: { title: string; desc: string }; scheduleLabel: string; scheduleBtn: string; directContact: string; location: string };
   form: { label: string; heading: string; sub: string; fullName: string; phone: string; email: string; preferredDate: string; preferredTime: string; timeOptional: string; address: string; addressPlaceholder: string; fenceType: string; fenceTypePlaceholder: string; linearFeet: string; hoa: string; hoaPlaceholder: string; message: string; disclaimer: string; send: string; sending: string; success: string; hoaOptions: { value: string; label: string }[]; fenceOptions: string[]; required: string };
   footer: { tagline: string; quickLinks: string; hours: string; rights: string };
+  estimator: {
+    tagline: string; heading: string; sub: string;
+    selectMaterial: string; premiumLabel: string;
+    height: string; linearFeet: string; gates: string; removal: string;
+    estimateReady: string; estimateReadySub: string; estimateMeta: string;
+    nextBtn: string; noCommit: string;
+    step2Title: string; step2Sub: string; step2Locked: string; editDetails: string;
+    nameLabel: string; phoneLabel: string; emailLabel: string; zipLabel: string;
+    submitBtn: string; submitting: string; privacy: string;
+    confirmTitle: string; confirmSub: string; range: string; rangeNote: string;
+    scheduleBtn: string; backHome: string; callNow: string;
+    gallery: string;
+  };
 };
 
 export const t: Record<Lang, Translation> = {
@@ -139,6 +152,42 @@ export const t: Record<Lang, Translation> = {
       hours: "Mon – Sat, 8:00 AM – 6:00 PM",
       rights: "All rights reserved.",
     },
+    // Estimator
+    estimator: {
+      tagline: "No commitment required",
+      heading: "Instant Fence Estimator",
+      sub: "Get a real price range in 30 seconds. Then schedule a free on-site visit to confirm everything.",
+      selectMaterial: "1. Select Material",
+      premiumLabel: "⭐ Premium / Grade A material",
+      height: "2. Fence Height",
+      linearFeet: "3. Linear Feet",
+      gates: "4. Gates",
+      removal: "🗑 Old fence removal needed?",
+      estimateReady: "Your estimate is ready",
+      estimateReadySub: "Complete the next step to reveal your personalized price range.",
+      estimateMeta: "Based on",
+      nextBtn: "Get My Personalized Estimate →",
+      noCommit: "No commitment. Free on-site visit to confirm everything.",
+      step2Title: "Almost there!",
+      step2Sub: "Enter your details to receive your personalized estimate by email.",
+      step2Locked: "Your estimate is ready 🔒",
+      editDetails: "← Edit project details",
+      nameLabel: "Full Name",
+      phoneLabel: "Phone Number",
+      emailLabel: "Email Address",
+      zipLabel: "Zip Code",
+      submitBtn: "✨ Get My Instant Estimate",
+      submitting: "Sending your estimate...",
+      privacy: "🔒 Your information is 100% protected. No spam, ever.",
+      confirmTitle: "Your estimate is on its way!",
+      confirmSub: "We sent a detailed breakdown to",
+      range: "Your estimated range",
+      rangeNote: "Final price confirmed after on-site measurement",
+      scheduleBtn: "📅 Schedule Your Free Site Visit",
+      backHome: "Back to Home",
+      callNow: "📞 Call Us Now",
+      gallery: "Final Step",
+    },
   },
   es: {
     nav: {
@@ -249,6 +298,42 @@ export const t: Record<Lang, Translation> = {
       quickLinks: "Enlaces rápidos",
       hours: "Lun – Sáb, 8:00 AM – 6:00 PM",
       rights: "Todos los derechos reservados.",
+    },
+    // Estimator
+    estimator: {
+      tagline: "Sin compromiso",
+      heading: "Estimador Instantáneo de Cercas",
+      sub: "Obtén un rango de precio real en 30 segundos. Luego agenda una visita gratuita para confirmar todo.",
+      selectMaterial: "1. Selecciona el Material",
+      premiumLabel: "⭐ Premium / Material Grado A",
+      height: "2. Altura de la Cerca",
+      linearFeet: "3. Pies Lineales",
+      gates: "4. Puertas",
+      removal: "🗑 ¿Necesitas remover la cerca vieja?",
+      estimateReady: "Tu estimado está listo",
+      estimateReadySub: "Completa el siguiente paso para ver tu rango de precio personalizado.",
+      estimateMeta: "Basado en",
+      nextBtn: "Ver Mi Estimado Personalizado →",
+      noCommit: "Sin compromiso. Visita gratuita para confirmar todo.",
+      step2Title: "¡Ya casi!",
+      step2Sub: "Ingresa tus datos para recibir tu estimado personalizado por correo.",
+      step2Locked: "Tu estimado está listo 🔒",
+      editDetails: "← Editar detalles del proyecto",
+      nameLabel: "Nombre completo",
+      phoneLabel: "Número de teléfono",
+      emailLabel: "Correo electrónico",
+      zipLabel: "Código postal",
+      submitBtn: "✨ Obtener Mi Estimado Instantáneo",
+      submitting: "Enviando tu estimado...",
+      privacy: "🔒 Tu información está 100% protegida. Sin spam, nunca.",
+      confirmTitle: "¡Tu estimado está en camino!",
+      confirmSub: "Enviamos un desglose detallado a",
+      range: "Tu rango estimado",
+      rangeNote: "Precio final confirmado después de la medición en sitio",
+      scheduleBtn: "📅 Agendar Tu Visita Gratuita",
+      backHome: "Volver al Inicio",
+      callNow: "📞 Llámanos Ahora",
+      gallery: "Paso Final",
     },
   },
 };

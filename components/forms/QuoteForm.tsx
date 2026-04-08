@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type FormData = {
   fullName: string;
@@ -35,13 +36,7 @@ const initialFormData: FormData = {
   message: "",
 };
 
-const fenceOptions = ["Vinyl", "Aluminum", "Chain-link", "Wood", "Not sure yet"];
-
-const hoaOptions = [
-  { value: "yes", label: "Yes" },
-  { value: "no", label: "No" },
-  { value: "not-sure", label: "Not sure yet" },
-];
+// fenceOptions and hoaOptions now come from translations
 
 const TIME_SLOTS = [
   "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM",
@@ -83,6 +78,8 @@ function useAddressSuggestions(query: string) {
 }
 
 export default function QuoteForm() {
+  const { tr } = useLanguage();
+  const f = tr.form;
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -189,16 +186,9 @@ export default function QuoteForm() {
       className="rounded-3xl bg-white px-5 py-8 shadow-xl ring-1 ring-brand-light/60 sm:px-8 sm:py-10"
     >
       <div className="mb-8 space-y-3 text-center sm:text-left">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand-green">
-          Tell us about your project
-        </p>
-        <h2 className="text-2xl font-bold text-brand-deep sm:text-3xl">
-          Request your personalized fence quote
-        </h2>
-        <p className="text-sm text-brand-deep/70 sm:text-base">
-          The more details you share, the faster we can provide accurate pricing
-          and schedule your installation.
-        </p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-green">{f.label}</p>
+        <h2 className="text-2xl font-bold text-brand-deep sm:text-3xl">{f.heading}</h2>
+        <p className="text-sm text-brand-deep/70 sm:text-base">{f.sub}</p>
       </div>
 
       {submitError && (
@@ -209,7 +199,7 @@ export default function QuoteForm() {
 
       {status === "success" && (
         <div role="status" aria-live="polite" className="mb-6 rounded-2xl bg-brand-light/30 px-4 py-3 text-sm text-brand-deep">
-          Thanks! Your request is in our queue. A SmoothFenceUSA specialist will reach out shortly.
+          {f.success}
         </div>
       )}
 
@@ -217,7 +207,7 @@ export default function QuoteForm() {
         {/* Row 1: Name + Phone */}
         <div className="grid gap-5 md:grid-cols-2">
           <div>
-            <label htmlFor="fullName" className="text-sm font-medium text-brand-deep">Full name *</label>
+            <label htmlFor="fullName" className="text-sm font-medium text-brand-deep">{f.fullName} {f.required}</label>
             <input
               id="fullName" name="fullName" type="text"
               className={inputClass}
@@ -230,7 +220,7 @@ export default function QuoteForm() {
           </div>
 
           <div>
-            <label htmlFor="phone" className="text-sm font-medium text-brand-deep">Phone *</label>
+            <label htmlFor="phone" className="text-sm font-medium text-brand-deep">{f.phone} {f.required}</label>
             <input
               id="phone" name="phone" type="tel"
               className={inputClass}
@@ -243,7 +233,7 @@ export default function QuoteForm() {
           </div>
 
           <div>
-            <label htmlFor="email" className="text-sm font-medium text-brand-deep">Email *</label>
+            <label htmlFor="email" className="text-sm font-medium text-brand-deep">{f.email} {f.required}</label>
             <input
               id="email" name="email" type="email"
               className={inputClass}
@@ -257,9 +247,7 @@ export default function QuoteForm() {
 
           {/* Preferred Date */}
           <div>
-            <label htmlFor="preferredDate" className="text-sm font-medium text-brand-deep">
-              Preferred visit date
-            </label>
+            <label htmlFor="preferredDate" className="text-sm font-medium text-brand-deep">{f.preferredDate}</label>
             <input
               id="preferredDate" name="preferredDate" type="date"
               min={today}
@@ -273,8 +261,8 @@ export default function QuoteForm() {
         {formData.preferredDate && (
           <div>
             <p className="mb-2 text-sm font-medium text-brand-deep">
-              Preferred time{" "}
-              <span className="font-normal text-brand-deep/50">(optional)</span>
+              {f.preferredTime}{" "}
+              <span className="font-normal text-brand-deep/50">{f.timeOptional}</span>
             </p>
             <div className="flex flex-wrap gap-2">
               {TIME_SLOTS.map((slot) => (
@@ -297,9 +285,7 @@ export default function QuoteForm() {
 
         {/* Address with autocomplete */}
         <div ref={addressRef} className="relative">
-          <label htmlFor="address" className="text-sm font-medium text-brand-deep">
-            Property address *
-          </label>
+          <label htmlFor="address" className="text-sm font-medium text-brand-deep">{f.address} {f.required}</label>
           <input
             id="address" name="address" type="text"
             className={inputClass}
@@ -308,7 +294,7 @@ export default function QuoteForm() {
             aria-invalid={Boolean(errors.address)}
             aria-describedby={errors.address ? "address-error" : undefined}
             autoComplete="off"
-            placeholder="Start typing your address…"
+            placeholder={f.addressPlaceholder}
             required
           />
           {errors.address && <p id="address-error" className="mt-1 text-xs text-red-600">{errors.address}</p>}
@@ -336,7 +322,7 @@ export default function QuoteForm() {
         {/* Fence type + linear feet + HOA */}
         <div className="grid gap-5 md:grid-cols-3">
           <div>
-            <label htmlFor="fenceType" className="text-sm font-medium text-brand-deep">Fence type *</label>
+            <label htmlFor="fenceType" className="text-sm font-medium text-brand-deep">{f.fenceType} {f.required}</label>
             <select
               id="fenceType" name="fenceType"
               className={`${inputClass} appearance-none`}
@@ -345,8 +331,8 @@ export default function QuoteForm() {
               aria-describedby={errors.fenceType ? "fenceType-error" : undefined}
               required
             >
-              <option value="">Select an option</option>
-              {fenceOptions.map((option) => (
+              <option value="">{f.fenceTypePlaceholder}</option>
+              {f.fenceOptions.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
@@ -354,7 +340,7 @@ export default function QuoteForm() {
           </div>
 
           <div>
-            <label htmlFor="linearFeet" className="text-sm font-medium text-brand-deep">Approx. linear feet</label>
+            <label htmlFor="linearFeet" className="text-sm font-medium text-brand-deep">{f.linearFeet}</label>
             <input
               id="linearFeet" name="linearFeet" type="number" min="0"
               className={inputClass}
@@ -363,7 +349,7 @@ export default function QuoteForm() {
           </div>
 
           <div>
-            <label htmlFor="hoa" className="text-sm font-medium text-brand-deep">HOA involved? *</label>
+            <label htmlFor="hoa" className="text-sm font-medium text-brand-deep">{f.hoa} {f.required}</label>
             <select
               id="hoa" name="hoa"
               className={`${inputClass} appearance-none`}
@@ -372,8 +358,8 @@ export default function QuoteForm() {
               aria-describedby={errors.hoa ? "hoa-error" : undefined}
               required
             >
-              <option value="">Select an option</option>
-              {hoaOptions.map((option) => (
+              <option value="">{f.hoaPlaceholder}</option>
+              {f.hoaOptions.map((option) => (
                 <option key={option.value} value={option.value}>{option.label}</option>
               ))}
             </select>
@@ -383,7 +369,7 @@ export default function QuoteForm() {
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="text-sm font-medium text-brand-deep">Message / project details *</label>
+          <label htmlFor="message" className="text-sm font-medium text-brand-deep">{f.message} {f.required}</label>
           <textarea
             id="message" name="message" rows={4}
             className={`${inputClass} resize-none`}
@@ -396,15 +382,13 @@ export default function QuoteForm() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-brand-deep/60">
-            By submitting, you agree to be contacted about your quote request.
-          </p>
+          <p className="text-xs text-brand-deep/60">{f.disclaimer}</p>
           <button
             type="submit"
             className="inline-flex items-center justify-center rounded-full bg-brand-deep px-6 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-brand-green disabled:cursor-not-allowed disabled:opacity-70"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Sending…" : "Send request"}
+            {isSubmitting ? f.sending : f.send}
           </button>
         </div>
       </form>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ── Pricing data ─────────────────────────────────────────── */
 const MATERIALS = [
@@ -49,6 +50,9 @@ const fmt = (n: number) =>
 
 /* ── Component ────────────────────────────────────────────── */
 export default function EstimatorClient({ inline = false }: { inline?: boolean }) {
+  const { tr } = useLanguage();
+  const e = tr.estimator;
+
   /* Step 1 state */
   const [material,    setMaterial]    = useState("vinyl");
   const [height,      setHeight]      = useState(6);
@@ -108,21 +112,15 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
             {/* Header */}
             {inline && (
               <div className="text-center border-b border-brand-light pb-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-brand-green mb-2">
-                  No commitment required
-                </p>
-                <h2 className="text-2xl font-extrabold text-brand-deep">
-                  Instant Fence Estimator
-                </h2>
-                <p className="mt-2 text-sm text-brand-deep/60">
-                  Get a real price range in 30 seconds. Then schedule a free on-site visit to confirm everything.
-                </p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-brand-green mb-2">{e.tagline}</p>
+                <h2 className="text-2xl font-extrabold text-brand-deep">{e.heading}</h2>
+                <p className="mt-2 text-sm text-brand-deep/60">{e.sub}</p>
               </div>
             )}
 
             {/* Material */}
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-3">1. Select Material</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-3">{e.selectMaterial}</p>
               <div className="grid grid-cols-2 gap-3">
                 {MATERIALS.map((m) => (
                   <button
@@ -139,7 +137,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
                 ))}
               </div>
               <label className="mt-3 flex items-center justify-between rounded-2xl border border-brand-light bg-brand-cream/50 px-4 py-3 cursor-pointer">
-                <span className="text-sm font-medium text-brand-deep">⭐ Premium / Grade A material</span>
+                <span className="text-sm font-medium text-brand-deep">{e.premiumLabel}</span>
                 <div
                   onClick={() => setPremium(!premium)}
                   className={`relative w-11 h-6 rounded-full transition-colors ${premium ? "bg-brand-green" : "bg-slate-300"}`}
@@ -151,7 +149,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
 
             {/* Height */}
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-3">2. Fence Height</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-3">{e.height}</p>
               <div className="flex gap-3">
                 {HEIGHTS.map((h) => (
                   <button
@@ -172,7 +170,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
             {/* Linear feet & gates */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">3. Linear Feet</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">{e.linearFeet}</p>
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
@@ -186,7 +184,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
                 </div>
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">4. Gates</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">{e.gates}</p>
                 <input
                   type="number"
                   min={0}
@@ -200,7 +198,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
 
             {/* Old fence removal */}
             <label className="flex items-center justify-between rounded-2xl border border-brand-light bg-brand-cream/50 px-4 py-3 cursor-pointer">
-              <span className="text-sm font-medium text-brand-deep">🗑 Old fence removal needed?</span>
+              <span className="text-sm font-medium text-brand-deep">{e.removal}</span>
               <div
                 onClick={() => setRemoval(!removal)}
                 className={`relative w-11 h-6 rounded-full transition-colors ${removal ? "bg-brand-green" : "bg-slate-300"}`}
@@ -212,12 +210,10 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
             {/* Teaser — no price shown until contact info is submitted */}
             {estimate && (
               <div className="rounded-2xl bg-brand-deep/5 border border-brand-light p-5 text-center">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-green mb-1">Your estimate is ready</p>
-                <p className="text-base font-semibold text-brand-deep">
-                  Complete the next step to reveal your personalized price range.
-                </p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-green mb-1">{e.estimateReady}</p>
+                <p className="text-base font-semibold text-brand-deep">{e.estimateReadySub}</p>
                 <p className="text-xs text-brand-deep/50 mt-1">
-                  Based on {linearFeet} ft · {height} ft height · {MATERIALS.find(m=>m.id===material)?.label}
+                  {e.estimateMeta} {linearFeet} ft · {height} ft · {MATERIALS.find(m=>m.id===material)?.label}
                   {gates > 0 ? ` · ${gates} gate${gates > 1 ? "s" : ""}` : ""}
                   {removal ? " · includes removal" : ""}
                   {premium ? " · premium grade" : ""}
@@ -230,9 +226,9 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
               disabled={!estimate}
               className="w-full rounded-full bg-brand-deep py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-brand-green hover:shadow-xl disabled:opacity-50"
             >
-              Get My Personalized Estimate →
+              {e.nextBtn}
             </button>
-            <p className="text-center text-xs text-brand-deep/40">No commitment. Free on-site visit to confirm everything.</p>
+            <p className="text-center text-xs text-brand-deep/40">{e.noCommit}</p>
           </div>
         )}
 
@@ -240,38 +236,38 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
         {step === 2 && (
           <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-8 space-y-6">
             <div className="text-center">
-              <span className="inline-block rounded-full bg-brand-yellow/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-deep mb-3">Final Step</span>
-              <h2 className="text-2xl font-extrabold text-brand-deep">Almost there!</h2>
-              <p className="text-sm text-brand-deep/60 mt-1">Enter your details to receive your personalized estimate by email.</p>
+              <span className="inline-block rounded-full bg-brand-yellow/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-deep mb-3">{e.gallery}</span>
+              <h2 className="text-2xl font-extrabold text-brand-deep">{e.step2Title}</h2>
+              <p className="text-sm text-brand-deep/60 mt-1">{e.step2Sub}</p>
             </div>
 
             {/* Teaser in step 2 — price hidden until submission */}
             <div className="rounded-2xl bg-brand-deep text-white p-4 text-center">
-              <p className="text-xs uppercase tracking-wide text-brand-cream/70 mb-1">Your estimate is ready 🔒</p>
-              <p className="text-base font-semibold text-brand-cream/90">Fill in your info to unlock your price range</p>
+              <p className="text-xs uppercase tracking-wide text-brand-cream/70 mb-1">{e.step2Locked}</p>
+              <p className="text-base font-semibold text-brand-cream/90">{e.step2Sub}</p>
               <button type="button" onClick={() => setStep(1)} className="text-xs text-brand-cream/50 mt-1 hover:text-brand-yellow transition-colors">
-                ← Edit project details
+                {e.editDetails}
               </button>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2 sm:col-span-1">
-                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">Full Name *</label>
+                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">{e.nameLabel} *</label>
                 <input value={name} onChange={e=>setName(e.target.value)} placeholder="John Smith" required
                   className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30" />
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">Phone Number *</label>
+                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">{e.phoneLabel} *</label>
                 <input value={phone} onChange={e=>setPhone(e.target.value)} placeholder="(386) 000-0000" type="tel" required
                   className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30" />
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">Email Address *</label>
+                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">{e.emailLabel} *</label>
                 <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="john@email.com" type="email" required
                   className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30" />
               </div>
               <div className="col-span-2 sm:col-span-1">
-                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">Zip Code *</label>
+                <label className="text-xs font-semibold text-brand-deep/70 mb-1 block">{e.zipLabel} *</label>
                 <input value={zip} onChange={e=>setZip(e.target.value)} placeholder="32137" required
                   className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-green/30" />
               </div>
@@ -281,9 +277,9 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
 
             <button type="submit" disabled={sending}
               className="w-full rounded-full bg-brand-yellow py-4 text-base font-bold text-brand-deep shadow-lg transition-all hover:scale-105 hover:shadow-xl disabled:opacity-60">
-              {sending ? "Sending your estimate..." : "✨ Get My Instant Estimate"}
+              {sending ? e.submitting : e.submitBtn}
             </button>
-            <p className="text-center text-xs text-brand-deep/40">🔒 Your information is 100% protected. No spam, ever.</p>
+            <p className="text-center text-xs text-brand-deep/40">{e.privacy}</p>
           </form>
         )}
 
@@ -291,16 +287,16 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
         {step === 3 && (
           <div className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-8 text-center space-y-6">
             <div className="text-5xl">🎉</div>
-            <h2 className="text-2xl font-extrabold text-brand-deep">Your estimate is on its way!</h2>
+            <h2 className="text-2xl font-extrabold text-brand-deep">{e.confirmTitle}</h2>
             <p className="text-brand-deep/70">
-              We sent a detailed breakdown to <strong>{email}</strong>. Check your inbox — and don&apos;t forget to schedule your free on-site visit so we can confirm every detail.
+              {e.confirmSub} <strong>{email}</strong>.
             </p>
 
             {estimate && (
               <div className="rounded-2xl bg-brand-deep text-white p-5">
-                <p className="text-xs uppercase tracking-wide text-brand-cream/70 mb-1">Your estimated range</p>
+                <p className="text-xs uppercase tracking-wide text-brand-cream/70 mb-1">{e.range}</p>
                 <p className="text-3xl font-extrabold">{fmt(estimate.low)} – {fmt(estimate.high)}</p>
-                <p className="text-xs text-brand-cream/50 mt-1">Final price confirmed after on-site measurement</p>
+                <p className="text-xs text-brand-cream/50 mt-1">{e.rangeNote}</p>
               </div>
             )}
 
@@ -310,14 +306,14 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
               rel="noopener noreferrer"
               className="inline-flex w-full items-center justify-center rounded-full bg-brand-green py-4 text-base font-bold text-white shadow-lg transition-all hover:scale-105"
             >
-              📅 Schedule Your Free Site Visit
+              {e.scheduleBtn}
             </a>
             <div className="flex gap-3">
-              <Link href="/" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream">
-                Back to Home
+              <Link href="/" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
+                {e.backHome}
               </Link>
-              <a href="tel:+13864039460" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream">
-                📞 Call Us Now
+              <a href="tel:+13864039460" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
+                {e.callNow}
               </a>
             </div>
           </div>
@@ -330,15 +326,9 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
   return (
     <main className="min-h-screen bg-brand-cream">
       <section className="bg-brand-deep py-14 px-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
-          No commitment required
-        </p>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Instant Fence Estimator
-        </h1>
-        <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base">
-          Get a real price range in 30 seconds. Then schedule a free on-site visit to confirm everything.
-        </p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">{e.tagline}</p>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">{e.heading}</h1>
+        <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base">{e.sub}</p>
       </section>
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
         {cards}

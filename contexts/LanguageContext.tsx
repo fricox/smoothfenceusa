@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
 import { type Lang, type Translation, t } from "@/lib/translations";
 
 type LanguageContextType = {
@@ -18,8 +18,21 @@ const LanguageContext = createContext<LanguageContextType>({
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
 
+  // Load from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("sfusa-lang") as Lang | null;
+      if (saved === "en" || saved === "es") {
+        setLangState(saved);
+      }
+    } catch {}
+  }, []);
+
   const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);
+    try {
+      localStorage.setItem("sfusa-lang", newLang);
+    } catch {}
   }, []);
 
   return (
