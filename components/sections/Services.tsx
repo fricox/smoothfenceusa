@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ── Service icons ──────────────────────────────────────────────── */
 const VinylIcon = () => (
@@ -140,6 +141,9 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const { tr } = useLanguage();
+  const s = tr.services;
+
   return (
     <section
       id="services"
@@ -154,7 +158,7 @@ export default function ServicesSection() {
             transition={{ duration: 0.5 }}
             className="text-2xl md:text-3xl font-semibold text-brand-deep"
           >
-            Fence services for Palm Coast properties
+            {s.sectionHeading}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -163,13 +167,12 @@ export default function ServicesSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-3 text-sm md:text-base text-brand-deep/70"
           >
-            Installations, repairs, and HOA support handled by a crew that knows
-            Florida's climate and permitting rules.
+            {s.sectionSub}
           </motion.p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-          {services.map((service, index) => {
+          {s.items.map((service, index) => {
             const Icon = serviceIcons[index];
             return (
               <motion.div

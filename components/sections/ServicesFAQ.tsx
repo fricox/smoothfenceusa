@@ -2,79 +2,40 @@
 
 import { useState } from "react";
 import { clsx } from "clsx";
-
-type FaqItem = {
-  id: number;
-  question: string;
-  answer: string;
-};
-
-const faqItems: FaqItem[] = [
-  {
-    id: 1,
-    question: "What areas do you serve?",
-    answer:
-      "We primarily serve Palm Coast and surrounding communities. If you're slightly outside the zone, contact us and we’ll confirm availability.",
-  },
-  {
-    id: 2,
-    question: "Do you help with HOA approvals and permits?",
-    answer:
-      "Yes, we guide homeowners through HOA requirements and local permitting to avoid delays and rejections.",
-  },
-  {
-    id: 3,
-    question: "How long does a typical fence installation take?",
-    answer:
-      "Most residential fence projects take 1–3 days once materials are onsite and approvals are complete.",
-  },
-  {
-    id: 4,
-    question: "Can you repair part of my fence instead of replacing it?",
-    answer:
-      "Often yes. We repair damaged panels, leaning posts, and storm damage without replacing the entire fence.",
-  },
-  {
-    id: 5,
-    question: "Which fence material works best in Florida’s climate?",
-    answer:
-      "Vinyl and aluminum handle moisture, heat, and storms very well. Wood can also perform great with proper installation.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ServicesFAQ() {
+  const { tr } = useLanguage();
+  const s = tr.services;
   const [openId, setOpenId] = useState<number | null>(null);
 
-  const toggle = (id: number) => {
-    setOpenId((x) => (x === id ? null : id));
-  };
+  const toggle = (id: number) => setOpenId((x) => (x === id ? null : id));
 
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-6 text-center lg:mb-8 lg:text-left">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-green">
-          FAQ
+          {s.faqLabel}
         </p>
         <h2 className="text-2xl font-bold text-brand-deep sm:text-3xl">
-          Frequently asked questions
+          {s.faqHeading}
         </h2>
         <p className="mt-2 text-sm text-brand-deep/80 sm:text-base">
-          These answers can be edited later with business-specific info.
+          {s.faqSub}
         </p>
       </div>
 
       <div className="space-y-3">
-        {faqItems.map((item) => {
-          const isOpen = openId === item.id;
-
+        {s.faqs.map((item, index) => {
+          const isOpen = openId === index;
           return (
             <div
-              key={item.id}
+              key={index}
               className="overflow-hidden rounded-2xl border border-brand-light bg-white/90 shadow-sm shadow-brand-deep/5"
             >
               <button
                 type="button"
-                onClick={() => toggle(item.id)}
+                onClick={() => toggle(index)}
                 className="flex w-full items-center justify-between px-4 py-3 text-left sm:px-5 sm:py-4"
               >
                 <span className="text-sm font-semibold text-brand-deep sm:text-base">
@@ -89,7 +50,6 @@ export default function ServicesFAQ() {
                   +
                 </span>
               </button>
-
               <div
                 className={clsx(
                   "px-4 pb-3 text-sm text-brand-deep/80 transition-[max-height] duration-200 ease-out sm:px-5 sm:pb-4",
@@ -105,7 +65,3 @@ export default function ServicesFAQ() {
     </div>
   );
 }
-
-
-
-

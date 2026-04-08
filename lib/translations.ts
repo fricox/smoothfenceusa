@@ -16,6 +16,25 @@ export type Translation = {
   contact: { label: string; heading: string; sub: string; whatNext: string; step1: { title: string; desc: string }; step2: { title: string; desc: string }; step3: { title: string; desc: string }; scheduleLabel: string; scheduleBtn: string; directContact: string; location: string };
   form: { label: string; heading: string; sub: string; fullName: string; phone: string; email: string; preferredDate: string; preferredTime: string; timeOptional: string; address: string; addressPlaceholder: string; fenceType: string; fenceTypePlaceholder: string; linearFeet: string; hoa: string; hoaPlaceholder: string; message: string; disclaimer: string; send: string; sending: string; success: string; hoaOptions: { value: string; label: string }[]; fenceOptions: string[]; required: string };
   footer: { tagline: string; quickLinks: string; hours: string; rights: string };
+  services: {
+    pageTagline: string; pageHeading: string; pageSub: string;
+    sectionHeading: string; sectionSub: string;
+    items: { title: string; description: string }[];
+    faqLabel: string; faqHeading: string; faqSub: string;
+    faqs: { question: string; answer: string }[];
+  };
+  about: {
+    heading: string;
+    p1: string; p2: string; p3: string;
+    expectHeading: string;
+    items: string[];
+  };
+  hoa: {
+    heading: string; intro1: string; intro2: string;
+    hoaCard: { heading: string; items: string[] };
+    permitCard: { heading: string; items: string[] };
+    footer: string;
+  };
   estimator: {
     tagline: string; heading: string; sub: string;
     selectMaterial: string; premiumLabel: string;
@@ -151,6 +170,50 @@ export const t: Record<Lang, Translation> = {
       quickLinks: "Quick links",
       hours: "Mon – Sat, 8:00 AM – 6:00 PM",
       rights: "All rights reserved.",
+    },
+    // Services page
+    services: {
+      pageTagline: "Fence services for Palm Coast properties",
+      pageHeading: "Professional fence services with local expertise",
+      pageSub: "From new installations to repairs and HOA approvals, SmoothFenceUSA delivers long-lasting fences built for Florida weather, storms, and permitting rules.",
+      sectionHeading: "Fence services for Palm Coast properties",
+      sectionSub: "Installations, repairs, and HOA support handled by a crew that knows Florida's climate and permitting rules.",
+      items: [
+        { title: "Vinyl fence installation", description: "Low-maintenance vinyl fences that stay bright and clean, perfect for privacy and curb appeal in Florida's coastal climate." },
+        { title: "Aluminum fence installation", description: "Sleek, durable aluminum fences that won't rust and are ideal for pools, front yards, and HOA communities." },
+        { title: "Chain-link fence installation", description: "A cost-effective way to secure your property, pets, or work areas without blocking visibility." },
+        { title: "Wood fence installation", description: "Classic wood fences with modern hardware and proper post setting so they don't lean or sag after the first storm." },
+        { title: "Fence repair & storm damage", description: "We fix leaning panels, broken posts, and storm-damaged sections so you don't have to replace the whole fence." },
+        { title: "HOA & permits assistance", description: "We help you navigate HOA guidelines and local permitting so your fence is approved the first time." },
+      ],
+      faqLabel: "FAQ",
+      faqHeading: "Frequently asked questions",
+      faqSub: "Quick answers about our process and services.",
+      faqs: [
+        { question: "What areas do you serve?", answer: "We primarily serve Palm Coast and surrounding communities. If you're slightly outside the zone, contact us and we'll confirm availability." },
+        { question: "Do you help with HOA approvals and permits?", answer: "Yes, we guide homeowners through HOA requirements and local permitting to avoid delays and rejections." },
+        { question: "How long does a typical fence installation take?", answer: "Most residential fence projects take 1–3 days once materials are onsite and approvals are complete." },
+        { question: "Can you repair part of my fence instead of replacing it?", answer: "Often yes. We repair damaged panels, leaning posts, and storm damage without replacing the entire fence." },
+        { question: "Which fence material works best in Florida's climate?", answer: "Vinyl and aluminum handle moisture, heat, and storms very well. Wood can also perform great with proper installation." },
+      ],
+    },
+    // About page
+    about: {
+      heading: "About SmoothFenceUSA",
+      p1: "SmoothFenceUSA was created with a simple goal: make fence projects easy for homeowners in Palm Coast and the surrounding Florida coast. We know how stressful it can be to deal with HOAs, permits, and contractors that don't show up on time. Our team focuses on clear communication, clean job sites, and results that look great from the street.",
+      p2: "We specialize in vinyl, aluminum, chain-link, and wood fences and understand how Florida's sun, wind, and storms affect each material. That's why we recommend the right posts, hardware, and layouts based on your property — not a one-size-fits-all approach.",
+      p3: "When you work with SmoothFenceUSA, you get a local crew that respects your time, your yard, and your neighbors. We show up when we say we will, keep you updated during your project, and leave your property as clean as we found it.",
+      expectHeading: "What you can expect from us",
+      items: ["Clear, written quotes with no hidden fees.", "Help with HOA approvals and required drawings.", "Professional installation crews and clean job sites.", "Recommendations based on your needs, not our convenience."],
+    },
+    // HOA page
+    hoa: {
+      heading: "HOA & permits made simple",
+      intro1: "Many neighborhoods in Palm Coast and nearby communities are part of an HOA. That means your new fence must follow specific rules for height, style, material, and color. On top of that, some projects require city or county permits.",
+      intro2: "SmoothFenceUSA helps you understand what's allowed before you sign a contract so you don't waste time or money on plans that won't be approved.",
+      hoaCard: { heading: "HOA guidance", items: ["Review of your HOA rules and design guidelines.", "Help choosing fence styles and colors that fit.", "Support with drawings or descriptions for approvals."] },
+      permitCard: { heading: "Permits & inspections", items: ["Guidance on what projects require permits.", "Coordination of permit steps when applicable.", "Fence layouts that respect property lines and easements."] },
+      footer: "Every neighborhood is different. When you request a quote, let us know if you're part of an HOA and we'll factor that into your plan from day one.",
     },
     // Estimator
     estimator: {
@@ -298,6 +361,50 @@ export const t: Record<Lang, Translation> = {
       quickLinks: "Enlaces rápidos",
       hours: "Lun – Sáb, 8:00 AM – 6:00 PM",
       rights: "Todos los derechos reservados.",
+    },
+    // Services page
+    services: {
+      pageTagline: "Servicios de cercas para Palm Coast",
+      pageHeading: "Servicios profesionales con experiencia local",
+      pageSub: "Desde instalaciones nuevas hasta reparaciones y aprobaciones de HOA, SmoothFenceUSA construye cercas duraderas diseñadas para el clima, las tormentas y las reglas de permisos de Florida.",
+      sectionHeading: "Servicios de cercas para Palm Coast",
+      sectionSub: "Instalaciones, reparaciones y apoyo con HOA por un equipo que conoce el clima y las reglas de permisos de Florida.",
+      items: [
+        { title: "Instalación de cerca de vinilo", description: "Cercas de vinilo de bajo mantenimiento que permanecen brillantes, perfectas para privacidad y atractivo en el clima costero de Florida." },
+        { title: "Instalación de cerca de aluminio", description: "Cercas de aluminio elegantes y duraderas que no se oxidan, ideales para piscinas, patios delanteros y comunidades con HOA." },
+        { title: "Instalación de malla ciclónica", description: "Una forma rentable de asegurar tu propiedad, mascotas o áreas de trabajo sin bloquear la visibilidad." },
+        { title: "Instalación de cerca de madera", description: "Cercas de madera clásicas con herrajes modernos e instalación correcta de postes para que no se inclinen después de la primera tormenta." },
+        { title: "Reparación y daños por tormenta", description: "Reparamos paneles inclinados, postes rotos y secciones dañadas por tormentas sin necesidad de reemplazar toda la cerca." },
+        { title: "Asistencia con HOA y permisos", description: "Te ayudamos a navegar los requisitos del HOA y los permisos locales para que tu cerca sea aprobada a la primera." },
+      ],
+      faqLabel: "Preguntas frecuentes",
+      faqHeading: "Preguntas frecuentes",
+      faqSub: "Respuestas rápidas sobre nuestro proceso y servicios.",
+      faqs: [
+        { question: "¿Qué áreas sirven?", answer: "Servimos principalmente Palm Coast y comunidades cercanas. Si estás un poco fuera de la zona, contáctanos y confirmamos disponibilidad." },
+        { question: "¿Ayudan con aprobaciones de HOA y permisos?", answer: "Sí, guiamos a los propietarios a través de los requisitos del HOA y los permisos locales para evitar retrasos y rechazos." },
+        { question: "¿Cuánto tiempo tarda una instalación típica?", answer: "La mayoría de los proyectos residenciales toman 1–3 días una vez que los materiales están en el sitio y las aprobaciones están completas." },
+        { question: "¿Pueden reparar parte de mi cerca en vez de reemplazarla?", answer: "A menudo sí. Reparamos paneles dañados, postes inclinados y daños por tormentas sin reemplazar toda la cerca." },
+        { question: "¿Qué material funciona mejor en el clima de Florida?", answer: "El vinilo y el aluminio manejan muy bien la humedad, el calor y las tormentas. La madera también funciona excelente con una instalación correcta." },
+      ],
+    },
+    // About page
+    about: {
+      heading: "Acerca de SmoothFenceUSA",
+      p1: "SmoothFenceUSA fue creada con un objetivo simple: hacer los proyectos de cercas fáciles para los propietarios en Palm Coast y la costa de Florida. Sabemos lo estresante que puede ser lidiar con HOAs, permisos y contratistas que no llegan a tiempo. Nuestro equipo se enfoca en comunicación clara, sitios de trabajo limpios y resultados que se ven bien desde la calle.",
+      p2: "Nos especializamos en cercas de vinilo, aluminio, malla ciclónica y madera, y entendemos cómo el sol, el viento y las tormentas de Florida afectan cada material. Por eso recomendamos los postes, herrajes y diseños correctos según tu propiedad, no un enfoque único para todos.",
+      p3: "Cuando trabajas con SmoothFenceUSA, obtienes un equipo local que respeta tu tiempo, tu jardín y tus vecinos. Llegamos cuando decimos que llegaremos, te mantenemos informado durante el proyecto y dejamos tu propiedad tan limpia como la encontramos.",
+      expectHeading: "Lo que puedes esperar de nosotros",
+      items: ["Cotizaciones claras y escritas sin cargos ocultos.", "Ayuda con aprobaciones de HOA y dibujos requeridos.", "Equipos de instalación profesionales y sitios de trabajo limpios.", "Recomendaciones basadas en tus necesidades, no en nuestra conveniencia."],
+    },
+    // HOA page
+    hoa: {
+      heading: "HOA y permisos simplificados",
+      intro1: "Muchos vecindarios en Palm Coast y comunidades cercanas son parte de un HOA. Eso significa que tu nueva cerca debe seguir reglas específicas de altura, estilo, material y color. Además, algunos proyectos requieren permisos de la ciudad o el condado.",
+      intro2: "SmoothFenceUSA te ayuda a entender qué está permitido antes de firmar un contrato para que no pierdas tiempo o dinero en planes que no serán aprobados.",
+      hoaCard: { heading: "Orientación sobre HOA", items: ["Revisión de las reglas y directrices de diseño de tu HOA.", "Ayuda para elegir estilos y colores de cerca que se ajusten.", "Apoyo con dibujos o descripciones para las aprobaciones."] },
+      permitCard: { heading: "Permisos e inspecciones", items: ["Orientación sobre qué proyectos requieren permisos.", "Coordinación de los pasos del permiso cuando aplique.", "Diseños de cerca que respetan los linderos y servidumbres."] },
+      footer: "Cada vecindario es diferente. Al solicitar una cotización, avísanos si eres parte de un HOA y lo incluiremos en tu plan desde el primer día.",
     },
     // Estimator
     estimator: {
