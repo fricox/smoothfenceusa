@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 /* ── Pricing data ─────────────────────────────────────────── */
 const MATERIALS = [
-  { id: "vinyl",     label: "PVC / Vinyl",  low: 28, high: 45 },
+  { id: "vinyl",     label: "PVC / Vinyl",  low: 26, high: 45 },
   { id: "wood",      label: "Wood",         low: 20, high: 35 },
   { id: "aluminum",  label: "Aluminum",     low: 30, high: 50 },
   { id: "chainlink", label: "Chain-Link",   low: 15, high: 25 },
