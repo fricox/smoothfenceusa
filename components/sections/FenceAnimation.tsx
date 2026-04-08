@@ -76,35 +76,35 @@ export default function FenceAnimation() {
         overflow="visible"
       >
         <defs>
-          {/* Plank: bright left edge → shadow right edge */}
+          {/* Plank: tan PVC — bright left edge → shadow right edge */}
           <linearGradient id={`pg-${cycle}`} x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%"   stopColor="#f6f4f0" />
-            <stop offset="7%"   stopColor="#edebe5" />
-            <stop offset="50%"  stopColor="#e2dfd8" />
-            <stop offset="93%"  stopColor="#c8c5be" />
-            <stop offset="100%" stopColor="#aeaba4" />
+            <stop offset="0%"   stopColor="#e8d9bc" />
+            <stop offset="7%"   stopColor="#dfd0b0" />
+            <stop offset="50%"  stopColor="#d4c49e" />
+            <stop offset="93%"  stopColor="#b8a87e" />
+            <stop offset="100%" stopColor="#9e9068" />
           </linearGradient>
 
-          {/* Post: side darks, bright front face */}
+          {/* Post: tan PVC — side darks, bright front face */}
           <linearGradient id={`ptg-${cycle}`} x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%"   stopColor="#c8c5be" />
-            <stop offset="16%"  stopColor="#f0ede6" />
-            <stop offset="55%"  stopColor="#e6e3dc" />
-            <stop offset="84%"  stopColor="#c4c1ba" />
-            <stop offset="100%" stopColor="#a8a5a0" />
+            <stop offset="0%"   stopColor="#b8a87e" />
+            <stop offset="16%"  stopColor="#e2d2b0" />
+            <stop offset="55%"  stopColor="#d8c8a4" />
+            <stop offset="84%"  stopColor="#b0a07a" />
+            <stop offset="100%" stopColor="#968860" />
           </linearGradient>
 
           {/* Post cap top face */}
           <linearGradient id={`cg-${cycle}`} x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%"   stopColor="#f8f6f1" />
-            <stop offset="100%" stopColor="#d8d5ce" />
+            <stop offset="0%"   stopColor="#eedfc0" />
+            <stop offset="100%" stopColor="#c8b890" />
           </linearGradient>
 
-          {/* Rail: top-lit */}
+          {/* Rail: top-lit tan */}
           <linearGradient id={`rg-${cycle}`} x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%"   stopColor="#f0ede6" />
-            <stop offset="40%"  stopColor="#e2dfd8" />
-            <stop offset="100%" stopColor="#b8b5ae" />
+            <stop offset="0%"   stopColor="#e2d2b0" />
+            <stop offset="40%"  stopColor="#d4c49e" />
+            <stop offset="100%" stopColor="#a89870" />
           </linearGradient>
 
           {/* Shine sweep mask */}
