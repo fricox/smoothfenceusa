@@ -305,10 +305,10 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
             {/* Pay deposit button */}
             {estimate && (
               <Link
-                href={`/pay?amount=${Math.round(estimate.low * 0.25)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`}
+                href={`/pay?amount=${Math.round(estimate.low * 0.50)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow py-4 text-base font-bold text-brand-deep shadow-lg transition-all hover:scale-105 hover:shadow-xl"
               >
-                💳 {lang === "es" ? `Pagar Depósito (${fmt(Math.round(estimate.low * 0.25))}) →` : `Pay Deposit (${fmt(Math.round(estimate.low * 0.25))}) →`}
+                💳 {lang === "es" ? `Pagar Depósito 50% (${fmt(Math.round(estimate.low * 0.50))}) →` : `Pay 50% Deposit (${fmt(Math.round(estimate.low * 0.50))}) →`}
               </Link>
             )}
 
