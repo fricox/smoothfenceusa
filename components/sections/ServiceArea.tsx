@@ -86,8 +86,8 @@ function MapModal({ onClose }: { onClose: () => void }) {
               top: "18%", left: "30%",
               width: "55%", height: "68%",
               borderRadius: "50%",
-              background: "radial-gradient(ellipse, rgba(103,157,56,0.22) 0%, rgba(103,157,56,0.10) 55%, transparent 75%)",
-              border: "2px solid rgba(103,157,56,0.45)",
+              background: "radial-gradient(ellipse, rgba(18,80,54,0.45) 0%, rgba(18,80,54,0.28) 50%, transparent 75%)",
+              border: "2.5px solid rgba(18,80,54,0.80)",
             }}
           />
 
@@ -123,7 +123,7 @@ function MapModal({ onClose }: { onClose: () => void }) {
           >
             <div
               className="h-5 w-5 flex-shrink-0 rounded"
-              style={{ background: "rgba(103,157,56,0.5)", border: "2px solid #679d38" }}
+              style={{ background: "rgba(18,80,54,0.45)", border: "2px solid #125036" }}
             />
             <span className="text-sm font-medium" style={{ color: "#fbfcf9" }}>
               {isEs ? "Área verde resaltada: Zona de Servicio Garantizada" : "Green highlighted area: Guaranteed Service Zone"}
