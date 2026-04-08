@@ -152,6 +152,12 @@ export default function Header() {
             </div>
 
             <Link
+              href="/pay"
+              className="rounded-full bg-brand-yellow px-4 py-2 text-sm font-bold text-brand-deep shadow-sm transition-colors hover:bg-brand-light mr-2"
+            >
+              💳 {lang === "es" ? "Pagar" : "Pay"}
+            </Link>
+            <Link
               href="/contact"
               className="rounded-full bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-amber-500"
             >

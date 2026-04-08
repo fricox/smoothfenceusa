@@ -50,7 +50,7 @@ const fmt = (n: number) =>
 
 /* ── Component ────────────────────────────────────────────── */
 export default function EstimatorClient({ inline = false }: { inline?: boolean }) {
-  const { tr } = useLanguage();
+  const { tr, lang } = useLanguage();
   const e = tr.estimator;
 
   /* Step 1 state */
@@ -300,6 +300,16 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
                 <p className="text-3xl font-extrabold">{fmt(estimate.low)} – {fmt(estimate.high)}</p>
                 <p className="text-xs text-brand-cream/50 mt-1">{e.rangeNote}</p>
               </div>
+            )}
+
+            {/* Pay deposit button */}
+            {estimate && (
+              <Link
+                href={`/pay?amount=${Math.round(estimate.low * 0.25)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-yellow py-4 text-base font-bold text-brand-deep shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+              >
+                💳 {lang === "es" ? `Pagar Depósito (${fmt(Math.round(estimate.low * 0.25))}) →` : `Pay Deposit (${fmt(Math.round(estimate.low * 0.25))}) →`}
+              </Link>
             )}
 
             <a
