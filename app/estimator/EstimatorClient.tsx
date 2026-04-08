@@ -56,8 +56,8 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
   /* Step 1 state */
   const [material,    setMaterial]    = useState("vinyl");
   const [height,      setHeight]      = useState(6);
-  const [linearFeet,  setLinearFeet]  = useState(150);
-  const [gates,       setGates]       = useState(1);
+  const [linearFeet,  setLinearFeet]  = useState<string>("150");
+  const [gates,       setGates]       = useState<string>("1");
   const [removal,     setRemoval]     = useState(false);
   const [premium,     setPremium]     = useState(false);
 
@@ -70,7 +70,9 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
   const [sending, setSending] = useState(false);
   const [error,   setError]   = useState("");
 
-  const estimate = calcRange(material, height, linearFeet, gates, removal, premium);
+  const feetNum = Math.max(0, Number(linearFeet) || 0);
+  const gatesNum = Math.max(0, Number(gates) || 0);
+  const estimate = calcRange(material, height, feetNum, gatesNum, removal, premium);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -85,8 +87,8 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
           name, phone, email, zip,
           material: MATERIALS.find(m => m.id === material)?.label,
           height: `${height} ft`,
-          linearFeet,
-          gates,
+          linearFeet: feetNum,
+          gates: gatesNum,
           removal,
           premium,
           estimateLow:  estimate?.low,
@@ -177,7 +179,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
                     min={10}
                     max={2000}
                     value={linearFeet}
-                    onChange={(e) => setLinearFeet(Math.max(0, Number(e.target.value)))}
+                    onChange={(e) => setLinearFeet(e.target.value)}
                     className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm font-semibold text-brand-deep focus:outline-none focus:ring-2 focus:ring-brand-green/30"
                   />
                   <span className="text-sm text-brand-deep/60">ft</span>
@@ -190,7 +192,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
                   min={0}
                   max={10}
                   value={gates}
-                  onChange={(e) => setGates(Math.max(0, Number(e.target.value)))}
+                  onChange={(e) => setGates(e.target.value)}
                   className="w-full rounded-2xl border border-brand-light px-4 py-3 text-sm font-semibold text-brand-deep focus:outline-none focus:ring-2 focus:ring-brand-green/30"
                 />
               </div>
@@ -213,8 +215,8 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-green mb-1">{e.estimateReady}</p>
                 <p className="text-base font-semibold text-brand-deep">{e.estimateReadySub}</p>
                 <p className="text-xs text-brand-deep/50 mt-1">
-                  {e.estimateMeta} {linearFeet} ft · {height} ft · {MATERIALS.find(m=>m.id===material)?.label}
-                  {gates > 0 ? ` · ${gates} gate${gates > 1 ? "s" : ""}` : ""}
+                  {e.estimateMeta} {feetNum} ft · {height} ft · {MATERIALS.find(m=>m.id===material)?.label}
+                  {gatesNum > 0 ? ` · ${gatesNum} gate${gatesNum > 1 ? "s" : ""}` : ""}
                   {removal ? " · includes removal" : ""}
                   {premium ? " · premium grade" : ""}
                 </p>
