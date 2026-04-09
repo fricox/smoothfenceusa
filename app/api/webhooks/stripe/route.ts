@@ -66,7 +66,6 @@ export async function POST(req: NextRequest) {
     const calendlyUrl = `https://calendly.com/federico-smoothfenceusa/installation?${new URLSearchParams({
       name: customerName,
       email: customerEmail,
-      a1: "Fence installation — deposit paid",
     }).toString()}`;
 
     // ── Send emails via Resend ────────────────────────────────

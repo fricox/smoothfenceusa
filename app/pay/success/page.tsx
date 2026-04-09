@@ -38,7 +38,6 @@ function SuccessContent() {
   const calendlyUrl = `${calendlyBase}?${new URLSearchParams({
     name,
     email,
-    a1: isEs ? "Instalación de cerca — depósito pagado" : "Fence installation — deposit paid",
   }).toString()}`;
 
   return (
