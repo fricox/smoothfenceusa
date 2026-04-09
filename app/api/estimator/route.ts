@@ -114,7 +114,7 @@ export async function POST(request: Request) {
   ]);
 
   // Push to unified Google Sheets CRM
-  pushLeadEvent({
+  await pushLeadEvent({
     type: "estimate_sent",
     source: "estimator",
     status: "new",

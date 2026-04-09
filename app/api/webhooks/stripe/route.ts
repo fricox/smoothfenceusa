@@ -177,7 +177,7 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Log to unified Google Sheets CRM ──────────────────
-    pushLeadEvent({
+    await pushLeadEvent({
       type: "deposit_paid",
       source: "stripe",
       status: "deposit_paid",

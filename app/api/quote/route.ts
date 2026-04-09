@@ -131,7 +131,7 @@ export async function POST(request: Request) {
   }
 
   // ── Save lead to unified Google Sheets CRM ──
-  pushLeadEvent({
+  await pushLeadEvent({
     type: "lead_created",
     source: "contact",
     status: "new",

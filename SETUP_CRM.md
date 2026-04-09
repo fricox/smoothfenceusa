@@ -123,25 +123,19 @@ Aplica a los tres entornos (Production, Preview, Development) y haz un **redeplo
 
 ## 4) Probar que funciona
 
-Desde tu terminal local:
+Desde tu terminal local, **reemplazando la URL de ejemplo por la tuya** (la que termina en `/exec`). Nota el flag `-L` — es obligatorio porque Apps Script siempre responde con un redirect 302 que `curl` debe seguir:
 
 ```bash
-curl -X POST "$GOOGLE_SHEETS_WEBHOOK_URL" \
+curl -L -X POST "https://script.google.com/macros/s/TU_ID_AQUI/exec" \
   -H "Content-Type: application/json" \
-  -d '{
-    "submittedAt":"2026-04-08T20:00:00Z",
-    "leadId":"test@example.com",
-    "type":"lead_created",
-    "source":"contact",
-    "status":"new",
-    "fullName":"Test User",
-    "email":"test@example.com",
-    "phone":"386-555-0123",
-    "message":"Prueba manual"
-  }'
+  -d '{"submittedAt":"2026-04-08T20:00:00Z","leadId":"test@example.com","type":"lead_created","source":"contact","status":"new","fullName":"Test User","email":"test@example.com","phone":"386-555-0123","message":"Prueba manual"}'
 ```
 
+Respuesta esperada: `{"ok":true}`
+
 Abre tu Sheet — deberías ver una nueva fila con la celda `status` coloreada amarillo claro. Si la ves, el CRM está vivo.
+
+**⚠️ No uses `$GOOGLE_SHEETS_WEBHOOK_URL`** en el curl a menos que hayas hecho `export GOOGLE_SHEETS_WEBHOOK_URL="..."` primero en esa misma terminal. Esa variable vive en Vercel, no en tu shell local.
 
 ## 5) Configurar el webhook de Calendly
 
