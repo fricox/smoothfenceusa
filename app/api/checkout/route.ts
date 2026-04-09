@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             product_data: {
               name: description || "Fence Installation Deposit",
               description: `Smooth Fence USA — ${customerName ? `Customer: ${customerName}` : "Deposit for fence project"}`,
-              images: ["https://smoothfenceusa.com/icon-512.png"],
+              images: ["https://smoothfenceusa.com/logo-stripe.png"],
             },
             unit_amount: Math.round(amount * 100), // cents
           },
