@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { Resend } from "resend";
+import { pushLeadEvent } from "@/lib/sheets";
 
 export const runtime = "nodejs";
 
@@ -175,27 +176,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // ── Log to Google Sheets ─────────────────────────────────
-    const sheetsWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-    if (sheetsWebhook) {
-      fetch(sheetsWebhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "payment",
-          submittedAt: paidAt,
-          fullName: customerName,
-          email: customerEmail,
-          phone: session.customer_details?.phone || "",
-          address: "",
-          fenceType: "",
-          linearFeet: "",
-          hoa: "",
-          preferredDate: "",
-          message: `💰 DEPOSIT PAID: ${fmt(amount)} — ${description} — Stripe: ${sessionId}`,
-        }),
-      }).catch((err) => console.error("Sheets webhook error:", err));
-    }
+    // ── Log to unified Google Sheets CRM ──────────────────
+    pushLeadEvent({
+      type: "deposit_paid",
+      source: "stripe",
+      status: "deposit_paid",
+      fullName: customerName,
+      email: customerEmail,
+      phone: session.customer_details?.phone || "",
+      depositAmount: amount,
+      stripeSessionId: sessionId,
+      earliestInstallDate: earliestStr,
+      notes: `💰 DEPOSIT PAID: ${fmt(amount)} — ${description}`,
+    });
   }
 
   return NextResponse.json({ received: true });

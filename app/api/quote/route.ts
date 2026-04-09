@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { pushLeadEvent } from "@/lib/sheets";
 
 type QuotePayload = {
   fullName: string;
@@ -17,13 +18,12 @@ type FieldErrors = Partial<Record<keyof QuotePayload, string>>;
 
 export const runtime = "nodejs";
 
+// Minimal required fields: the new short contact form only collects name,
+// phone and message. Everything else is optional so the legacy long form
+// keeps working for backward compatibility.
 const requiredFields: Array<keyof QuotePayload> = [
   "fullName",
   "phone",
-  "email",
-  "address",
-  "fenceType",
-  "hoa",
   "message",
 ];
 
@@ -130,26 +130,21 @@ export async function POST(request: Request) {
     );
   }
 
-  // ── Save lead to Google Sheets CRM (fire-and-forget) ──
-  const sheetsWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (sheetsWebhook) {
-    fetch(sheetsWebhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fullName: payload.fullName,
-        phone: payload.phone,
-        email: payload.email,
-        address: payload.address,
-        fenceType: payload.fenceType,
-        linearFeet: payload.linearFeet ?? "",
-        hoa: payload.hoa,
-        preferredDate: payload.preferredDate ?? "",
-        message: payload.message,
-        submittedAt: new Date().toISOString(),
-      }),
-    }).catch((err) => console.error("Sheets webhook error:", err));
-  }
+  // ── Save lead to unified Google Sheets CRM ──
+  pushLeadEvent({
+    type: "lead_created",
+    source: "contact",
+    status: "new",
+    fullName: payload.fullName,
+    phone: payload.phone,
+    email: payload.email,
+    address: payload.address,
+    material: payload.fenceType,
+    linearFeet: payload.linearFeet,
+    hoa: payload.hoa,
+    preferredDate: payload.preferredDate,
+    message: payload.message,
+  });
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

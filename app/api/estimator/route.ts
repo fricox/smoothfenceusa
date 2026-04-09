@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { pushLeadEvent } from "@/lib/sheets";
 
 export const runtime = "nodejs";
 
@@ -112,21 +113,25 @@ export async function POST(request: Request) {
     }),
   ]);
 
-  // Fire-and-forget to Google Sheets
-  const sheetsWebhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (sheetsWebhook) {
-    fetch(sheetsWebhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        submittedAt: new Date().toISOString(),
-        fullName: name, phone, email,
-        address: zip, fenceType: material,
-        linearFeet, hoa: "", preferredDate: "",
-        message: `Estimator lead — ${height}, ${gates} gate(s), removal: ${removal}, premium: ${premium}. Range: ${fmt(estimateLow)}–${fmt(estimateHigh)}`,
-      }),
-    }).catch(() => {});
-  }
+  // Push to unified Google Sheets CRM
+  pushLeadEvent({
+    type: "estimate_sent",
+    source: "estimator",
+    status: "new",
+    fullName: name,
+    phone,
+    email,
+    zip,
+    material,
+    height,
+    linearFeet,
+    gates,
+    removal,
+    premium,
+    estimateLow,
+    estimateHigh,
+    notes: `Estimator: ${material}${premium ? " (premium)" : ""}, ${height}, ${linearFeet} ft, ${gates} gate(s), removal: ${removal ? "yes" : "no"}`,
+  });
 
   return NextResponse.json({ ok: true });
 }
