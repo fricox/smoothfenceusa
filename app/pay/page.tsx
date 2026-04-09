@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const DEPOSIT_OPTIONS = [
@@ -11,19 +12,36 @@ const DEPOSIT_OPTIONS = [
   { label: "$1,000", value: 1000 },
 ];
 
-export default function PayPage() {
+function PayForm() {
   const { lang } = useLanguage();
   const isEs = lang === "es";
+  const params = useSearchParams();
 
-  const [amount, setAmount]         = useState<string>("500");
-  const [customAmt, setCustomAmt]   = useState(false);
-  const [name, setName]             = useState("");
-  const [email, setEmail]           = useState("");
-  const [description, setDesc]      = useState("");
-  const [loading, setLoading]       = useState(false);
-  const [error, setError]           = useState("");
+  // Read values from URL (set by the estimator deposit button)
+  const urlAmount = params.get("amount");
+  const urlName   = params.get("name") || "";
+  const urlEmail  = params.get("email") || "";
+  const urlDesc   = params.get("description") || "";
+
+  const prefilledAmount = urlAmount && Number(urlAmount) >= 50 ? Number(urlAmount) : null;
+
+  // If the URL provided an amount, default to "custom amount" mode so the
+  // real value shows (otherwise the preset buttons would override it).
+  const [amount, setAmount]       = useState<string>(
+    prefilledAmount ? String(prefilledAmount) : "500"
+  );
+  const [customAmt, setCustomAmt] = useState<boolean>(
+    prefilledAmount !== null &&
+      !DEPOSIT_OPTIONS.some((o) => o.value === prefilledAmount)
+  );
+  const [name, setName]           = useState(urlName);
+  const [email, setEmail]         = useState(urlEmail);
+  const [description, setDesc]    = useState(urlDesc);
+  const [loading, setLoading]     = useState(false);
+  const [error, setError]         = useState("");
 
   const numAmount = Math.max(0, Number(amount) || 0);
+  const fromEstimate = prefilledAmount !== null;
 
   async function handlePay() {
     if (!name || !email || numAmount < 50) {
@@ -53,6 +71,8 @@ export default function PayPage() {
     }
   }
 
+  const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
+
   return (
     <main className="min-h-screen bg-brand-cream">
       {/* Hero */}
@@ -73,10 +93,34 @@ export default function PayPage() {
       <div className="mx-auto max-w-lg px-4 py-12 sm:px-6">
         <div className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-8 space-y-7">
 
+          {/* Banner when amount came from estimator */}
+          {fromEstimate && (
+            <div className="rounded-2xl bg-brand-yellow/20 border-2 border-brand-yellow px-5 py-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-brand-deep/70">
+                {isEs ? "Basado en tu estimado" : "Based on your estimate"}
+              </p>
+              <div className="mt-1 flex items-baseline justify-between">
+                <span className="text-sm font-semibold text-brand-deep">
+                  {isEs ? "Depósito 50%" : "50% deposit"}
+                </span>
+                <span className="text-3xl font-extrabold text-brand-deep">
+                  {fmt(prefilledAmount!)}
+                </span>
+              </div>
+              <p className="mt-2 text-xs text-brand-deep/60">
+                {isEs
+                  ? "Este es el 50% del rango mínimo de tu estimado. Puedes ajustarlo abajo si prefieres."
+                  : "This is 50% of the low end of your estimate. You can adjust it below if you prefer."}
+              </p>
+            </div>
+          )}
+
           {/* Amount selector */}
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-brand-green mb-3">
-              {isEs ? "Monto del Depósito" : "Deposit Amount"}
+              {fromEstimate
+                ? (isEs ? "Ajustar monto (opcional)" : "Adjust amount (optional)")
+                : (isEs ? "Monto del Depósito" : "Deposit Amount")}
             </p>
             <div className="grid grid-cols-4 gap-2 mb-3">
               {DEPOSIT_OPTIONS.map((opt) => (
@@ -94,7 +138,7 @@ export default function PayPage() {
               ))}
             </div>
             <button
-              onClick={() => { setCustomAmt(true); setAmount(""); }}
+              onClick={() => { setCustomAmt(true); }}
               className={`w-full rounded-2xl border-2 py-2.5 text-sm font-semibold transition-all ${
                 customAmt
                   ? "border-brand-deep bg-brand-deep text-white"
@@ -163,7 +207,7 @@ export default function PayPage() {
                 {isEs ? "Total a pagar" : "Total to pay"}
               </span>
               <span className="text-2xl font-extrabold text-brand-deep">
-                ${numAmount.toLocaleString("en-US")}
+                {fmt(numAmount)}
               </span>
             </div>
           )}
@@ -179,7 +223,7 @@ export default function PayPage() {
           >
             {loading
               ? (isEs ? "Redirigiendo..." : "Redirecting...")
-              : (isEs ? `Pagar $${numAmount.toLocaleString("en-US")} →` : `Pay $${numAmount.toLocaleString("en-US")} →`)}
+              : (isEs ? `Pagar ${fmt(numAmount)} →` : `Pay ${fmt(numAmount)} →`)}
           </button>
 
           {/* Trust badges */}
@@ -213,5 +257,13 @@ export default function PayPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function PayPage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-brand-cream" />}>
+      <PayForm />
+    </Suspense>
   );
 }
