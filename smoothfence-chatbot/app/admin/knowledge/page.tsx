@@ -32,13 +32,12 @@ export default function KnowledgePage() {
       const parsed = JSON.parse(text);
       const { error } = await supabase
         .from('knowledge_base')
-        .update({ content: parsed, updated_at: new Date().toISOString() })
-        .eq('id', 'main');
+        .upsert({ id: 'main', content: parsed, updated_at: new Date().toISOString() });
       if (error) throw error;
       setKb(parsed);
       setMsg('Guardado ✓');
-    } catch (e: any) {
-      setMsg('Error: ' + e.message);
+    } catch (e: unknown) {
+      setMsg('Error: ' + (e instanceof Error ? e.message : String(e)));
     } finally {
       setSaving(false);
     }
