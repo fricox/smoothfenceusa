@@ -9,7 +9,7 @@ const MAX_TOKENS = 800;
 const HISTORY_LIMIT = 30; // últimos N mensajes que mandamos a Claude
 
 const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY?.trim(),
 });
 
 export interface ChatTurnInput {
@@ -83,6 +83,7 @@ export async function runChatTurn(input: ChatTurnInput): Promise<ChatTurnResult>
   let leadCaptured = false;
   let finalText = '';
 
+  console.log('[engine] calling Anthropic model:', MODEL, 'session:', input.sessionId);
   for (let i = 0; i < 3; i++) {
     const response = await client.messages.create({
       model: MODEL,

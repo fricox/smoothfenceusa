@@ -86,8 +86,11 @@ export default function ChatWidget({
         body: JSON.stringify({ sessionId, message: text, language }),
       });
       const data = await r.json();
+      if (!r.ok || !data.reply) {
+        throw new Error(data.detail || data.error || 'API error');
+      }
       if (data.language && data.language !== language) setLanguage(data.language);
-      setMessages((m) => [...m, { role: 'assistant', content: data.reply ?? '...' }]);
+      setMessages((m) => [...m, { role: 'assistant', content: data.reply }]);
     } catch {
       setMessages((m) => [
         ...m,
