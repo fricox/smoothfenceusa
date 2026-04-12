@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingButtons from "@/components/ui/FloatingButtons";
@@ -40,6 +41,11 @@ export default function RootLayout({
             <FloatingButtons />
           </div>
         </LanguageProvider>
+        {/* Fency AI chatbot widget — loads from separate Vercel deployment */}
+        <Script
+          src="https://smoothfence-chatbot.vercel.app/api/widget.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

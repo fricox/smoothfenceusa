@@ -55,6 +55,13 @@ export default function ChatWidget({
     return () => clearTimeout(timer);
   }, [apiBase]);
 
+  // Notify parent frame (widget.js) when chat opens/closes so it can resize
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.parent !== window) {
+      window.parent.postMessage({ type: 'fency-resize', open }, '*');
+    }
+  }, [open]);
+
   // auto-scroll al fondo
   useEffect(() => {
     if (scrollRef.current) {
