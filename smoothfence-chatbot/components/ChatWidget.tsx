@@ -7,6 +7,7 @@ type Msg = { role: 'user' | 'assistant'; content: string };
 
 const SESSION_KEY = 'sf_chat_session_id';
 const AUTO_OPEN_MS = 5000;
+const CALENDLY_URL = 'https://calendly.com/federico-smoothfenceusa/30min';
 
 interface ChatWidgetProps {
   apiBase?: string; // para uso embebido en otro dominio
@@ -54,6 +55,16 @@ export default function ChatWidget({
     const timer = setTimeout(() => setOpen(true), AUTO_OPEN_MS);
     return () => clearTimeout(timer);
   }, [apiBase]);
+
+  // Cargar el script de Calendly popup widget (Forma A)
+  useEffect(() => {
+    if (document.getElementById('calendly-widget-script')) return;
+    const script = document.createElement('script');
+    script.id = 'calendly-widget-script';
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
 
   // auto-scroll al fondo
   useEffect(() => {
@@ -115,6 +126,22 @@ export default function ChatWidget({
       '_blank',
       'noreferrer'
     );
+  }
+
+  /**
+   * Forma A: abre el popup widget de Calendly si el script está cargado y no
+   * estamos dentro de un iframe (el popup se ve bien en página completa).
+   * Forma B: fallback — abre Calendly en nueva pestaña (siempre funciona).
+   */
+  function openCalendly() {
+    const cal = (window as any).Calendly;
+    // Forma A: popup inline — solo fuera de iframe para que ocupe toda la viewport
+    if (cal && window === window.top) {
+      cal.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      // Forma B: nueva pestaña (dentro del iframe o si el script aún no cargó)
+      window.open(CALENDLY_URL, '_blank', 'noreferrer');
+    }
   }
 
   return (
@@ -183,6 +210,16 @@ export default function ChatWidget({
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Botón Agendar cita */}
+          <div className="border-t border-gray-100 bg-brand-50 px-3 py-2">
+            <button
+              onClick={openCalendly}
+              className="w-full rounded-xl bg-brand-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 active:scale-[0.98]"
+            >
+              📅 {language === 'es' ? 'Agendar visita gratuita' : 'Schedule free visit'}
+            </button>
           </div>
 
           {/* Handoff bar */}
