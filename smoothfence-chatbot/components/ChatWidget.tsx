@@ -104,12 +104,18 @@ export default function ChatWidget({
     }
   }
 
-  const waHref = whatsapp
-    ? `https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${encodeURIComponent(
-        buildWhatsAppMessage(messages, language)
-      )}`
-    : '';
+  const waNumber = whatsapp ? whatsapp.replace(/[^\d]/g, '') : '';
   const telHref = phone ? `tel:${phone.replace(/[^+\d]/g, '')}` : '';
+
+  function openWhatsApp() {
+    if (!waNumber) return;
+    const text = buildWhatsAppMessage(messages, language);
+    window.open(
+      `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`,
+      '_blank',
+      'noreferrer'
+    );
+  }
 
   return (
     <div className="fixed bottom-5 right-5 z-[9999] font-sans">
@@ -184,15 +190,13 @@ export default function ChatWidget({
             <span className="text-gray-500">
               {language === 'es' ? 'Hablar con humano:' : 'Talk to a human:'}
             </span>
-            {waHref && (
-              <a
-                href={waHref}
-                target="_blank"
-                rel="noreferrer"
+            {waNumber && (
+              <button
+                onClick={openWhatsApp}
                 className="font-medium text-brand-600 hover:underline"
               >
                 WhatsApp
-              </a>
+              </button>
             )}
             {telHref && (
               <>
@@ -236,62 +240,43 @@ export default function ChatWidget({
 }
 
 /**
- * Builds a contextual WhatsApp message by extracting keywords from chat history.
- * Looks for material, dimensions, and location mentions in user messages.
+ * Builds a WhatsApp message with the full conversation transcript.
+ * Skips the auto welcome message (first bot message), takes last 8 exchanges,
+ * truncates bot replies to keep URLs under ~1500 chars total.
  */
-function buildWhatsAppMessage(messages: Msg[], language: 'es' | 'en'): string {
-  const userTexts = messages
-    .filter((m) => m.role === 'user')
-    .map((m) => m.content.toLowerCase())
-    .join(' ');
+function buildWhatsAppMessage(msgs: Msg[], language: 'es' | 'en'): string {
+  // Skip the initial welcome message (index 0, role assistant)
+  const conversation = msgs.slice(msgs[0]?.role === 'assistant' ? 1 : 0);
 
-  const details: string[] = [];
-
-  // Material detection
-  const materialMap: Record<string, string> = {
-    vinyl: 'Vinyl', pvc: 'Vinyl', vinilo: 'Vinyl',
-    aluminum: 'Aluminum', aluminium: 'Aluminum', aluminio: 'Aluminum',
-    'chain link': 'Chain Link', chainlink: 'Chain Link', chain: 'Chain Link', eslabón: 'Chain Link',
-    wood: 'Wood', madera: 'Wood', cedar: 'Wood',
-  };
-  for (const [keyword, label] of Object.entries(materialMap)) {
-    if (userTexts.includes(keyword)) {
-      details.push(language === 'es' ? `Material: ${label}` : `Material: ${label}`);
-      break;
-    }
-  }
-
-  // Dimension detection (e.g. "150 feet", "50 ft", "100 metros", "200 linear feet")
-  const dimMatch = userTexts.match(/(\d+[\d,.]*)\s*(linear\s+)?fe?e?t|ft|metros?|m\b/);
-  if (dimMatch) {
-    details.push(language === 'es' ? `Medidas aprox: ${dimMatch[0]}` : `Approx size: ${dimMatch[0]}`);
-  }
-
-  // Height detection
-  const heightMatch = userTexts.match(/(\d)\s*(?:ft|feet|foot|pie[s]?)\s+(?:tall|high|height|alto)/);
-  if (heightMatch) {
-    details.push(language === 'es' ? `Altura: ${heightMatch[1]}ft` : `Height: ${heightMatch[1]}ft`);
-  }
-
-  // Location detection (Palm Coast, Flagler, Daytona, etc.)
-  const locations = ['palm coast', 'flagler beach', 'flagler', 'bunnell', 'ormond', 'daytona'];
-  for (const loc of locations) {
-    if (userTexts.includes(loc)) {
-      const locLabel = loc.replace(/\b\w/g, (c) => c.toUpperCase());
-      details.push(language === 'es' ? `Ubicación: ${locLabel}` : `Location: ${locLabel}`);
-      break;
-    }
-  }
-
-  if (details.length === 0) {
+  if (conversation.length === 0) {
     return language === 'es'
       ? 'Hola, me gustaría un estimado de cerca'
       : 'Hi, I would like a fence estimate';
   }
 
-  return language === 'es'
-    ? `Hola, hablé con Fency y me interesa un estimado de cerca.\n${details.join('\n')}`
-    : `Hi, I chatted with Fency and I'm interested in a fence estimate.\n${details.join('\n')}`;
+  const header = language === 'es'
+    ? 'Hola, estuve chateando con Fency en el sitio de Smooth Fence USA. Acá va el resumen:\n\n'
+    : 'Hi, I was chatting with Fency on the Smooth Fence USA website. Here\'s the summary:\n\n';
+
+  // Take last 8 messages, format as transcript
+  const recent = conversation.slice(-8);
+  const lines = recent.map((m) => {
+    const prefix = m.role === 'user' ? '👤' : '🤖';
+    // Truncate long bot replies to 100 chars to keep URL short
+    const content = m.role === 'assistant' && m.content.length > 100
+      ? m.content.slice(0, 97) + '…'
+      : m.content;
+    return `${prefix}: ${content}`;
+  });
+
+  const transcript = lines.join('\n');
+  const full = header + transcript;
+
+  // WhatsApp URL has a practical ~1500 char limit on the text param
+  if (full.length > 1400) {
+    return full.slice(0, 1397) + '…';
+  }
+  return full;
 }
 
 /** Ícono de cerca personalizado, SVG inline. */
