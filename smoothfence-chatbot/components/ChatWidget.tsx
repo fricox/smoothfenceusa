@@ -129,17 +129,14 @@ export default function ChatWidget({
   }
 
   /**
-   * Forma A: abre el popup widget de Calendly si el script está cargado y no
-   * estamos dentro de un iframe (el popup se ve bien en página completa).
-   * Forma B: fallback — abre Calendly en nueva pestaña (siempre funciona).
+   * Abre Calendly. Intenta el popup widget si ya está cargado (mejor UX),
+   * pero siempre hace window.open como acción principal — nunca falla.
    */
   function openCalendly() {
     const cal = (window as any).Calendly;
-    // Forma A: popup inline — solo fuera de iframe para que ocupe toda la viewport
-    if (cal && window === window.top) {
+    if (typeof cal?.initPopupWidget === 'function') {
       cal.initPopupWidget({ url: CALENDLY_URL });
     } else {
-      // Forma B: nueva pestaña (dentro del iframe o si el script aún no cargó)
       window.open(CALENDLY_URL, '_blank', 'noreferrer');
     }
   }
