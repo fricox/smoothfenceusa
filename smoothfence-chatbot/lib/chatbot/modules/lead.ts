@@ -1,6 +1,7 @@
 /**
  * Módulo "estimador / lead capture".
  * Define la herramienta que Claude puede llamar para guardar un lead.
+ * Also pushes to the unified Google Sheets CRM.
  */
 
 import { createServiceClient } from '../db/server';
@@ -52,5 +53,39 @@ export async function saveLead(input: SaveLeadInput) {
   if (error) {
     return { ok: false, error: error.message };
   }
+
+  await pushToSheetsCRM(input);
+
   return { ok: true, lead_id: data.id };
+}
+
+async function pushToSheetsCRM(input: SaveLeadInput) {
+  const url = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (!url) return;
+
+  const now = new Date().toISOString();
+  const payload = {
+    submittedAt: now,
+    leadId: (input.email || input.phone || '').toLowerCase().trim(),
+    type: 'lead_created',
+    source: 'chatbot',
+    status: 'new',
+    fullName: input.name,
+    email: input.email || '',
+    phone: input.phone,
+    zip: input.zip,
+    notes: `🤖 Fency chatbot lead (${input.language}) — ${input.notes || ''}`,
+    message: input.notes || '',
+  };
+
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch (err) {
+    console.error('[Fency] Failed to push lead to Sheets CRM:', err);
+  }
 }
