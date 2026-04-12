@@ -101,14 +101,10 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
       if (!res.ok) throw new Error("Server error");
 
       // Push GTM dataLayer event for conversion tracking
-      if (typeof window !== "undefined" && Array.isArray((window as unknown as Record<string, unknown>).dataLayer)) {
-        (window as unknown as Record<string, unknown[]>).dataLayer.push({
-          event: "lead_form_submit",
-          form_type: "estimator",
-          estimate_low: estimate?.low,
-          estimate_high: estimate?.high,
-          ...attribution,
-        });
+      if (typeof window !== "undefined") {
+        const w = window as unknown as Record<string, unknown[]>;
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ event: "lead_form_submit", form_type: "estimator", estimate_low: estimate?.low, estimate_high: estimate?.high, ...attribution });
       }
 
       setStep(3);

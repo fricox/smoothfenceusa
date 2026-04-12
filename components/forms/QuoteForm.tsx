@@ -169,6 +169,9 @@ export default function QuoteForm() {
       setSubmitError(null);
       setStatus("success");
       setFormData(initialFormData);
+      const w = window as unknown as Record<string, unknown[]>;
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({ event: "lead_form_submit" });
     } catch (error) {
       console.error("Quote request failed:", error);
       setSubmitError("Something went wrong. Please try again in a moment.");

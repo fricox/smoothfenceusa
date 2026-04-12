@@ -68,12 +68,10 @@ export default function QuickContactForm() {
       }
 
       // Push GTM dataLayer event for conversion tracking
-      if (typeof window !== "undefined" && Array.isArray((window as unknown as Record<string, unknown>).dataLayer)) {
-        (window as unknown as Record<string, unknown[]>).dataLayer.push({
-          event: "lead_form_submit",
-          form_type: "quick_contact",
-          ...attribution,
-        });
+      if (typeof window !== "undefined") {
+        const w = window as unknown as Record<string, unknown[]>;
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ event: "lead_form_submit", form_type: "quick_contact", ...attribution });
       }
 
       setStatus("ok");
