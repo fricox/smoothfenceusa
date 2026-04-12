@@ -128,6 +128,20 @@ export async function runChatTurn(input: ChatTurnInput): Promise<ChatTurnResult>
     break;
   }
 
+  // Si el loop agotó todas las iteraciones sin producir texto (tool_use loop infinito),
+  // forzar una respuesta de texto sin herramientas disponibles.
+  if (!finalText && messages[messages.length - 1]?.role === 'user') {
+    const recovery = await client.messages.create({
+      model: MODEL,
+      max_tokens: MAX_TOKENS,
+      system,
+      tools: [],
+      messages,
+    });
+    const textBlocks = recovery.content.filter((b): b is Anthropic.TextBlock => b.type === 'text');
+    finalText = textBlocks.map((b) => b.text).join('\n').trim();
+  }
+
   // 5. guardar respuesta
   if (finalText) {
     await supabase.from('chat_messages').insert({

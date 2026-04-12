@@ -9,7 +9,7 @@ import type Anthropic from '@anthropic-ai/sdk';
 export const saveLeadTool: Anthropic.Tool = {
   name: 'save_lead',
   description:
-    'Save a customer lead once you have collected at least name, phone, and zip code. Email is optional but preferred. Call this only once per session, when you have the data.',
+    'Save a customer lead. Ideally collect name, phone, and zip before calling — but if you have name + zip, you may save and continue collecting phone. Email is optional. Call this only once per session.',
   input_schema: {
     type: 'object',
     properties: {
@@ -19,7 +19,7 @@ export const saveLeadTool: Anthropic.Tool = {
       zip: { type: 'string', description: '5-digit US ZIP code' },
       notes: { type: 'string', description: 'Brief note about what kind of fence they need' },
     },
-    required: ['name', 'phone', 'zip'],
+    required: ['name', 'zip'],
   },
 };
 
