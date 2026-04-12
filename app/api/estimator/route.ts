@@ -10,6 +10,8 @@ export async function POST(request: Request) {
     name, phone, email, zip,
     material, height, linearFeet, gates,
     removal, premium, estimateLow, estimateHigh,
+    // Attribution (Track A)
+    gclid, utm_source, utm_medium, utm_campaign, utm_term, utm_content,
   } = data;
 
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -86,6 +88,7 @@ export async function POST(request: Request) {
           <tr><td style="padding:8px;color:#666">Linear Feet</td><td style="font-weight:700">${linearFeet} ft</td></tr>
           <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Gates</td><td style="font-weight:700">${gates}</td></tr>
           <tr><td style="padding:8px;color:#666">Old fence removal</td><td style="font-weight:700">${removal ? "Yes" : "No"}</td></tr>
+          ${gclid || utm_source || utm_medium || utm_campaign ? `<tr style="background:#f0f0f0"><td style="padding:8px;color:#999" colspan="2"><small>Attribution: ${[gclid ? "gclid=" + gclid : "", utm_source ? "src=" + utm_source : "", utm_medium ? "med=" + utm_medium : "", utm_campaign ? "cmp=" + utm_campaign : ""].filter(Boolean).join(" · ")}</small></td></tr>` : ""}
           <tr style="background:#125036"><td colspan="2" style="padding:12px;text-align:center">
             <span style="color:#b2cf7f;font-size:12px">ESTIMATED RANGE</span><br>
             <span style="color:#f8cf2b;font-size:28px;font-weight:900">${fmt(estimateLow)} – ${fmt(estimateHigh)}</span>
@@ -131,6 +134,12 @@ export async function POST(request: Request) {
     estimateLow,
     estimateHigh,
     notes: `Estimator: ${material}${premium ? " (premium)" : ""}, ${height}, ${linearFeet} ft, ${gates} gate(s), removal: ${removal ? "yes" : "no"}`,
+    gclid,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    utm_term,
+    utm_content,
   });
 
   return NextResponse.json({ ok: true });

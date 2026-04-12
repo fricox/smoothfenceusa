@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getAttribution } from "@/lib/attribution";
 
 /**
  * Tiny pre-estimator form for people who have a quick question.
@@ -43,6 +44,7 @@ export default function QuickContactForm() {
     setErrorMsg("");
 
     try {
+      const attribution = getAttribution();
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -56,12 +58,22 @@ export default function QuickContactForm() {
           hoa: "",
           preferredDate: "",
           message,
+          ...attribution,
         }),
       });
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Network error");
+      }
+
+      // Push GTM dataLayer event for conversion tracking
+      if (typeof window !== "undefined" && Array.isArray((window as unknown as Record<string, unknown>).dataLayer)) {
+        (window as unknown as Record<string, unknown[]>).dataLayer.push({
+          event: "lead_form_submit",
+          form_type: "quick_contact",
+          ...attribution,
+        });
       }
 
       setStatus("ok");
