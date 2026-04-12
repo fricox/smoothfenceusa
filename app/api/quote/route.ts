@@ -12,6 +12,13 @@ type QuotePayload = {
   hoa: string;
   preferredDate?: string;
   message: string;
+  // Attribution (Track A) — all optional
+  gclid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 };
 
 type FieldErrors = Partial<Record<keyof QuotePayload, string>>;
@@ -93,6 +100,14 @@ export async function POST(request: Request) {
     "",
     "Mensaje:",
     payload.message,
+    "",
+    "--- Attribution ---",
+    templateLineText("gclid", payload.gclid),
+    templateLineText("utm_source", payload.utm_source),
+    templateLineText("utm_medium", payload.utm_medium),
+    templateLineText("utm_campaign", payload.utm_campaign),
+    templateLineText("utm_term", payload.utm_term),
+    templateLineText("utm_content", payload.utm_content),
   ]
     .filter(Boolean)
     .join("\n");
@@ -110,6 +125,14 @@ export async function POST(request: Request) {
       ${templateLine("Fecha preferida", payload.preferredDate)}
       <p><strong>Mensaje:</strong></p>
       <p>${payload.message}</p>
+      <hr>
+      <p style="color:#999;font-size:12px"><strong>Attribution</strong></p>
+      ${templateLine("gclid", payload.gclid)}
+      ${templateLine("utm_source", payload.utm_source)}
+      ${templateLine("utm_medium", payload.utm_medium)}
+      ${templateLine("utm_campaign", payload.utm_campaign)}
+      ${templateLine("utm_term", payload.utm_term)}
+      ${templateLine("utm_content", payload.utm_content)}
     </div>
   `;
 
@@ -144,6 +167,12 @@ export async function POST(request: Request) {
     hoa: payload.hoa,
     preferredDate: payload.preferredDate,
     message: payload.message,
+    gclid: payload.gclid,
+    utm_source: payload.utm_source,
+    utm_medium: payload.utm_medium,
+    utm_campaign: payload.utm_campaign,
+    utm_term: payload.utm_term,
+    utm_content: payload.utm_content,
   });
 
   return NextResponse.json({ ok: true }, { status: 200 });
