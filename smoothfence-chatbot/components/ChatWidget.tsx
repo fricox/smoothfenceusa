@@ -106,7 +106,7 @@ export default function ChatWidget({
 
   const waHref = whatsapp
     ? `https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${encodeURIComponent(
-        language === 'es' ? 'Hola, quiero un estimado de cerca' : 'Hi, I want a fence estimate'
+        buildWhatsAppMessage(messages, language)
       )}`
     : '';
   const telHref = phone ? `tel:${phone.replace(/[^+\d]/g, '')}` : '';
@@ -233,6 +233,65 @@ export default function ChatWidget({
       )}
     </div>
   );
+}
+
+/**
+ * Builds a contextual WhatsApp message by extracting keywords from chat history.
+ * Looks for material, dimensions, and location mentions in user messages.
+ */
+function buildWhatsAppMessage(messages: Msg[], language: 'es' | 'en'): string {
+  const userTexts = messages
+    .filter((m) => m.role === 'user')
+    .map((m) => m.content.toLowerCase())
+    .join(' ');
+
+  const details: string[] = [];
+
+  // Material detection
+  const materialMap: Record<string, string> = {
+    vinyl: 'Vinyl', pvc: 'Vinyl', vinilo: 'Vinyl',
+    aluminum: 'Aluminum', aluminium: 'Aluminum', aluminio: 'Aluminum',
+    'chain link': 'Chain Link', chainlink: 'Chain Link', chain: 'Chain Link', eslabón: 'Chain Link',
+    wood: 'Wood', madera: 'Wood', cedar: 'Wood',
+  };
+  for (const [keyword, label] of Object.entries(materialMap)) {
+    if (userTexts.includes(keyword)) {
+      details.push(language === 'es' ? `Material: ${label}` : `Material: ${label}`);
+      break;
+    }
+  }
+
+  // Dimension detection (e.g. "150 feet", "50 ft", "100 metros", "200 linear feet")
+  const dimMatch = userTexts.match(/(\d+[\d,.]*)\s*(linear\s+)?fe?e?t|ft|metros?|m\b/);
+  if (dimMatch) {
+    details.push(language === 'es' ? `Medidas aprox: ${dimMatch[0]}` : `Approx size: ${dimMatch[0]}`);
+  }
+
+  // Height detection
+  const heightMatch = userTexts.match(/(\d)\s*(?:ft|feet|foot|pie[s]?)\s+(?:tall|high|height|alto)/);
+  if (heightMatch) {
+    details.push(language === 'es' ? `Altura: ${heightMatch[1]}ft` : `Height: ${heightMatch[1]}ft`);
+  }
+
+  // Location detection (Palm Coast, Flagler, Daytona, etc.)
+  const locations = ['palm coast', 'flagler beach', 'flagler', 'bunnell', 'ormond', 'daytona'];
+  for (const loc of locations) {
+    if (userTexts.includes(loc)) {
+      const locLabel = loc.replace(/\b\w/g, (c) => c.toUpperCase());
+      details.push(language === 'es' ? `Ubicación: ${locLabel}` : `Location: ${locLabel}`);
+      break;
+    }
+  }
+
+  if (details.length === 0) {
+    return language === 'es'
+      ? 'Hola, me gustaría un estimado de cerca'
+      : 'Hi, I would like a fence estimate';
+  }
+
+  return language === 'es'
+    ? `Hola, hablé con Fency y me interesa un estimado de cerca.\n${details.join('\n')}`
+    : `Hi, I chatted with Fency and I'm interested in a fence estimate.\n${details.join('\n')}`;
 }
 
 /** Ícono de cerca personalizado, SVG inline. */
