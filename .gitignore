@@ -40,3 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
+
+# claude worktrees & old build cache
+.claude/
+.next_old/
+gbp-photos-seo/
+smoothfence-chatbot/
+Preview engine/
+DISPATCH_INTEGRATION.md
