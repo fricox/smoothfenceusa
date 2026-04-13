@@ -1,7 +1,7 @@
 export type Lang = "en" | "es";
 
 export type Translation = {
-  nav: { home: string; services: string; gallery: string; estimator: string; about: string; hoaPermits: string; contact: string; getFreeQuote: string };
+  nav: { home: string; services: string; gallery: string; estimator: string; about: string; hoaPermits: string; financing: string; contact: string; getFreeQuote: string };
   topbar: { hours: string; callUs: string; email: string };
   hero: { tagline: string; heading: string; subheading: string; cta: string; schedule: string };
   trust: {
@@ -60,6 +60,7 @@ export const t: Record<Lang, Translation> = {
       estimator: "Estimator",
       about: "About",
       hoaPermits: "HOA & Permits",
+      financing: "Financing",
       contact: "Contact",
       getFreeQuote: "Get a Free Quote",
     },
@@ -260,6 +261,7 @@ export const t: Record<Lang, Translation> = {
       estimator: "Estimador",
       about: "Nosotros",
       hoaPermits: "HOA & Permisos",
+      financing: "Financiamiento",
       contact: "Contacto",
       getFreeQuote: "Cotización Gratis",
     },

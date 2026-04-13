@@ -21,6 +21,7 @@ export default function Header() {
     { label: tr.nav.gallery, href: "/gallery" },
     { label: tr.nav.about, href: "/about" },
     { label: tr.nav.hoaPermits, href: "/hoas-permits" },
+    { label: tr.nav.financing, href: "/financing" },
     { label: tr.nav.contact, href: "/contact" },
   ];
 
