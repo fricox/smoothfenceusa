@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getAttribution } from "@/lib/attribution";
+import { trackLeadConversion } from "@/lib/gtag";
 
 /* ── Pricing data ─────────────────────────────────────────── */
 const MATERIALS = [
@@ -106,6 +107,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
         w.dataLayer = w.dataLayer || [];
         w.dataLayer.push({ event: "lead_form_submit", form_type: "estimator", estimate_low: estimate?.low, estimate_high: estimate?.high, ...attribution });
       }
+      trackLeadConversion();
 
       setStep(3);
     } catch {

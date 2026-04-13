@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getAttribution } from "@/lib/attribution";
+import { trackLeadConversion } from "@/lib/gtag";
 
 /**
  * Tiny pre-estimator form for people who have a quick question.
@@ -73,6 +74,7 @@ export default function QuickContactForm() {
         w.dataLayer = w.dataLayer || [];
         w.dataLayer.push({ event: "lead_form_submit", form_type: "quick_contact", ...attribution });
       }
+      trackLeadConversion();
 
       setStatus("ok");
       setFullName("");
