@@ -1,5 +1,6 @@
 // Auto-generated gallery photo data
 // Generated from SEO-optimized photos in public/gallery/
+// Corrections applied from user review
 
 import { Photo } from "./types";
 
@@ -15,11 +16,11 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 2,
-    "title": "Aluminum Fence Around Yard",
-    "titleEs": "Aluminio Cerca Alrededor Jard\u00edn",
+    "title": "Vinyl Fence Around Yard",
+    "titleEs": "Vinilo Cerca Alrededor Jard\u00edn",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-aluminum-fence-around-yard-palm-coast.jpg"
   },
   {
@@ -42,19 +43,19 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 5,
-    "title": "Aluminum Fence Ornamental Style",
-    "titleEs": "Aluminio Cerca Ornamental Estilo",
+    "title": "Vinyl Fence Ornamental Style",
+    "titleEs": "Vinilo Cerca Ornamental Estilo",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-aluminum-fence-ornamental-style-palm-coast.jpg"
   },
   {
     "id": 6,
-    "title": "Aluminum Fence Perimeter Security",
-    "titleEs": "Aluminio Cerca Per\u00edmetro Seguridad",
+    "title": "Chain Link Fence Perimeter Security",
+    "titleEs": "Malla Cicl\u00f3nica Cerca Per\u00edmetro Seguridad",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
+    "type": "chain-link",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-aluminum-fence-perimeter-security-palm-coast-fl.jpg"
   },
@@ -69,19 +70,19 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 8,
-    "title": "Aluminum Fence With Gate Entry",
-    "titleEs": "Aluminio Cerca With Puerta Entrada",
+    "title": "Vinyl Fence With Gate Entryorida",
+    "titleEs": "Vinilo Cerca With Puerta Entryorida",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-aluminum-fence-with-gate-entry-palm-coast-florida.jpg"
   },
   {
     "id": 9,
-    "title": "Aluminum Pool Fence",
-    "titleEs": "Aluminio Piscina Cerca",
+    "title": "Vinyl Pool Fenceorida",
+    "titleEs": "Vinilo Piscina Fenceorida",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-aluminum-pool-fence-palm-coast-florida.jpg"
   },
@@ -96,28 +97,28 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 11,
-    "title": "Black Aluminum Fence Decorative",
-    "titleEs": "Negro Aluminio Cerca Decorativa",
+    "title": "Black Vinyl Fence Decorative",
+    "titleEs": "Negro Vinilo Cerca Decorativo",
     "location": "Flagler County, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-black-aluminum-fence-decorative-flagler-county-fl.jpg"
   },
   {
     "id": 12,
-    "title": "Black Aluminum Fence Driveway",
-    "titleEs": "Negro Aluminio Cerca Entrada",
+    "title": "Black Vinyl Fence Driveway",
+    "titleEs": "Negro Vinilo Cerca Entrada de Auto",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-black-aluminum-fence-driveway-florida.jpg"
   },
   {
     "id": 13,
-    "title": "Black Aluminum Fence Front Yard",
-    "titleEs": "Negro Aluminio Cerca Patio Delantero",
+    "title": "Black Vinyl Fence Front Yard",
+    "titleEs": "Negro Vinilo Cerca Patio Delantero",
     "location": "Flagler County, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-black-aluminum-fence-front-yard-flagler-county-fl.jpg"
   },
@@ -127,15 +128,15 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Negro Aluminio Cerca Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "aluminum",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-black-aluminum-fence-installation-florida.jpg"
   },
   {
     "id": 15,
-    "title": "Black Aluminum Fence Property Line",
-    "titleEs": "Negro Aluminio Cerca Propiedad L\u00ednea",
+    "title": "Black Vinyl Fence Property Line",
+    "titleEs": "Negro Vinilo Cerca Propiedad L\u00ednea",
     "location": "Palm Coast, FL",
-    "type": "aluminum",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-black-aluminum-fence-property-line-palm-coast-fl.jpg"
   },
@@ -168,10 +169,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 19,
-    "title": "Chain Link Fence Black Coated",
-    "titleEs": "Malla Cicl\u00f3nica Cerca Negro Recubierto",
+    "title": "Wood Fence Black Coated",
+    "titleEs": "Madera Cerca Negro Recubierto",
     "location": "Flagler County, FL",
-    "type": "chain-link",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-chain-link-fence-black-coated-flagler-county-fl.jpg"
   },
@@ -199,7 +200,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Malla Cicl\u00f3nica Cerca Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "chain-link",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-chain-link-fence-installation-palm-coast.jpg"
   },
   {
@@ -240,10 +241,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 27,
-    "title": "Chain Link To Wood Fence Upgrade",
-    "titleEs": "Malla Cicl\u00f3nica To Madera Cerca Mejora",
+    "title": "Vinyl To Vinyl Fence Upgrade",
+    "titleEs": "Vinilo To Vinilo Cerca Mejora",
     "location": "Palm Coast, FL",
-    "type": "chain-link",
+    "type": "vinyl",
     "tag": "installation",
     "src": "/gallery/smooth-fence-usa-chain-link-to-wood-fence-upgrade-palm-coast-fl.jpg"
   },
@@ -271,16 +272,16 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Cerca Remoci\u00f3n Viejo Secci\u00f3n Despejado",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-fence-removal-old-section-cleared-flagler-county.jpg"
   },
   {
     "id": 31,
     "title": "Fence Replacement Before And After",
-    "titleEs": "Cerca Replacement Before And After",
+    "titleEs": "Cerca Reemplazo Antes And Despu\u00e9s",
     "location": "Flagler County, FL",
-    "type": "vinyl",
-    "tag": "process",
+    "type": "wood",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-fence-replacement-before-and-after-flagler-county-fl.jpg"
   },
   {
@@ -289,24 +290,24 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Long Vinilo Privacidad Cerca",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-long-vinyl-privacy-fence-palm-coast-fl.jpg"
   },
   {
     "id": 33,
     "title": "Ranch Rail Fence Farm Style",
-    "titleEs": "Ranch Rail Cerca Granja Estilo",
+    "titleEs": "Rancho Riel Cerca Granja Estilo",
     "location": "Flagler County, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-ranch-rail-fence-farm-style-flagler-county-fl.jpg"
   },
   {
     "id": 34,
-    "title": "Ranch Rail Fence Horse Property",
-    "titleEs": "Ranch Rail Cerca Caballo Propiedad",
+    "title": "Ranch Rail Fence Horse Propertyorida",
+    "titleEs": "Rancho Riel Cerca Caballo Propertyorida",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-ranch-rail-fence-horse-property-palm-coast-florida.jpg"
   },
@@ -316,24 +317,24 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Ranch Rail Cerca Natural Madera",
     "location": "Flagler County, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-ranch-rail-fence-natural-wood-flagler-county-fl.jpg"
   },
   {
     "id": 36,
     "title": "Ranch Rail Fence Open Property",
-    "titleEs": "Ranch Rail Cerca Abierto Propiedad",
+    "titleEs": "Rancho Riel Cerca Abierto Propiedad",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-ranch-rail-fence-open-property-palm-coast.jpg"
   },
   {
     "id": 37,
-    "title": "Ranch Rail Fence Wood Horizontal",
-    "titleEs": "Ranch Rail Cerca Madera Horizontal",
+    "title": "Ranch Rail Fence Vinyl Horizontal",
+    "titleEs": "Rancho Riel Cerca Vinilo Horizontal",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-ranch-rail-fence-wood-horizontal-florida.jpg"
   },
@@ -348,11 +349,11 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 39,
-    "title": "Vinyl And Wood Fence Transition",
-    "titleEs": "Vinilo And Madera Cerca Transition",
+    "title": "Vinyl And Vinyl Fence Transitionorida",
+    "titleEs": "Vinilo And Vinilo Cerca Transitionorida",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-and-wood-fence-transition-palm-coast-florida.jpg"
   },
   {
@@ -361,7 +362,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Doble Puerta Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-double-gate-installation-palm-coast-fl.jpg"
   },
   {
@@ -397,15 +398,15 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Alrededor Cobertizo Estructura",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-around-shed-structure-flagler-county.jpg"
   },
   {
     "id": 45,
-    "title": "Vinyl Fence Backyard Enclosure",
-    "titleEs": "Vinilo Cerca Patio Trasero Cerramiento",
+    "title": "Wood Fence Backyard Enclosure",
+    "titleEs": "Madera Cerca Patio Trasero Cercado",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-backyard-enclosure-palm-coast-fl.jpg"
   },
@@ -415,7 +416,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Patio Trasero",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-backyard-palm-coast-fl.jpg"
   },
   {
@@ -424,7 +425,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Construcci\u00f3n Progreso Actualizaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-build-progress-update-palm-coast-fl.jpg"
   },
   {
@@ -433,7 +434,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Limpio Instalaci\u00f3n",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-clean-installation-flagler-county.jpg"
   },
   {
@@ -460,7 +461,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Completado Proyecto",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-completed-project-palm-coast.jpg"
   },
   {
@@ -478,7 +479,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Construcci\u00f3n Dise\u00f1o",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-construction-layout-palm-coast-florida.jpg"
   },
   {
@@ -487,7 +488,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Construcci\u00f3n Mid Stage",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-construction-mid-stage-palm-coast-fl.jpg"
   },
   {
@@ -514,7 +515,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Esquina Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-corner-installation-florida.jpg"
   },
   {
@@ -528,10 +529,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 59,
-    "title": "Vinyl Fence Corner Post Detail",
-    "titleEs": "Vinilo Cerca Esquina Poste Detalle",
+    "title": "Aluminum Fence Corner Post Detail",
+    "titleEs": "Aluminio Cerca Esquina Poste Detalle",
     "location": "Flagler County, FL",
-    "type": "vinyl",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-corner-post-detail-flagler-county-fl.jpg"
   },
@@ -577,7 +578,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Estructura Patio Trasero",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-framework-backyard-palm-coast.jpg"
   },
   {
@@ -586,7 +587,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Estructura Construcci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-framework-construction-florida.jpg"
   },
   {
@@ -595,7 +596,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Estructura Rails Up",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-framework-rails-up-palm-coast.jpg"
   },
   {
@@ -631,7 +632,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Puerta Cerrado Posici\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-gate-closed-position-florida.jpg"
   },
   {
@@ -672,10 +673,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 75,
-    "title": "Vinyl Fence Gate Hardware Close",
-    "titleEs": "Vinilo Cerca Puerta Herraje Close",
+    "title": "Wood Fence Gate Hardware Close",
+    "titleEs": "Madera Cerca Puerta Herrajes Cerca",
     "location": "Flagler County, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-gate-hardware-close-flagler-county-fl.jpg"
   },
@@ -685,15 +686,15 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Puerta Herraje Instalado",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-gate-hardware-installed-flagler-county-fl.jpg"
   },
   {
     "id": 77,
-    "title": "Vinyl Fence Gate Latch Mechanism",
-    "titleEs": "Vinilo Cerca Puerta Latch Mechanism",
+    "title": "Wood Fence Gate Latch Mechanism",
+    "titleEs": "Madera Cerca Puerta Pestillo Mecanismo",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-gate-latch-mechanism-palm-coast-fl.jpg"
   },
@@ -703,7 +704,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Puerta Abierto Posici\u00f3n",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-gate-open-position-flagler-county-fl.jpg"
   },
   {
@@ -766,7 +767,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca In Progreso Paneles",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-in-progress-panels-florida.jpg"
   },
   {
@@ -802,7 +803,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Large Abierto Jard\u00edn",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-large-open-yard-palm-coast-fl.jpg"
   },
   {
@@ -811,7 +812,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Large Propiedad Cerramiento",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-large-property-enclosure-florida.jpg"
   },
   {
@@ -820,7 +821,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Long Straight L\u00ednea",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-long-straight-line-flagler-county-fl.jpg"
   },
   {
@@ -829,7 +830,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Nuevo Hogar Construcci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-new-home-construction-florida.jpg"
   },
   {
@@ -856,7 +857,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Panel Instalaci\u00f3n Close",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-panel-installation-close-flagler-county.jpg"
   },
   {
@@ -906,10 +907,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 101,
-    "title": "Vinyl Fence Post Base Concrete",
-    "titleEs": "Vinilo Cerca Poste Base Concrete",
+    "title": "Wood Fence Post Base Concreteorida",
+    "titleEs": "Madera Cerca Poste Base Concreteorida",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-post-base-concrete-palm-coast-florida.jpg"
   },
@@ -919,7 +920,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Poste Caps Detalle",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-post-caps-detail-flagler-county.jpg"
   },
   {
@@ -937,7 +938,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Poste Instalaci\u00f3n Process",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-post-installation-process-palm-coast-fl.jpg"
   },
   {
@@ -955,7 +956,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Postes And Rails Laid",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-posts-and-rails-laid-palm-coast.jpg"
   },
   {
@@ -964,7 +965,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Postes Construcci\u00f3n Start",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-posts-construction-start-florida.jpg"
   },
   {
@@ -1000,7 +1001,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Proyecto Before After",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-project-before-after-palm-coast.jpg"
   },
   {
@@ -1036,7 +1037,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Rails Construcci\u00f3n Progreso",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-rails-construction-progress-palm-coast-florida.jpg"
   },
   {
@@ -1045,7 +1046,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Rails Ready For Paneles",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-rails-ready-for-panels-flagler-county.jpg"
   },
   {
@@ -1054,7 +1055,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Rails Lateral Vista",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-rails-side-view-flagler-county-fl.jpg"
   },
   {
@@ -1144,7 +1145,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Cerca Straight Professional",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-fence-straight-professional-florida.jpg"
   },
   {
@@ -1239,20 +1240,20 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 138,
-    "title": "Vinyl Gate Standalone Section",
-    "titleEs": "Vinilo Puerta Standalone Secci\u00f3n",
+    "title": "Wood Gate Standalone Section",
+    "titleEs": "Madera Puerta Individual Secci\u00f3n",
     "location": "Flagler County, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-gate-standalone-section-flagler-county.jpg"
   },
   {
     "id": 139,
-    "title": "Vinyl Gate With Wood Fence Section",
-    "titleEs": "Vinilo Puerta With Madera Cerca Secci\u00f3n",
+    "title": "Vinyl Gate With Vinyl Fence Section",
+    "titleEs": "Vinilo Puerta With Vinilo Cerca Secci\u00f3n",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-gate-with-wood-fence-section-palm-coast-fl.jpg"
   },
   {
@@ -1396,7 +1397,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Privacidad Cerca Green C\u00e9sped",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-privacy-fence-green-grass-palm-coast-fl.jpg"
   },
   {
@@ -1419,10 +1420,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 158,
-    "title": "Vinyl Privacy Fence House Rear",
-    "titleEs": "Vinilo Privacidad Cerca House Rear",
+    "title": "Aluminum Privacy Fence House Rear",
+    "titleEs": "Aluminio Privacidad Cerca Casa Trasero",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-privacy-fence-house-rear-florida.jpg"
   },
@@ -1432,7 +1433,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Privacidad Cerca House Lateral",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-privacy-fence-house-side-florida.jpg"
   },
   {
@@ -1477,7 +1478,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Privacidad Cerca Residencial",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "process",
     "src": "/gallery/smooth-fence-usa-vinyl-privacy-fence-residential-palm-coast.jpg"
   },
   {
@@ -1491,11 +1492,11 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 166,
-    "title": "Vinyl Privacy Fence Side Yard",
-    "titleEs": "Vinilo Privacidad Cerca Lateral Jard\u00edn",
+    "title": "Remove tear out",
+    "titleEs": "Remove tear out",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "process",
     "src": "/gallery/smooth-fence-usa-vinyl-privacy-fence-side-yard-palm-coast-fl.jpg"
   },
   {
@@ -1537,27 +1538,27 @@ export const galleryPhotos: Photo[] = [
   {
     "id": 171,
     "title": "Vinyl Ranch Rail Fence Property",
-    "titleEs": "Vinilo Ranch Rail Cerca Propiedad",
+    "titleEs": "Vinilo Rancho Riel Cerca Propiedad",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-ranch-rail-fence-property-palm-coast-fl.jpg"
   },
   {
     "id": 172,
     "title": "Vinyl Ranch Rail Fence Rural",
-    "titleEs": "Vinilo Ranch Rail Cerca Rural",
+    "titleEs": "Vinilo Rancho Riel Cerca Rural",
     "location": "Flagler County, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-ranch-rail-fence-rural-flagler-county.jpg"
   },
   {
     "id": 173,
     "title": "Vinyl Ranch Rail Fence Spacious",
-    "titleEs": "Vinilo Ranch Rail Cerca Spacious",
+    "titleEs": "Vinilo Rancho Riel Cerca Espacioso",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-vinyl-ranch-rail-fence-spacious-palm-coast-fl.jpg"
   },
@@ -1603,7 +1604,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Vinilo Semi Privacidad Cerca Jard\u00edn",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-vinyl-semi-privacy-fence-yard-palm-coast.jpg"
   },
   {
@@ -1630,7 +1631,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Estacas Cerca Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-picket-fence-installation-palm-coast.jpg"
   },
   {
@@ -1662,10 +1663,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 185,
-    "title": "White Vinyl Fence Along Property",
-    "titleEs": "Blanco Vinilo Cerca A Lo Largo Propiedad",
+    "title": "White Aluminum Fence Along Property",
+    "titleEs": "Blanco Aluminio Cerca Along Propiedad",
     "location": "Flagler County, FL",
-    "type": "vinyl",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-along-property-flagler-county.jpg"
   },
@@ -1675,7 +1676,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Patio Trasero Green Lawn",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-backyard-green-lawn-flagler-county-fl.jpg"
   },
   {
@@ -1702,7 +1703,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Dusk Iluminaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-dusk-lighting-palm-coast-fl.jpg"
   },
   {
@@ -1720,7 +1721,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Frame Estructura",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-frame-structure-palm-coast-fl.jpg"
   },
   {
@@ -1729,7 +1730,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Fresco Install",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-fresh-install-palm-coast.jpg"
   },
   {
@@ -1774,7 +1775,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Hedge L\u00ednea",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "process",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-hedge-line-palm-coast-florida.jpg"
   },
   {
@@ -1810,7 +1811,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Neat Install",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-neat-install-flagler-county-fl.jpg"
   },
   {
@@ -1819,7 +1820,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Nuevo Construcci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-new-construction-palm-coast.jpg"
   },
   {
@@ -1855,7 +1856,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Panel Assembly",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-panel-assembly-florida.jpg"
   },
   {
@@ -1882,7 +1883,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Poste Placement",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-post-placement-flagler-county.jpg"
   },
   {
@@ -1918,7 +1919,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Scenic Lot",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-scenic-lot-palm-coast-florida.jpg"
   },
   {
@@ -1927,7 +1928,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Cerca Secci\u00f3n Vista",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-section-view-flagler-county.jpg"
   },
   {
@@ -2004,20 +2005,20 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 223,
-    "title": "White Vinyl Fence Yard Perimeter",
-    "titleEs": "Blanco Vinilo Cerca Jard\u00edn Per\u00edmetro",
+    "title": "White Wood Fence Yard Perimeter",
+    "titleEs": "Blanco Madera Cerca Jard\u00edn Per\u00edmetro",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-fence-yard-perimeter-palm-coast.jpg"
   },
   {
     "id": 224,
-    "title": "White Vinyl Gate Frame Setup",
-    "titleEs": "Blanco Vinilo Puerta Frame Setup",
+    "title": "White Wood Gate Frame Setuporida",
+    "titleEs": "Blanco Madera Puerta Marco Setuporida",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
-    "tag": "process",
+    "type": "wood",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-gate-frame-setup-palm-coast-florida.jpg"
   },
   {
@@ -2026,24 +2027,24 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Puerta Front Walkway",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-gate-front-walkway-palm-coast-florida.jpg"
   },
   {
     "id": 226,
-    "title": "White Vinyl Gate Garden Entry",
-    "titleEs": "Blanco Vinilo Puerta Garden Entrada",
+    "title": "White Wood Gate Garden Entry",
+    "titleEs": "Blanco Madera Puerta Jard\u00edn Entry",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-gate-garden-entry-florida.jpg"
   },
   {
     "id": 227,
-    "title": "White Vinyl Gate Hinges Detail",
-    "titleEs": "Blanco Vinilo Puerta Hinges Detalle",
+    "title": "White Wood Gate Hinges Detail",
+    "titleEs": "Blanco Madera Puerta Bisagras Detalle",
     "location": "Palm Coast, FL",
-    "type": "vinyl",
+    "type": "wood",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-gate-hinges-detail-palm-coast.jpg"
   },
@@ -2053,7 +2054,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Puerta Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-gate-installation-florida.jpg"
   },
   {
@@ -2062,7 +2063,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Puerta Matching Cerca",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "process",
     "src": "/gallery/smooth-fence-usa-white-vinyl-gate-matching-fence-flagler-county.jpg"
   },
   {
@@ -2080,7 +2081,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Privacidad Cerca Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-white-vinyl-privacy-fence-installation-palm-coast-florida.jpg"
   },
   {
@@ -2107,7 +2108,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Privacidad Paneles Jard\u00edn",
     "location": "Flagler County, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-privacy-panels-yard-flagler-county-fl.jpg"
   },
   {
@@ -2116,16 +2117,16 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Blanco Vinilo Rail Cerca Jard\u00edn",
     "location": "Palm Coast, FL",
     "type": "vinyl",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-rail-fence-yard-palm-coast-florida.jpg"
   },
   {
     "id": 236,
     "title": "White Vinyl Ranch Rail Fence",
-    "titleEs": "Blanco Vinilo Ranch Rail Cerca",
+    "titleEs": "Blanco Vinilo Rancho Riel Cerca",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-white-vinyl-ranch-rail-fence-palm-coast.jpg"
   },
   {
@@ -2139,19 +2140,19 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 238,
-    "title": "Wood Fence And House Exterior",
-    "titleEs": "Madera Cerca And House Exterior",
+    "title": "Vinyl Fence And House Exterior",
+    "titleEs": "Vinilo Cerca And Casa Exterior",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-and-house-exterior-flagler-county.jpg"
   },
   {
     "id": 239,
-    "title": "Wood Fence Back Side View",
-    "titleEs": "Madera Cerca Back Lateral Vista",
+    "title": "Vinyl Fence Back Side View",
+    "titleEs": "Vinilo Cerca Back Lateral Vista",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-back-side-view-florida.jpg"
   },
@@ -2166,17 +2167,17 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 241,
-    "title": "Wood Fence Boards Drying New",
-    "titleEs": "Madera Cerca Tablas Drying Nuevo",
+    "title": "Chain Link Fence Boards Drying New",
+    "titleEs": "Malla Cicl\u00f3nica Cerca Tablas Secado Nuevo",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "chain-link",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-boards-drying-new-flagler-county.jpg"
   },
   {
     "id": 242,
     "title": "Wood Fence Boards Gate Frame",
-    "titleEs": "Madera Cerca Tablas Puerta Frame",
+    "titleEs": "Madera Cerca Tablas Puerta Marco",
     "location": "Palm Coast, FL",
     "type": "wood",
     "tag": "finished",
@@ -2188,7 +2189,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Tablas Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-boards-installation-palm-coast-florida.jpg"
   },
   {
@@ -2224,25 +2225,25 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Bracing Support Vista",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-bracing-support-view-palm-coast.jpg"
   },
   {
     "id": 248,
-    "title": "Wood Fence Complete Section",
-    "titleEs": "Madera Cerca Completo Secci\u00f3n",
+    "title": "Vinyl Fence Complete Section",
+    "titleEs": "Vinilo Cerca Completo Secci\u00f3n",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-complete-section-palm-coast.jpg"
   },
   {
     "id": 249,
-    "title": "Wood Fence Construction In Field",
-    "titleEs": "Madera Cerca Construcci\u00f3n In Field",
+    "title": "Aluminum Fence Construction In Field",
+    "titleEs": "Aluminio Cerca Construcci\u00f3n In Field",
     "location": "Flagler County, FL",
-    "type": "wood",
-    "tag": "process",
+    "type": "aluminum",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-construction-in-field-flagler-county.jpg"
   },
   {
@@ -2251,7 +2252,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Construcci\u00f3n Nailing",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-construction-nailing-florida.jpg"
   },
   {
@@ -2260,7 +2261,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Curved Propiedad L\u00ednea",
     "location": "Flagler County, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-curved-property-line-flagler-county-fl.jpg"
   },
   {
@@ -2296,7 +2297,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca From Behind \u00c1ngulo",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-from-behind-angle-palm-coast-fl.jpg"
   },
   {
@@ -2341,25 +2342,25 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Puerta Construcci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "process",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-gate-construction-palm-coast.jpg"
   },
   {
     "id": 261,
-    "title": "Wood Fence Gate With Hardware",
-    "titleEs": "Madera Cerca Puerta With Herraje",
+    "title": "Vinyl Fence Gate With Hardware",
+    "titleEs": "Vinilo Cerca Puerta With Herrajes",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-gate-with-hardware-palm-coast-fl.jpg"
   },
   {
     "id": 262,
-    "title": "Wood Fence Horizontal Boards",
-    "titleEs": "Madera Cerca Horizontal Tablas",
+    "title": "Aluminum Fence Horizontal Boardsorida",
+    "titleEs": "Aluminio Cerca Horizontal Boardsorida",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "aluminum",
+    "tag": "process",
     "src": "/gallery/smooth-fence-usa-wood-fence-horizontal-boards-palm-coast-florida.jpg"
   },
   {
@@ -2368,7 +2369,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Instalaci\u00f3n",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-installation-palm-coast-florida.jpg"
   },
   {
@@ -2382,19 +2383,19 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 265,
-    "title": "Wood Fence Long Residential Line",
-    "titleEs": "Madera Cerca Long Residencial L\u00ednea",
+    "title": "Aluminum Fence Long Residential Line",
+    "titleEs": "Aluminio Cerca Largo Residencial L\u00ednea",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-long-residential-line-flagler-county.jpg"
   },
   {
     "id": 266,
-    "title": "Wood Fence Long Run Property",
-    "titleEs": "Madera Cerca Long Run Propiedad",
+    "title": "Vinyl Fence Long Run Property",
+    "titleEs": "Vinilo Cerca Largo Corrida Propiedad",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-long-run-property-flagler-county.jpg"
   },
@@ -2427,19 +2428,19 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 270,
-    "title": "Wood Fence Panels Horizontal",
-    "titleEs": "Madera Cerca Paneles Horizontal",
+    "title": "Vinyl Fence Panels Horizontal",
+    "titleEs": "Vinilo Cerca Paneles Horizontal",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-panels-horizontal-flagler-county-fl.jpg"
   },
   {
     "id": 271,
-    "title": "Wood Fence Panels Tall Privacy",
-    "titleEs": "Madera Cerca Paneles Alto Privacidad",
+    "title": "Aluminum Fence Panels Tall Privacy",
+    "titleEs": "Aluminio Cerca Paneles Alto Privacidad",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-panels-tall-privacy-florida.jpg"
   },
@@ -2454,10 +2455,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 273,
-    "title": "Wood Fence Pickets Close View",
-    "titleEs": "Madera Cerca Pickets Close Vista",
+    "title": "Vinyl Fence Pickets Close Vieworida",
+    "titleEs": "Vinilo Cerca Pickets Cerca Vieworida",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-pickets-close-view-palm-coast-florida.jpg"
   },
@@ -2467,34 +2468,34 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Pickets Nuevo Install",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "installation",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-pickets-new-install-palm-coast-florida.jpg"
   },
   {
     "id": 275,
-    "title": "Wood Fence Post Concrete Base",
-    "titleEs": "Madera Cerca Poste Concrete Base",
+    "title": "Vinyl Fence Post Concrete Base",
+    "titleEs": "Vinilo Cerca Poste Concreto Base",
     "location": "Flagler County, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-post-concrete-base-flagler-county-fl.jpg"
   },
   {
     "id": 276,
-    "title": "Wood Fence Post Holes Dig",
-    "titleEs": "Madera Cerca Poste Holes Dig",
+    "title": "Vinyl Fence Post Holes Dig",
+    "titleEs": "Vinilo Cerca Poste Hoyos Excavaci\u00f3n",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "process",
     "src": "/gallery/smooth-fence-usa-wood-fence-post-holes-dig-flagler-county.jpg"
   },
   {
     "id": 277,
-    "title": "Wood Fence Post Installation Progress",
-    "titleEs": "Madera Cerca Poste Instalaci\u00f3n Progreso",
+    "title": "Vinyl Fence Post Installation Progress",
+    "titleEs": "Vinilo Cerca Poste Instalaci\u00f3n Progreso",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "process",
+    "type": "vinyl",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-post-installation-progress-palm-coast.jpg"
   },
   {
@@ -2512,7 +2513,7 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Postes Set In Ground",
     "location": "Flagler County, FL",
     "type": "wood",
-    "tag": "process",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-posts-set-in-ground-flagler-county-fl.jpg"
   },
   {
@@ -2553,10 +2554,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 284,
-    "title": "Wood Fence Section Fresh Lumber",
-    "titleEs": "Madera Cerca Secci\u00f3n Fresco Lumber",
+    "title": "Aluminum Fence Section Fresh Lumber",
+    "titleEs": "Aluminio Cerca Secci\u00f3n Fresco Madera",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-section-fresh-lumber-florida.jpg"
   },
@@ -2571,10 +2572,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 286,
-    "title": "Wood Fence Shadow Box Style",
-    "titleEs": "Madera Cerca Shadow Box Estilo",
+    "title": "Vinyl Fence Shadow Box Style",
+    "titleEs": "Vinilo Cerca Shadow Box Estilo",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-shadow-box-style-palm-coast.jpg"
   },
@@ -2584,16 +2585,16 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Lateral Jard\u00edn Run",
     "location": "Flagler County, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "process",
     "src": "/gallery/smooth-fence-usa-wood-fence-side-yard-run-flagler-county-fl.jpg"
   },
   {
     "id": 288,
-    "title": "Wood Fence Straight Line Install",
-    "titleEs": "Madera Cerca Straight L\u00ednea Install",
+    "title": "Vinyl Fence Straight Line Install",
+    "titleEs": "Vinilo Cerca Recto L\u00ednea Install",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "installation",
+    "type": "vinyl",
+    "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-straight-line-install-palm-coast-fl.jpg"
   },
   {
@@ -2602,24 +2603,24 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Cerca Straight Fila Paneles",
     "location": "Palm Coast, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-fence-straight-row-panels-palm-coast-florida.jpg"
   },
   {
     "id": 290,
-    "title": "Wood Fence Tall Boards Privacy",
-    "titleEs": "Madera Cerca Alto Tablas Privacidad",
+    "title": "Vinyl Fence Tall Boards Privacy",
+    "titleEs": "Vinilo Cerca Alto Tablas Privacidad",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-tall-boards-privacy-flagler-county-fl.jpg"
   },
   {
     "id": 291,
-    "title": "Wood Fence Tall Privacy Panels",
-    "titleEs": "Madera Cerca Alto Privacidad Paneles",
+    "title": "Vinyl Fence Tall Privacy Panels",
+    "titleEs": "Vinilo Cerca Alto Privacidad Paneles",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-tall-privacy-panels-florida.jpg"
   },
@@ -2652,10 +2653,10 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 295,
-    "title": "Wood Fence Yard Boundary",
-    "titleEs": "Madera Cerca Jard\u00edn Boundary",
+    "title": "Vinyl Fence Yard Boundaryorida",
+    "titleEs": "Vinilo Cerca Jard\u00edn Boundaryorida",
     "location": "Palm Coast, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-fence-yard-boundary-palm-coast-florida.jpg"
   },
@@ -2670,19 +2671,19 @@ export const galleryPhotos: Photo[] = [
   },
   {
     "id": 297,
-    "title": "Wood Privacy Fence Natural Finish",
-    "titleEs": "Madera Privacidad Cerca Natural Finish",
+    "title": "Aluminum Privacy Fence Natural Finish",
+    "titleEs": "Aluminio Privacidad Cerca Natural Acabado",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "aluminum",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-privacy-fence-natural-finish-flagler-county.jpg"
   },
   {
     "id": 298,
-    "title": "Wood Privacy Fence Neighbor Line",
-    "titleEs": "Madera Privacidad Cerca Neighbor L\u00ednea",
+    "title": "Vinyl Privacy Fence Neighbor Line",
+    "titleEs": "Vinilo Privacidad Cerca Vecino L\u00ednea",
     "location": "Flagler County, FL",
-    "type": "wood",
+    "type": "vinyl",
     "tag": "finished",
     "src": "/gallery/smooth-fence-usa-wood-privacy-fence-neighbor-line-flagler-county.jpg"
   },
@@ -2719,16 +2720,16 @@ export const galleryPhotos: Photo[] = [
     "titleEs": "Madera Ranch Rail Cerca Propiedad",
     "location": "Flagler County, FL",
     "type": "wood",
-    "tag": "finished",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-ranch-rail-fence-property-flagler-county.jpg"
   },
   {
     "id": 303,
-    "title": "Wood Vinyl Fence Combination",
-    "titleEs": "Madera Vinilo Cerca Combination",
+    "title": "Vinyl Vinyl Fence Combination",
+    "titleEs": "Vinilo Vinilo Cerca Combinaci\u00f3n",
     "location": "Palm Coast, FL",
-    "type": "wood",
-    "tag": "finished",
+    "type": "vinyl",
+    "tag": "installation",
     "src": "/gallery/smooth-fence-usa-wood-vinyl-fence-combination-palm-coast.jpg"
   }
 ];
