@@ -1,10 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
+import { escapeHtml, rateLimit } from "@/lib/sanitize";
 
 export const runtime = "nodejs";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  // ── Rate limiting ──
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!rateLimit(ip, { maxRequests: 5, windowMs: 60_000 })) {
+    return NextResponse.json({ ok: false, error: "Too many requests." }, { status: 429 });
+  }
+
   const data = await request.json();
   const {
     name, phone, email, zip,
@@ -25,6 +32,16 @@ export async function POST(request: Request) {
   const resend = new Resend(resendApiKey);
   const fmt = (n: number) => n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
+  // Escape user-provided values for safe HTML embedding
+  const sName = escapeHtml(name);
+  const sPhone = escapeHtml(phone);
+  const sEmail = escapeHtml(email);
+  const sZip = escapeHtml(zip);
+  const sMaterial = escapeHtml(material);
+  const sHeight = escapeHtml(height);
+  const sLinearFeet = escapeHtml(String(linearFeet));
+  const sGates = escapeHtml(String(gates));
+
   // ── Email to client ──────────────────────────────────────
   const clientHtml = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#125036">
@@ -33,18 +50,18 @@ export async function POST(request: Request) {
         <p style="color:#fff;margin:8px 0 0;font-size:14px">Your Fence Estimate is Ready</p>
       </div>
       <div style="background:#fff;padding:32px;border-radius:0 0 16px 16px;border:1px solid #b2cf7f">
-        <p style="font-size:16px">Hi <strong>${name}</strong>,</p>
+        <p style="font-size:16px">Hi <strong>${sName}</strong>,</p>
         <p>Thanks for using our estimator! Here's a summary of your project and the estimated cost range:</p>
 
         <div style="background:#fbfcf9;border:1px solid #b2cf7f;border-radius:12px;padding:20px;margin:20px 0">
           <h2 style="margin:0 0 16px;font-size:18px;color:#125036">📋 Project Summary</h2>
           <table style="width:100%;border-collapse:collapse;font-size:14px">
-            <tr><td style="padding:6px 0;color:#666">Material</td><td style="font-weight:600">${material}${premium ? " (Premium Grade)" : ""}</td></tr>
-            <tr><td style="padding:6px 0;color:#666">Height</td><td style="font-weight:600">${height}</td></tr>
-            <tr><td style="padding:6px 0;color:#666">Linear Feet</td><td style="font-weight:600">${linearFeet} ft</td></tr>
-            <tr><td style="padding:6px 0;color:#666">Gates</td><td style="font-weight:600">${gates}</td></tr>
+            <tr><td style="padding:6px 0;color:#666">Material</td><td style="font-weight:600">${sMaterial}${premium ? " (Premium Grade)" : ""}</td></tr>
+            <tr><td style="padding:6px 0;color:#666">Height</td><td style="font-weight:600">${sHeight}</td></tr>
+            <tr><td style="padding:6px 0;color:#666">Linear Feet</td><td style="font-weight:600">${sLinearFeet} ft</td></tr>
+            <tr><td style="padding:6px 0;color:#666">Gates</td><td style="font-weight:600">${sGates}</td></tr>
             <tr><td style="padding:6px 0;color:#666">Old fence removal</td><td style="font-weight:600">${removal ? "Yes" : "No"}</td></tr>
-            <tr><td style="padding:6px 0;color:#666">Zip Code</td><td style="font-weight:600">${zip}</td></tr>
+            <tr><td style="padding:6px 0;color:#666">Zip Code</td><td style="font-weight:600">${sZip}</td></tr>
           </table>
         </div>
 
@@ -79,14 +96,14 @@ export async function POST(request: Request) {
       </h2>
       <div style="background:#fff;padding:24px;border:1px solid #b2cf7f;border-radius:0 0 12px 12px">
         <table style="width:100%;font-size:14px;border-collapse:collapse">
-          <tr><td style="padding:8px;color:#666;width:40%">Name</td><td style="font-weight:700">${name}</td></tr>
-          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Phone</td><td style="font-weight:700"><a href="tel:${phone}">${phone}</a></td></tr>
-          <tr><td style="padding:8px;color:#666">Email</td><td style="font-weight:700"><a href="mailto:${email}">${email}</a></td></tr>
-          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Zip Code</td><td style="font-weight:700">${zip}</td></tr>
-          <tr><td style="padding:8px;color:#666">Material</td><td style="font-weight:700">${material}${premium ? " (Premium)" : ""}</td></tr>
-          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Height</td><td style="font-weight:700">${height}</td></tr>
-          <tr><td style="padding:8px;color:#666">Linear Feet</td><td style="font-weight:700">${linearFeet} ft</td></tr>
-          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Gates</td><td style="font-weight:700">${gates}</td></tr>
+          <tr><td style="padding:8px;color:#666;width:40%">Name</td><td style="font-weight:700">${sName}</td></tr>
+          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Phone</td><td style="font-weight:700"><a href="tel:${escapeHtml(phone)}">${sPhone}</a></td></tr>
+          <tr><td style="padding:8px;color:#666">Email</td><td style="font-weight:700"><a href="mailto:${escapeHtml(email)}">${sEmail}</a></td></tr>
+          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Zip Code</td><td style="font-weight:700">${sZip}</td></tr>
+          <tr><td style="padding:8px;color:#666">Material</td><td style="font-weight:700">${sMaterial}${premium ? " (Premium)" : ""}</td></tr>
+          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Height</td><td style="font-weight:700">${sHeight}</td></tr>
+          <tr><td style="padding:8px;color:#666">Linear Feet</td><td style="font-weight:700">${sLinearFeet} ft</td></tr>
+          <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Gates</td><td style="font-weight:700">${sGates}</td></tr>
           <tr><td style="padding:8px;color:#666">Old fence removal</td><td style="font-weight:700">${removal ? "Yes" : "No"}</td></tr>
           ${gclid || utm_source || utm_medium || utm_campaign ? `<tr style="background:#f0f0f0"><td style="padding:8px;color:#999" colspan="2"><small>Attribution: ${[gclid ? "gclid=" + gclid : "", utm_source ? "src=" + utm_source : "", utm_medium ? "med=" + utm_medium : "", utm_campaign ? "cmp=" + utm_campaign : ""].filter(Boolean).join(" · ")}</small></td></tr>` : ""}
           <tr style="background:#125036"><td colspan="2" style="padding:12px;text-align:center">

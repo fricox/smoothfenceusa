@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Add N business days to a date (skips Sat/Sun)
@@ -20,10 +19,6 @@ function addBusinessDays(start: Date, days: number): Date {
 function SuccessContent() {
   const { lang } = useLanguage();
   const isEs = lang === "es";
-  const params = useSearchParams();
-
-  const name  = params.get("name")  || "";
-  const email = params.get("email") || "";
 
   const earliest = addBusinessDays(new Date(), 5);
   const earliestStr = earliest.toLocaleDateString(isEs ? "es-US" : "en-US", {
@@ -33,12 +28,7 @@ function SuccessContent() {
     year: "numeric",
   });
 
-  // Prefill Calendly with name + email so the client doesn't have to retype it
-  const calendlyBase = "https://calendly.com/federico-smoothfenceusa/installation";
-  const calendlyUrl = `${calendlyBase}?${new URLSearchParams({
-    name,
-    email,
-  }).toString()}`;
+  const calendlyUrl = "https://calendly.com/federico-smoothfenceusa/installation";
 
   return (
     <main className="min-h-screen bg-brand-cream flex items-center justify-center px-4 py-12">

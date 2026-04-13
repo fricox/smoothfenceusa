@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://smoothfenceusa.com"}/pay/success?session_id={CHECKOUT_SESSION_ID}&name=${encodeURIComponent(customerName || "")}&email=${encodeURIComponent(customerEmail || "")}`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://smoothfenceusa.com"}/pay/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://smoothfenceusa.com"}/pay`,
       metadata: {
         customerName: customerName || "",

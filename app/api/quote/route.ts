@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
+import { escapeHtml, rateLimit } from "@/lib/sanitize";
 
 type QuotePayload = {
   fullName: string;
@@ -35,12 +36,21 @@ const requiredFields: Array<keyof QuotePayload> = [
 ];
 
 const templateLine = (label: string, value?: string) =>
-  value ? `<p><strong>${label}:</strong> ${value}</p>` : "";
+  value ? `<p><strong>${label}:</strong> ${escapeHtml(value)}</p>` : "";
 
 const templateLineText = (label: string, value?: string) =>
   value ? `${label}: ${value}` : "";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  // ── Rate limiting ──
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!rateLimit(ip, { maxRequests: 5, windowMs: 60_000 })) {
+    return NextResponse.json(
+      { ok: false, error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let payload: QuotePayload;
 
   try {
@@ -124,7 +134,7 @@ export async function POST(request: Request) {
       ${templateLine("HOA", payload.hoa)}
       ${templateLine("Fecha preferida", payload.preferredDate)}
       <p><strong>Mensaje:</strong></p>
-      <p>${payload.message}</p>
+      <p>${escapeHtml(payload.message)}</p>
       <hr>
       <p style="color:#999;font-size:12px"><strong>Attribution</strong></p>
       ${templateLine("gclid", payload.gclid)}
