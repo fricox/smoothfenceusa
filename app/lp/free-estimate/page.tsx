@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import EstimatorClient from "@/app/estimator/EstimatorClient";
 import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
 
@@ -26,9 +27,9 @@ export default function FreeEstimateLandingPage() {
         </p>
       </section>
 
-      {/* Form */}
-      <section className="mx-auto max-w-lg px-4 py-12 sm:px-6">
-        <QuickContactForm />
+      {/* Primary CTA: instant estimator (P0-1) */}
+      <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        <EstimatorClient inline />
       </section>
 
       <FinancingBanner variant="inline" source="lp_free_estimate" />
@@ -49,6 +50,11 @@ export default function FreeEstimateLandingPage() {
             <p className="text-sm text-brand-deep/60 mt-1">Response Guarantee</p>
           </div>
         </div>
+      </section>
+
+      {/* Secondary: fallback form for visitors who don't want the estimator */}
+      <section className="mx-auto max-w-lg px-4 py-12 sm:px-6">
+        <QuickContactForm />
       </section>
     </main>
   );
