@@ -30,7 +30,7 @@ export default function QuickContactForm() {
     name: isEs ? "Nombre" : "Name",
     phone: isEs ? "Teléfono" : "Phone",
     email: isEs ? "Correo (opcional)" : "Email (optional)",
-    message: isEs ? "¿En qué te podemos ayudar?" : "How can we help?",
+    message: isEs ? "Mensaje (opcional)" : "Message (optional)",
     submit: isEs ? "Enviar pregunta" : "Send question",
     sending: isEs ? "Enviando..." : "Sending...",
     ok: isEs ? "¡Recibido! Te contactamos pronto." : "Got it! We'll reach out shortly.",
@@ -140,15 +140,14 @@ export default function QuickContactForm() {
             {t.message}
           </label>
           <textarea
-            required
             rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="mt-1 w-full rounded-xl border border-brand-light bg-white px-4 py-3 text-brand-deep placeholder:text-brand-deep/40 focus:border-brand-green focus:outline-none"
             placeholder={
               isEs
-                ? "Ej: ¿Trabajan en mi zona? ¿Cuánto cuesta una puerta extra?"
-                : "e.g. Do you work in my area? What does an extra gate cost?"
+                ? "Contanos si necesitás algo puntual"
+                : "Tell us if you need something specific"
             }
           />
         </div>

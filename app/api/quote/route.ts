@@ -26,13 +26,12 @@ type FieldErrors = Partial<Record<keyof QuotePayload, string>>;
 
 export const runtime = "nodejs";
 
-// Minimal required fields: the new short contact form only collects name,
-// phone and message. Everything else is optional so the legacy long form
-// keeps working for backward compatibility.
+// Minimal required fields: the new short contact form only collects name
+// and phone. Message is optional (P0-6) so the fallback form has the lowest
+// possible friction; empty messages are normalized before use.
 const requiredFields: Array<keyof QuotePayload> = [
   "fullName",
   "phone",
-  "message",
 ];
 
 const templateLine = (label: string, value?: string) =>
@@ -82,6 +81,8 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const message = payload.message?.trim() ? payload.message.trim() : "(sin mensaje)";
+
   const resendApiKey = process.env.RESEND_API_KEY;
   const leadsToEmail = process.env.LEADS_TO_EMAIL;
   const emailFrom = process.env.EMAIL_FROM;
@@ -109,7 +110,7 @@ export async function POST(request: NextRequest) {
     templateLineText("Fecha preferida", payload.preferredDate),
     "",
     "Mensaje:",
-    payload.message,
+    message,
     "",
     "--- Attribution ---",
     templateLineText("gclid", payload.gclid),
@@ -134,7 +135,7 @@ export async function POST(request: NextRequest) {
       ${templateLine("HOA", payload.hoa)}
       ${templateLine("Fecha preferida", payload.preferredDate)}
       <p><strong>Mensaje:</strong></p>
-      <p>${escapeHtml(payload.message)}</p>
+      <p>${escapeHtml(message)}</p>
       <hr>
       <p style="color:#999;font-size:12px"><strong>Attribution</strong></p>
       ${templateLine("gclid", payload.gclid)}
@@ -176,7 +177,7 @@ export async function POST(request: NextRequest) {
     linearFeet: payload.linearFeet,
     hoa: payload.hoa,
     preferredDate: payload.preferredDate,
-    message: payload.message,
+    message,
     gclid: payload.gclid,
     utm_source: payload.utm_source,
     utm_medium: payload.utm_medium,
