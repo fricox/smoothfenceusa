@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Finance your new fence with affordable monthly payments. Options from GetHearth, Affirm, Afterpay, and Klarna. Apply in minutes. No hard credit check to prequalify.",
   openGraph: {
-    title: "Fence Financing | SmoothFenceUSA — Palm Coast, FL",
+    title: "Fence Financing | SmoothFenceUSA — Northeast Florida",
     description:
       "Affordable monthly payments for your fence project. Multiple financing options. Apply in minutes.",
     type: "website",

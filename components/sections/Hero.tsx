@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="relative w-full bg-brand-cream text-brand-deep">
       <Image
         src="/hero-fence-optimized.jpg"
-        alt="Professional fence installation by SmoothFenceUSA in Palm Coast, Florida"
+        alt="Professional fence installation by SmoothFenceUSA across Northeast Florida"
         fill
         priority
         className="object-cover opacity-35"

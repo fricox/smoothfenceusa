@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import QuickContactForm from "@/components/forms/QuickContactForm";
+import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "Aluminum Fence Installation | SmoothFenceUSA — Palm Coast, FL",
+  title: "Aluminum Fence Installation | SmoothFenceUSA — Northeast Florida",
   description:
-    "Elegant aluminum fence installation in Palm Coast. Rust-proof, pool-code compliant, and built to last. Free estimate from SmoothFenceUSA.",
+    "Elegant aluminum fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties. Rust-proof, pool-code compliant, and built to last. Free estimate from SmoothFenceUSA.",
   robots: { index: false, follow: false },
 };
 
@@ -53,6 +54,8 @@ export default function AluminumFenceLandingPage() {
             </p>
           </div>
         </div>
+
+        <FinancingBanner variant="inline" source="lp_aluminum_fence" />
 
         <QuickContactForm />
       </section>

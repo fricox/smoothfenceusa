@@ -48,7 +48,7 @@ export default function Footer() {
                 info@smoothfenceusa.com
               </a>
             </li>
-            <li className="text-brand-cream/60">Palm Coast, FL &amp; Northeast Florida</li>
+            <li className="text-brand-cream/60">Flagler · Volusia · St. Johns · Duval · Putnam, FL</li>
           </ul>
         </div>
 

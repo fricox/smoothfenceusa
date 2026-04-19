@@ -31,8 +31,9 @@ const PROVIDERS = [
     },
     ctaEn: "Apply with GetHearth",
     ctaEs: "Aplicar con GetHearth",
-    // DEBT: URL is placeholder. Replace with merchant-specific GetHearth link once account is created. [effort: 5 min]
-    url: "#hearth",
+    // Merchant-specific Hearth Financing prequalify URL (Smooth Fence USA / Federico).
+    // Activated 2026-04-19 after Hearth account approval. Replaces prior "#hearth" placeholder.
+    url: "https://app.gethearth.com/partners/smooth-fence-usa/federico/apply?utm_source=smoothfenceusa&utm_medium=website&utm_campaign=financing_page",
     bestFor: "best",
   },
   {
@@ -196,18 +197,16 @@ export default function FinancingClient() {
                   ))}
                 </div>
 
-                {/* CTA */}
-                {p.url.startsWith("#") ? (
-                  <button
-                    type="button"
-                    disabled
-                    className="w-full rounded-full bg-brand-green px-6 py-3 text-sm font-bold text-white opacity-80"
+                {/* CTA — external links (Hearth) open in new tab; internal links use Next Link. */}
+                {p.url.startsWith("http") ? (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full rounded-full bg-brand-green px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-brand-deep"
                   >
-                    {isEs ? p.ctaEs : p.ctaEn}{" "}
-                    <span className="text-xs font-normal opacity-70">
-                      ({isEs ? "próximamente" : "coming soon"})
-                    </span>
-                  </button>
+                    {isEs ? p.ctaEs : p.ctaEn} →
+                  </a>
                 ) : (
                   <Link
                     href={p.url}

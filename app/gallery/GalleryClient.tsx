@@ -68,8 +68,8 @@ export default function GalleryClient() {
         </h1>
         <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base sm:text-lg">
           {isEs
-            ? "Proceso, instalación y resultados finales — así es como trabajamos en Palm Coast y alrededores."
-            : "Process, installation, and final results — this is how we work across Palm Coast and surrounding areas."}
+            ? "Proceso, instalación y resultados finales — así trabajamos en Flagler, Volusia, St. Johns, Duval, Putnam y el resto del noreste de Florida."
+            : "Process, installation, and final results — this is how we work across Flagler, Volusia, St. Johns, Duval, Putnam, and the rest of Northeast Florida."}
         </p>
         <Link
           href="/contact"
@@ -182,8 +182,8 @@ export default function GalleryClient() {
         </h2>
         <p className="text-brand-cream/80 max-w-lg mx-auto mb-8 text-base">
           {isEs
-            ? "Únete a cientos de propietarios en Palm Coast que confían en SmoothFenceUSA. Estimados gratis, sin presión."
-            : "Join hundreds of homeowners in Palm Coast who trust SmoothFenceUSA. Free estimates, no pressure."}
+            ? "Únete a cientos de propietarios en el noreste de Florida que confían en SmoothFenceUSA. Estimados gratis, sin presión."
+            : "Join hundreds of homeowners across Northeast Florida who trust SmoothFenceUSA. Free estimates, no pressure."}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

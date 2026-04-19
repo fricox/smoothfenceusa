@@ -4,7 +4,7 @@ import GalleryClient from "./GalleryClient";
 export const metadata: Metadata = {
   title: "Before & After Gallery | SmoothFenceUSA",
   description:
-    "See the transformation. Real fence installation projects by SmoothFenceUSA in Palm Coast, Florida — vinyl, aluminum, chain-link, and wood fences.",
+    "See the transformation. Real fence installation projects by SmoothFenceUSA across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida — vinyl, aluminum, chain-link, and wood fences.",
 };
 
 export default function GalleryPage() {
