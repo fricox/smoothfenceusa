@@ -77,7 +77,7 @@ export const t: Record<Lang, Translation> = {
       subheading:
         "Vinyl, aluminum, chain-link, and wood — installed on time, on budget, and built to last Florida's weather.",
       cta: "Get a Free Quote",
-      schedule: "📅 Schedule a Visit",
+      schedule: "📅 Schedule site visit",
     },
     // Trust badges
     trust: {
@@ -276,7 +276,7 @@ export const t: Record<Lang, Translation> = {
       subheading:
         "Vinilo, aluminio, malla ciclónica y madera — instaladas a tiempo, dentro del presupuesto y construidas para aguantar el clima de Florida.",
       cta: "Cotización Gratis",
-      schedule: "📅 Agendar una Visita",
+      schedule: "📅 Agendar visita",
     },
     trust: {
       experience: { title: "Más de 10 Años de Experiencia", desc: "Más de una década instalando cercas en Flagler, Volusia, St. Johns y el resto del noreste de Florida." },

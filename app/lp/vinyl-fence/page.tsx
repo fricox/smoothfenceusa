@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import EstimatorClient from "@/app/estimator/EstimatorClient";
 import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
 
@@ -24,6 +25,11 @@ export default function VinylFenceLandingPage() {
           Zero maintenance. Lifetime durability. HOA-approved styles available.
           Get your free estimate from the local experts.
         </p>
+      </section>
+
+      {/* Primary CTA: instant estimator (P0-1) */}
+      <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        <EstimatorClient inline />
       </section>
 
       {/* Benefits */}
@@ -57,7 +63,10 @@ export default function VinylFenceLandingPage() {
 
         <FinancingBanner variant="inline" source="lp_vinyl_fence" />
 
-        <QuickContactForm />
+        {/* Secondary: fallback form for visitors who don't want the estimator */}
+        <div className="mt-10">
+          <QuickContactForm />
+        </div>
       </section>
     </main>
   );
