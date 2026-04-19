@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import QuickContactForm from "@/components/forms/QuickContactForm";
+import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "Vinyl Fence Installation | SmoothFenceUSA — Palm Coast, FL",
+  title: "Vinyl Fence Installation | SmoothFenceUSA — Northeast Florida",
   description:
-    "Professional PVC/vinyl fence installation in Palm Coast. Low maintenance, lifetime durability, HOA-approved styles. Free estimate from SmoothFenceUSA.",
+    "Professional PVC/vinyl fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties. Low maintenance, lifetime durability, HOA-approved styles. Free estimate from SmoothFenceUSA.",
   robots: { index: false, follow: false },
 };
 
@@ -14,7 +15,7 @@ export default function VinylFenceLandingPage() {
       {/* Hero */}
       <section className="bg-brand-deep py-16 px-4 text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
-          #1 Choice in Palm Coast
+          #1 Choice in Northeast Florida
         </p>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
           Vinyl Fence Installation
@@ -53,6 +54,8 @@ export default function VinylFenceLandingPage() {
             </p>
           </div>
         </div>
+
+        <FinancingBanner variant="inline" source="lp_vinyl_fence" />
 
         <QuickContactForm />
       </section>

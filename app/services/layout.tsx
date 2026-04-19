@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Fence Services | Vinyl, Aluminum, Wood & Chain-Link — SmoothFenceUSA",
-  description: "Professional fence installation, repair, and HOA assistance in Palm Coast, FL. Vinyl, aluminum, chain-link, and wood fences built for Florida weather.",
+  description: "Professional fence installation, repair, and HOA assistance across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida. Vinyl, aluminum, chain-link, and wood fences built for Florida weather.",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

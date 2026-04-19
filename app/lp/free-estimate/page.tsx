@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import QuickContactForm from "@/components/forms/QuickContactForm";
+import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "Free Fence Estimate | SmoothFenceUSA — Palm Coast, FL",
+  title: "Free Fence Estimate | SmoothFenceUSA — Northeast Florida",
   description:
-    "Get a free, no-obligation fence estimate from SmoothFenceUSA. Vinyl, aluminum, wood, and chain-link fences in Palm Coast and surrounding areas.",
+    "Get a free, no-obligation fence estimate from SmoothFenceUSA. Vinyl, aluminum, wood, and chain-link fences across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida.",
   robots: { index: false, follow: false },
 };
 
@@ -29,6 +30,8 @@ export default function FreeEstimateLandingPage() {
       <section className="mx-auto max-w-lg px-4 py-12 sm:px-6">
         <QuickContactForm />
       </section>
+
+      <FinancingBanner variant="inline" source="lp_free_estimate" />
 
       {/* Trust signals */}
       <section className="bg-white py-12 px-4 text-center">

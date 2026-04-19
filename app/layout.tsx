@@ -22,9 +22,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SmoothFenceUSA | Palm Coast Fence Installation",
+  title: "SmoothFenceUSA | Northeast Florida Fence Installation",
   description:
-    "SmoothFenceUSA installs vinyl, aluminum, chain-link, and wood fences across Palm Coast with full HOA and permit support.",
+    "SmoothFenceUSA installs vinyl, aluminum, chain-link, and wood fences across Flagler, Volusia, St. Johns, Duval & Putnam counties with full HOA and permit support.",
 };
 
 export default function RootLayout({
@@ -53,11 +53,13 @@ export default function RootLayout({
                 postalCode: "32137",
                 addressCountry: "US",
               },
-              areaServed: {
-                "@type": "GeoCircle",
-                geoMidpoint: { "@type": "GeoCoordinates", latitude: 29.5846, longitude: -81.2079 },
-                geoRadius: "50000",
-              },
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "Flagler County, FL" },
+                { "@type": "AdministrativeArea", name: "Volusia County, FL" },
+                { "@type": "AdministrativeArea", name: "St. Johns County, FL" },
+                { "@type": "AdministrativeArea", name: "Duval County, FL" },
+                { "@type": "AdministrativeArea", name: "Putnam County, FL" },
+              ],
               priceRange: "$$",
             }),
           }}

@@ -31,7 +31,7 @@ export default function ContactPage() {
     hours: isEs ? "Horario" : "Hours",
     hoursVal: isEs ? "Lun–Sáb 8:00 AM – 6:00 PM" : "Mon–Sat 8:00 AM – 6:00 PM",
     area: isEs ? "Área de servicio" : "Service area",
-    areaVal: "Palm Coast · Flagler · Volusia · St. Johns County, FL",
+    areaVal: "Flagler · Volusia · St. Johns · Duval · Putnam counties, FL",
   };
 
   return (

@@ -4,13 +4,14 @@ import Hero from "@/components/sections/Hero";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import TrustBadges from "@/components/sections/TrustBadges";
 import ServiceArea from "@/components/sections/ServiceArea";
+import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "SmoothFenceUSA | Fence Installation in Palm Coast & Northeast Florida",
-  description: "Professional vinyl, aluminum, chain-link, and wood fence installation in Palm Coast, Flagler County, and Northeast Florida. Free estimates, licensed & insured.",
+  title: "SmoothFenceUSA | Fence Installation in Northeast Florida",
+  description: "Professional vinyl, aluminum, chain-link, and wood fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida. Free estimates, licensed & insured.",
   openGraph: {
-    title: "SmoothFenceUSA | Fence Installation in Palm Coast, FL",
-    description: "Professional fence installation — vinyl, aluminum, chain-link, and wood. Free estimates. Licensed & insured.",
+    title: "SmoothFenceUSA | Fence Installation in Northeast Florida",
+    description: "Professional fence installation across Flagler, Volusia, St. Johns, Duval & Putnam counties — vinyl, aluminum, chain-link, and wood. Free estimates. Licensed & insured.",
     type: "website",
   },
 };
@@ -21,6 +22,7 @@ export default function Home() {
       <Hero />
       <TrustBadges />
       <WhyChooseUs />
+      <FinancingBanner variant="large" source="home" />
       <ServiceArea />
       <CTA />
     </>
