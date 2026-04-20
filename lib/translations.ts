@@ -9,6 +9,7 @@ export type Translation = {
     licensed: { title: string; desc: string };
     freeEstimate: { title: string; desc: string };
     premium: { title: string; desc: string };
+    bar: { stars: string; licensed: string; years: string; counties: string };
   };
   whyUs: { label: string; heading: string; sub: string; reasons: { title: string; desc: string }[] };
   serviceArea: { label: string; heading: string; sub: string; ctaQuote: string; ctaMap: string };
@@ -85,6 +86,12 @@ export const t: Record<Lang, Translation> = {
       licensed: { title: "Licensed & Insured", desc: "Fully licensed in Florida and insured for your complete peace of mind." },
       freeEstimate: { title: "Free Estimates", desc: "We come to your property and give you a detailed, no-obligation quote." },
       premium: { title: "Premium Materials", desc: "We only install materials that hold up to Florida's heat, humidity, and storms." },
+      bar: {
+        stars: "5-star service",
+        licensed: "Licensed & Insured",
+        years: "10+ years experience",
+        counties: "Serving 5 counties",
+      },
     },
     // Why choose us
     whyUs: {
@@ -283,6 +290,12 @@ export const t: Record<Lang, Translation> = {
       licensed: { title: "Licenciados y Asegurados", desc: "Completamente licenciados en Florida y asegurados para tu total tranquilidad." },
       freeEstimate: { title: "Estimados Gratuitos", desc: "Vamos a tu propiedad y te damos una cotización detallada sin compromiso." },
       premium: { title: "Materiales Premium", desc: "Solo instalamos materiales que soportan el calor, la humedad y las tormentas de Florida." },
+      bar: {
+        stars: "Servicio 5 estrellas",
+        licensed: "Licenciados y Asegurados",
+        years: "10+ años de experiencia",
+        counties: "Atendemos 5 condados",
+      },
     },
     whyUs: {
       label: "¿Por qué elegirnos?",
