@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { Lang } from "@/lib/translations";
+import { trackClickToContact } from "@/lib/track-click";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,6 +72,7 @@ export default function Header() {
             <span className="hidden lg:inline">{tr.topbar.callUs}</span>
             <a
               href="tel:+13864039460"
+              onClick={() => trackClickToContact("tel", "topbar")}
               className="rounded-full bg-brand-yellow px-3 py-1 font-semibold text-brand-deep transition-colors hover:bg-brand-light"
             >
               (386) 403-9460
@@ -174,6 +176,7 @@ export default function Header() {
             {/* Call button */}
             <a
               href="tel:+13864039460"
+              onClick={() => trackClickToContact("tel", "header_mobile")}
               aria-label="Call (386) 403-9460"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green text-white shadow-sm transition-colors hover:bg-brand-deep"
             >
@@ -256,7 +259,7 @@ export default function Header() {
             <div className="mt-2 grid grid-cols-2 gap-2">
               <a
                 href="tel:+13864039460"
-                onClick={closeMenu}
+                onClick={() => { trackClickToContact("tel", "header_mobile_menu"); closeMenu(); }}
                 className="flex items-center justify-center gap-2 rounded-full bg-brand-green px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-brand-deep"
               >
                 📞 {lang === "es" ? "Llamar" : "Call"}

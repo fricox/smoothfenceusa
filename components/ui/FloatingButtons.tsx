@@ -1,5 +1,7 @@
 "use client";
 
+import { trackClickToContact } from "@/lib/track-click";
+
 const PHONE = "13864039460";
 const PHONE_DISPLAY = "+1 (386) 403-9460";
 const WA_MESSAGE = encodeURIComponent(
@@ -12,6 +14,7 @@ export default function FloatingButtons() {
       {/* SMS Button */}
       <a
         href={`sms:+${PHONE}`}
+        onClick={() => trackClickToContact("sms", "floating_buttons")}
         aria-label={`Text us at ${PHONE_DISPLAY}`}
         title="Send us a text"
         className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-deep text-white shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-brand-deep/50 focus:ring-offset-2"
@@ -35,6 +38,7 @@ export default function FloatingButtons() {
       {/* WhatsApp Button */}
       <a
         href={`https://wa.me/${PHONE}?text=${WA_MESSAGE}`}
+        onClick={() => trackClickToContact("whatsapp", "floating_buttons")}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

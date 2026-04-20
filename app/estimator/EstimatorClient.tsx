@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getAttribution } from "@/lib/attribution";
 import { trackLeadConversion } from "@/lib/gtag";
+import { trackClickToContact } from "@/lib/track-click";
 
 /* ── Pricing data ─────────────────────────────────────────── */
 const MATERIALS = [
@@ -335,7 +336,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
               <Link href="/" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
                 {e.backHome}
               </Link>
-              <a href="tel:+13864039460" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
+              <a href="tel:+13864039460" onClick={() => trackClickToContact("tel", "estimator_success")} className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
                 {e.callNow}
               </a>
             </div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackClickToContact } from "@/lib/track-click";
 
 // Add N business days to a date (skips Sat/Sun)
 function addBusinessDays(start: Date, days: number): Date {
@@ -67,7 +68,7 @@ function SuccessContent() {
           <p className="text-sm font-semibold text-brand-deep">
             {isEs ? "¿Tienes preguntas?" : "Have questions?"}
           </p>
-          <a href="tel:+13864039460" className="text-brand-green font-bold hover:underline">
+          <a href="tel:+13864039460" onClick={() => trackClickToContact("tel", "pay_success")} className="text-brand-green font-bold hover:underline">
             (386) 403-9460
           </a>
         </div>

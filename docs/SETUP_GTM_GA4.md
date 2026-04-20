@@ -37,6 +37,25 @@ Inside GTM, create these tags:
   - `utm_medium`
   - `utm_campaign`
 
+### GA4 Event — Contact Click (P1-5)
+Fires when a visitor taps any tel: / sms: / WhatsApp link surfaced across the
+site (topbar, floating buttons, footer, contact page, estimator success,
+gallery CTA, pay success). Site code pushes the dataLayer event already
+(`lib/track-click.ts`). GTM still needs:
+
+- **Trigger**: Custom Event, Event name = `contact_click`
+- **Tag**: Google Analytics: GA4 Event
+  - Event Name: `contact_click`
+  - Event Parameters (from dataLayer):
+    - `channel` — `"tel"` | `"sms"` | `"whatsapp"`
+    - `location` — short string like `"topbar"`, `"floating_buttons"`, `"footer"`, `"header_mobile"`, `"header_mobile_menu"`, `"estimator_success"`, `"contact_card"`, `"contact_quick_action"`, `"gallery_cta"`, `"pay_success"`, `"whatsapp_button"`
+    - `page_path` — the pathname at click time (auto-included by lib/track-click.ts)
+    - `timestamp` — ms since epoch (auto-included)
+  - Trigger: the Custom Event above.
+
+Optional: in GA4, mark `contact_click` as a Key Event to count these as
+secondary conversions alongside `lead_form_submit` (Primary stays the form).
+
 ## 4. Google Ads Conversion Tracking
 
 ### Import GA4 Conversions
@@ -72,5 +91,17 @@ Inside GTM, create these tags:
   utm_campaign: "...",
   utm_term: "...",
   utm_content: "..."
+}
+
+// Pushed on every tap of a tel:/sms:/WhatsApp link (P1-5)
+{
+  event: "contact_click",
+  channel: "tel" | "sms" | "whatsapp",
+  location: "topbar" | "footer" | "floating_buttons" | "header_mobile" |
+            "header_mobile_menu" | "estimator_success" | "contact_card" |
+            "contact_quick_action" | "gallery_cta" | "pay_success" |
+            "whatsapp_button",
+  page_path: "/faq" | "/contact" | ...,
+  timestamp: 1713569345123
 }
 ```
