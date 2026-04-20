@@ -34,6 +34,11 @@ export default function Hero() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-deep">
               {tr.hero.heading}
             </h1>
+            <div className="flex justify-center lg:justify-start">
+              <span className="inline-flex items-center rounded-full bg-amber-50 px-4 py-1.5 text-sm font-semibold text-amber-700 ring-1 ring-amber-200">
+                {tr.hero.siteVisit24h}
+              </span>
+            </div>
             <p className="mt-4 max-w-xl text-lg sm:text-xl font-medium text-brand-deep/90">
               {tr.hero.subheading}
             </p>

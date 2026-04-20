@@ -12,7 +12,7 @@ import { trackLeadConversion } from "@/lib/gtag";
  * The real lead capture is the estimator — this form is a safety net.
  */
 export default function QuickContactForm() {
-  const { lang } = useLanguage();
+  const { lang, tr } = useLanguage();
   const isEs = lang === "es";
 
   const [fullName, setFullName] = useState("");
@@ -33,7 +33,7 @@ export default function QuickContactForm() {
     message: isEs ? "Mensaje (opcional)" : "Message (optional)",
     submit: isEs ? "Enviar pregunta" : "Send question",
     sending: isEs ? "Enviando..." : "Sending...",
-    ok: isEs ? "¡Recibido! Te contactamos pronto." : "Got it! We'll reach out shortly.",
+    ok: tr.form.success24h,
     error: isEs ? "No se pudo enviar. Llámanos directo." : "Couldn't send. Please call us directly.",
     useEstimator: isEs ? "¿Listo para un estimado?" : "Ready for an estimate?",
     goEstimator: isEs ? "Usa el estimador →" : "Use the estimator →",

@@ -303,9 +303,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
           <div className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-8 text-center space-y-6">
             <div className="text-5xl">🎉</div>
             <h2 className="text-2xl font-extrabold text-brand-deep">{e.confirmTitle}</h2>
-            <p className="text-brand-deep/70">
-              {e.confirmSub} <strong>{email}</strong>.
-            </p>
+            <p className="text-brand-deep/70">{e.success24h}</p>
 
             {estimate && (
               <div className="rounded-2xl bg-brand-deep text-white p-5">

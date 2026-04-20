@@ -3,7 +3,8 @@ export type Lang = "en" | "es";
 export type Translation = {
   nav: { home: string; services: string; gallery: string; estimator: string; about: string; hoaPermits: string; financing: string; contact: string; getFreeQuote: string };
   topbar: { hours: string; callUs: string; email: string };
-  hero: { tagline: string; heading: string; subheading: string; cta: string; schedule: string };
+  hero: { tagline: string; heading: string; subheading: string; cta: string; schedule: string; siteVisit24h: string };
+  lpTrustStrip: { siteVisit24h: string; licensed: string; financing: string };
   trust: {
     experience: { title: string; desc: string };
     licensed: { title: string; desc: string };
@@ -14,7 +15,7 @@ export type Translation = {
   serviceArea: { label: string; heading: string; sub: string; ctaQuote: string; ctaMap: string };
   cta: { heading: string; sub: string; btn: string };
   contact: { label: string; heading: string; sub: string; whatNext: string; step1: { title: string; desc: string }; step2: { title: string; desc: string }; step3: { title: string; desc: string }; scheduleLabel: string; scheduleBtn: string; directContact: string; location: string };
-  form: { label: string; heading: string; sub: string; fullName: string; phone: string; email: string; preferredDate: string; preferredTime: string; timeOptional: string; address: string; addressPlaceholder: string; fenceType: string; fenceTypePlaceholder: string; linearFeet: string; hoa: string; hoaPlaceholder: string; message: string; disclaimer: string; send: string; sending: string; success: string; hoaOptions: { value: string; label: string }[]; fenceOptions: string[]; required: string };
+  form: { label: string; heading: string; sub: string; fullName: string; phone: string; email: string; preferredDate: string; preferredTime: string; timeOptional: string; address: string; addressPlaceholder: string; fenceType: string; fenceTypePlaceholder: string; linearFeet: string; hoa: string; hoaPlaceholder: string; message: string; disclaimer: string; send: string; sending: string; success: string; success24h: string; hoaOptions: { value: string; label: string }[]; fenceOptions: string[]; required: string };
   footer: { tagline: string; quickLinks: string; hours: string; rights: string };
   services: {
     pageTagline: string; pageHeading: string; pageSub: string;
@@ -44,7 +45,7 @@ export type Translation = {
     step2Title: string; step2Sub: string; step2Locked: string; editDetails: string;
     nameLabel: string; phoneLabel: string; emailLabel: string; zipLabel: string;
     submitBtn: string; submitting: string; privacy: string;
-    confirmTitle: string; confirmSub: string; range: string; rangeNote: string;
+    confirmTitle: string; confirmSub: string; success24h: string; range: string; rangeNote: string;
     scheduleBtn: string; backHome: string; callNow: string;
     gallery: string;
   };
@@ -89,6 +90,13 @@ export const t: Record<Lang, Translation> = {
         "Vinyl, aluminum, chain-link, and wood — installed on time, on budget, and built to last Florida's weather.",
       cta: "Get a Free Quote",
       schedule: "📅 Schedule site visit",
+      siteVisit24h: "⚡ Free site visit within 24 hours · No obligation",
+    },
+    // LP trust strip (compact row above the Estimator on landing pages)
+    lpTrustStrip: {
+      siteVisit24h: "Site visit within 24h",
+      licensed: "Licensed & Insured",
+      financing: "Financing from $417/mo",
     },
     // Trust badges
     trust: {
@@ -168,6 +176,7 @@ export const t: Record<Lang, Translation> = {
       send: "Send request",
       sending: "Sending…",
       success: "Thanks! Your request is in our queue. A Smooth Fence USA specialist will reach out shortly.",
+      success24h: "Thanks! We'll schedule your free site visit within 24 hours. Check your phone/email for confirmation.",
       hoaOptions: [
         { value: "yes", label: "Yes" },
         { value: "no", label: "No" },
@@ -256,6 +265,7 @@ export const t: Record<Lang, Translation> = {
       privacy: "🔒 Your information is 100% protected. No spam, ever.",
       confirmTitle: "Your estimate is on its way!",
       confirmSub: "We sent a detailed breakdown to",
+      success24h: "Thanks! We'll schedule your free site visit within 24 hours. Check your phone/email for confirmation.",
       range: "Your estimated range",
       rangeNote: "Final price confirmed after on-site measurement",
       scheduleBtn: "📅 Schedule Your Free Site Visit",
@@ -299,6 +309,12 @@ export const t: Record<Lang, Translation> = {
         "Vinilo, aluminio, malla ciclónica y madera — instaladas a tiempo, dentro del presupuesto y construidas para aguantar el clima de Florida.",
       cta: "Cotización Gratis",
       schedule: "📅 Agendar visita",
+      siteVisit24h: "⚡ Visita gratis en menos de 24 horas · Sin compromiso",
+    },
+    lpTrustStrip: {
+      siteVisit24h: "Visita en 24h",
+      licensed: "Licencia y seguro",
+      financing: "Financiamiento desde $417/mes",
     },
     trust: {
       experience: { title: "Más de 10 Años de Experiencia", desc: "Más de una década instalando cercas en Flagler, Volusia, St. Johns y el resto del noreste de Florida." },
@@ -372,6 +388,7 @@ export const t: Record<Lang, Translation> = {
       send: "Enviar solicitud",
       sending: "Enviando…",
       success: "¡Gracias! Tu solicitud está en nuestra cola. Un especialista de Smooth Fence USA te contactará pronto.",
+      success24h: "¡Gracias! Coordinamos tu visita gratuita en las próximas 24 horas. Revisá tu teléfono/email para la confirmación.",
       hoaOptions: [
         { value: "yes", label: "Sí" },
         { value: "no", label: "No" },
@@ -459,6 +476,7 @@ export const t: Record<Lang, Translation> = {
       privacy: "🔒 Tu información está 100% protegida. Sin spam, nunca.",
       confirmTitle: "¡Tu estimado está en camino!",
       confirmSub: "Enviamos un desglose detallado a",
+      success24h: "¡Gracias! Coordinamos tu visita gratuita en las próximas 24 horas. Revisá tu teléfono/email para la confirmación.",
       range: "Tu rango estimado",
       rangeNote: "Precio final confirmado después de la medición en sitio",
       scheduleBtn: "📅 Agendar Tu Visita Gratuita",
