@@ -7,11 +7,12 @@ import ServiceArea from "@/components/sections/ServiceArea";
 import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "SmoothFenceUSA | Fence Installation in Northeast Florida",
+  title: "Smooth Fence USA | Fence Installation in Northeast Florida",
   description: "Professional vinyl, aluminum, chain-link, and wood fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida. Free estimates, licensed & insured.",
   openGraph: {
-    title: "SmoothFenceUSA | Fence Installation in Northeast Florida",
+    title: "Smooth Fence USA | Fence Installation in Northeast Florida",
     description: "Professional fence installation across Flagler, Volusia, St. Johns, Duval & Putnam counties — vinyl, aluminum, chain-link, and wood. Free estimates. Licensed & insured.",
+    siteName: "Smooth Fence USA",
     type: "website",
   },
 };

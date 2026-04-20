@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Make a Payment | SmoothFenceUSA",
-  description: "Securely pay your SmoothFenceUSA deposit or invoice online via Stripe.",
+  title: "Make a Payment | Smooth Fence USA",
+  description: "Securely pay your Smooth Fence USA deposit or invoice online via Stripe.",
   robots: { index: false, follow: false },
 };
 

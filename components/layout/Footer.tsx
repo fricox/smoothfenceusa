@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6 md:flex-row md:justify-between">
         <div className="space-y-3 max-w-sm">
           <p className="text-xl font-semibold tracking-tight text-brand-yellow">
-            SmoothFenceUSA
+            Smooth Fence USA
           </p>
           <p className="text-sm text-brand-cream/80">
             {tr.footer.tagline}
@@ -70,7 +70,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <p className="px-4 py-6 text-center text-xs text-brand-cream/70">
-          © {currentYear} SmoothFenceUSA. {tr.footer.rights}
+          © {currentYear} Smooth Fence USA. {tr.footer.rights}
         </p>
       </div>
     </footer>

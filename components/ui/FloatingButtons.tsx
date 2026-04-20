@@ -3,7 +3,7 @@
 const PHONE = "13864039460";
 const PHONE_DISPLAY = "+1 (386) 403-9460";
 const WA_MESSAGE = encodeURIComponent(
-  "Hi! I'm interested in getting a fence quote from SmoothFenceUSA."
+  "Hi! I'm interested in getting a fence quote from Smooth Fence USA."
 );
 
 export default function FloatingButtons() {

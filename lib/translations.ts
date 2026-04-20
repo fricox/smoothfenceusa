@@ -134,7 +134,7 @@ export const t: Record<Lang, Translation> = {
     // Contact page
     contact: {
       label: "Get your free quote",
-      heading: "Contact SmoothFenceUSA",
+      heading: "Contact Smooth Fence USA",
       sub: "Share your site details and we'll coordinate a visit, gather HOA docs, and send a precise project estimate.",
       whatNext: "What happens next?",
       step1: { title: "Quick call:", desc: "We confirm project scope, HOA status, and preferred timelines." },
@@ -167,7 +167,7 @@ export const t: Record<Lang, Translation> = {
       disclaimer: "By submitting, you agree to be contacted about your quote request.",
       send: "Send request",
       sending: "Sending…",
-      success: "Thanks! Your request is in our queue. A SmoothFenceUSA specialist will reach out shortly.",
+      success: "Thanks! Your request is in our queue. A Smooth Fence USA specialist will reach out shortly.",
       hoaOptions: [
         { value: "yes", label: "Yes" },
         { value: "no", label: "No" },
@@ -187,7 +187,7 @@ export const t: Record<Lang, Translation> = {
     services: {
       pageTagline: "Fence services for Northeast Florida properties",
       pageHeading: "Professional fence services with local expertise",
-      pageSub: "From new installations to repairs and HOA approvals, SmoothFenceUSA delivers long-lasting fences built for Florida weather, storms, and permitting rules.",
+      pageSub: "From new installations to repairs and HOA approvals, Smooth Fence USA delivers long-lasting fences built for Florida weather, storms, and permitting rules.",
       sectionHeading: "Fence services for Northeast Florida properties",
       sectionSub: "Installations, repairs, and HOA support handled by a crew that knows Florida's climate and permitting rules.",
       items: [
@@ -211,10 +211,10 @@ export const t: Record<Lang, Translation> = {
     },
     // About page
     about: {
-      heading: "About SmoothFenceUSA",
-      p1: "SmoothFenceUSA was created with a simple goal: make fence projects easy for homeowners across Northeast Florida, including Flagler, Volusia, St. Johns, Duval and Putnam counties. We know how stressful it can be to deal with HOAs, permits, and contractors that don't show up on time. Our team focuses on clear communication, clean job sites, and results that look great from the street.",
+      heading: "About Smooth Fence USA",
+      p1: "Smooth Fence USA was created with a simple goal: make fence projects easy for homeowners across Northeast Florida, including Flagler, Volusia, St. Johns, Duval and Putnam counties. We know how stressful it can be to deal with HOAs, permits, and contractors that don't show up on time. Our team focuses on clear communication, clean job sites, and results that look great from the street.",
       p2: "We specialize in vinyl, aluminum, chain-link, and wood fences and understand how Florida's sun, wind, and storms affect each material. That's why we recommend the right posts, hardware, and layouts based on your property — not a one-size-fits-all approach.",
-      p3: "When you work with SmoothFenceUSA, you get a local crew that respects your time, your yard, and your neighbors. We show up when we say we will, keep you updated during your project, and leave your property as clean as we found it.",
+      p3: "When you work with Smooth Fence USA, you get a local crew that respects your time, your yard, and your neighbors. We show up when we say we will, keep you updated during your project, and leave your property as clean as we found it.",
       expectHeading: "What you can expect from us",
       items: ["Clear, written quotes with no hidden fees.", "Help with HOA approvals and required drawings.", "Professional installation crews and clean job sites.", "Recommendations based on your needs, not our convenience."],
     },
@@ -222,7 +222,7 @@ export const t: Record<Lang, Translation> = {
     hoa: {
       heading: "HOA & permits made simple",
       intro1: "Many neighborhoods across Flagler, Volusia, St. Johns and the surrounding Northeast Florida communities are part of an HOA. That means your new fence must follow specific rules for height, style, material, and color. On top of that, some projects require city or county permits.",
-      intro2: "SmoothFenceUSA helps you understand what's allowed before you sign a contract so you don't waste time or money on plans that won't be approved.",
+      intro2: "Smooth Fence USA helps you understand what's allowed before you sign a contract so you don't waste time or money on plans that won't be approved.",
       hoaCard: { heading: "HOA guidance", items: ["Review of your HOA rules and design guidelines.", "Help choosing fence styles and colors that fit.", "Support with drawings or descriptions for approvals."] },
       permitCard: { heading: "Permits & inspections", items: ["Guidance on what projects require permits.", "Coordination of permit steps when applicable.", "Fence layouts that respect property lines and easements."] },
       footer: "Every neighborhood is different. When you request a quote, let us know if you're part of an HOA and we'll factor that into your plan from day one.",
@@ -339,7 +339,7 @@ export const t: Record<Lang, Translation> = {
     },
     contact: {
       label: "Obtén tu cotización gratis",
-      heading: "Contacta a SmoothFenceUSA",
+      heading: "Contacta a Smooth Fence USA",
       sub: "Comparte los detalles de tu propiedad y coordinaremos una visita, gestionaremos los documentos del HOA y te enviaremos un estimado preciso.",
       whatNext: "¿Qué pasa después?",
       step1: { title: "Llamada rápida:", desc: "Confirmamos el alcance del proyecto, el estado del HOA y los plazos preferidos." },
@@ -371,7 +371,7 @@ export const t: Record<Lang, Translation> = {
       disclaimer: "Al enviar, aceptas ser contactado sobre tu solicitud de cotización.",
       send: "Enviar solicitud",
       sending: "Enviando…",
-      success: "¡Gracias! Tu solicitud está en nuestra cola. Un especialista de SmoothFenceUSA te contactará pronto.",
+      success: "¡Gracias! Tu solicitud está en nuestra cola. Un especialista de Smooth Fence USA te contactará pronto.",
       hoaOptions: [
         { value: "yes", label: "Sí" },
         { value: "no", label: "No" },
@@ -390,7 +390,7 @@ export const t: Record<Lang, Translation> = {
     services: {
       pageTagline: "Servicios de cercas para propiedades del noreste de Florida",
       pageHeading: "Servicios profesionales con experiencia local",
-      pageSub: "Desde instalaciones nuevas hasta reparaciones y aprobaciones de HOA, SmoothFenceUSA construye cercas duraderas diseñadas para el clima, las tormentas y las reglas de permisos de Florida.",
+      pageSub: "Desde instalaciones nuevas hasta reparaciones y aprobaciones de HOA, Smooth Fence USA construye cercas duraderas diseñadas para el clima, las tormentas y las reglas de permisos de Florida.",
       sectionHeading: "Servicios de cercas para propiedades del noreste de Florida",
       sectionSub: "Instalaciones, reparaciones y apoyo con HOA por un equipo que conoce el clima y las reglas de permisos de Florida.",
       items: [
@@ -414,10 +414,10 @@ export const t: Record<Lang, Translation> = {
     },
     // About page
     about: {
-      heading: "Acerca de SmoothFenceUSA",
-      p1: "SmoothFenceUSA fue creada con un objetivo simple: hacer los proyectos de cercas fáciles para los propietarios en Flagler, Volusia, St. Johns, Duval, Putnam y el resto del noreste de Florida. Sabemos lo estresante que puede ser lidiar con HOAs, permisos y contratistas que no llegan a tiempo. Nuestro equipo se enfoca en comunicación clara, sitios de trabajo limpios y resultados que se ven bien desde la calle.",
+      heading: "Acerca de Smooth Fence USA",
+      p1: "Smooth Fence USA fue creada con un objetivo simple: hacer los proyectos de cercas fáciles para los propietarios en Flagler, Volusia, St. Johns, Duval, Putnam y el resto del noreste de Florida. Sabemos lo estresante que puede ser lidiar con HOAs, permisos y contratistas que no llegan a tiempo. Nuestro equipo se enfoca en comunicación clara, sitios de trabajo limpios y resultados que se ven bien desde la calle.",
       p2: "Nos especializamos en cercas de vinilo, aluminio, malla ciclónica y madera, y entendemos cómo el sol, el viento y las tormentas de Florida afectan cada material. Por eso recomendamos los postes, herrajes y diseños correctos según tu propiedad, no un enfoque único para todos.",
-      p3: "Cuando trabajas con SmoothFenceUSA, obtienes un equipo local que respeta tu tiempo, tu jardín y tus vecinos. Llegamos cuando decimos que llegaremos, te mantenemos informado durante el proyecto y dejamos tu propiedad tan limpia como la encontramos.",
+      p3: "Cuando trabajas con Smooth Fence USA, obtienes un equipo local que respeta tu tiempo, tu jardín y tus vecinos. Llegamos cuando decimos que llegaremos, te mantenemos informado durante el proyecto y dejamos tu propiedad tan limpia como la encontramos.",
       expectHeading: "Lo que puedes esperar de nosotros",
       items: ["Cotizaciones claras y escritas sin cargos ocultos.", "Ayuda con aprobaciones de HOA y dibujos requeridos.", "Equipos de instalación profesionales y sitios de trabajo limpios.", "Recomendaciones basadas en tus necesidades, no en nuestra conveniencia."],
     },
@@ -425,7 +425,7 @@ export const t: Record<Lang, Translation> = {
     hoa: {
       heading: "HOA y permisos simplificados",
       intro1: "Muchos vecindarios en Flagler, Volusia, St. Johns y las comunidades cercanas del noreste de Florida son parte de un HOA. Eso significa que tu nueva cerca debe seguir reglas específicas de altura, estilo, material y color. Además, algunos proyectos requieren permisos de la ciudad o el condado.",
-      intro2: "SmoothFenceUSA te ayuda a entender qué está permitido antes de firmar un contrato para que no pierdas tiempo o dinero en planes que no serán aprobados.",
+      intro2: "Smooth Fence USA te ayuda a entender qué está permitido antes de firmar un contrato para que no pierdas tiempo o dinero en planes que no serán aprobados.",
       hoaCard: { heading: "Orientación sobre HOA", items: ["Revisión de las reglas y directrices de diseño de tu HOA.", "Ayuda para elegir estilos y colores de cerca que se ajusten.", "Apoyo con dibujos o descripciones para las aprobaciones."] },
       permitCard: { heading: "Permisos e inspecciones", items: ["Orientación sobre qué proyectos requieren permisos.", "Coordinación de los pasos del permiso cuando aplique.", "Diseños de cerca que respetan los linderos y servidumbres."] },
       footer: "Cada vecindario es diferente. Al solicitar una cotización, avísanos si eres parte de un HOA y lo incluiremos en tu plan desde el primer día.",

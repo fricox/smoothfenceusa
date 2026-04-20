@@ -4,9 +4,9 @@ import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "Aluminum Fence Installation | SmoothFenceUSA — Northeast Florida",
+  title: "Aluminum Fence Installation | Smooth Fence USA — Northeast Florida",
   description:
-    "Elegant aluminum fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties. Rust-proof, pool-code compliant, and built to last. Free estimate from SmoothFenceUSA.",
+    "Elegant aluminum fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties. Rust-proof, pool-code compliant, and built to last. Free estimate from Smooth Fence USA.",
   robots: { index: false, follow: false },
 };
 
