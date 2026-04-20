@@ -48,6 +48,9 @@ export type Translation = {
     scheduleBtn: string; backHome: string; callNow: string;
     gallery: string;
   };
+  financing: {
+    calculator: { title: string; sub: string; poweredBy: string; fallback: string };
+  };
 };
 
 export const t: Record<Lang, Translation> = {
@@ -252,6 +255,14 @@ export const t: Record<Lang, Translation> = {
       callNow: "📞 Call Us Now",
       gallery: "Final Step",
     },
+    financing: {
+      calculator: {
+        title: "Calculate your monthly payment",
+        sub: "See what your fence project could cost per month — no impact on your credit.",
+        poweredBy: "Powered by Hearth",
+        fallback: "If the calculator doesn't load, apply directly →",
+      },
+    },
   },
   es: {
     nav: {
@@ -443,6 +454,14 @@ export const t: Record<Lang, Translation> = {
       backHome: "Volver al Inicio",
       callNow: "📞 Llámanos Ahora",
       gallery: "Paso Final",
+    },
+    financing: {
+      calculator: {
+        title: "Calcula tu pago mensual",
+        sub: "Vé cuánto podría costarte tu cerca al mes — sin afectar tu crédito.",
+        poweredBy: "Funciona con Hearth",
+        fallback: "Si la calculadora no carga, aplica directo →",
+      },
     },
   },
 };

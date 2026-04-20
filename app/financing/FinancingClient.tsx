@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import CTA from "@/components/layout/CTA";
+import HearthPaymentCalculator from "@/components/sections/HearthPaymentCalculator";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { HEARTH_APPLY_URL } from "@/lib/financing";
 
 /* ──────────────────────────────────────────────
    Constants — no magic values
@@ -31,9 +33,9 @@ const PROVIDERS = [
     },
     ctaEn: "Apply with GetHearth",
     ctaEs: "Aplicar con GetHearth",
-    // Merchant-specific Hearth Financing prequalify URL (Smooth Fence USA / Federico).
-    // Activated 2026-04-19 after Hearth account approval. Replaces prior "#hearth" placeholder.
-    url: "https://app.gethearth.com/partners/smooth-fence-usa/federico/apply?utm_source=smoothfenceusa&utm_medium=website&utm_campaign=financing_page",
+    // Merchant-specific Hearth Financing prequalify URL — single source of truth in lib/financing.ts
+    // so the Payment Calculator fallback link shares the same UTM attribution.
+    url: HEARTH_APPLY_URL,
     bestFor: "best",
   },
   {
@@ -147,6 +149,11 @@ export default function FinancingClient() {
             <p className="mx-auto max-w-2xl text-base text-brand-deep/80 sm:text-lg">
               {t.sub}
             </p>
+          </div>
+
+          {/* Payment calculator (P0-3 — upper funnel before Apply CTAs) */}
+          <div className="mb-12">
+            <HearthPaymentCalculator />
           </div>
 
           {/* Provider cards */}
