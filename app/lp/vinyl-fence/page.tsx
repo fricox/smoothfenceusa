@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import EstimatorClient from "@/app/estimator/EstimatorClient";
 import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
+import LpTrustStrip from "@/components/sections/LpTrustStrip";
 
 export const metadata: Metadata = {
   title: "Vinyl Fence Installation | Smooth Fence USA — Northeast Florida",
@@ -26,6 +27,8 @@ export default function VinylFenceLandingPage() {
           Get your free estimate from the local experts.
         </p>
       </section>
+
+      <LpTrustStrip />
 
       {/* Primary CTA: instant estimator (P0-1) */}
       <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6">

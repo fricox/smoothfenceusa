@@ -4,6 +4,7 @@ import Link from "next/link";
 import EstimatorClient from "@/app/estimator/EstimatorClient";
 import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
+import LpTrustStrip from "@/components/sections/LpTrustStrip";
 import TrustBadges from "@/components/sections/TrustBadges";
 import { getCounty, COUNTIES } from "@/lib/counties";
 
@@ -60,6 +61,8 @@ export default function CountyLanding({ slug }: Props) {
           Licensed &amp; insured. Serving {county.heroCity} and all of {county.name}. Free estimate in minutes.
         </p>
       </section>
+
+      <LpTrustStrip />
 
       {/* Estimator */}
       <section className="py-12 px-4 max-w-5xl mx-auto">
