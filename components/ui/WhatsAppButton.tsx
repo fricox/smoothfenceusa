@@ -2,7 +2,7 @@
 
 const PHONE = "13864039460";
 const MESSAGE = encodeURIComponent(
-  "Hi! I'm interested in getting a fence quote from SmoothFenceUSA."
+  "Hi! I'm interested in getting a fence quote from Smooth Fence USA."
 );
 
 export default function WhatsAppButton() {

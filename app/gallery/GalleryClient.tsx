@@ -182,8 +182,8 @@ export default function GalleryClient() {
         </h2>
         <p className="text-brand-cream/80 max-w-lg mx-auto mb-8 text-base">
           {isEs
-            ? "Únete a cientos de propietarios en el noreste de Florida que confían en SmoothFenceUSA. Estimados gratis, sin presión."
-            : "Join hundreds of homeowners across Northeast Florida who trust SmoothFenceUSA. Free estimates, no pressure."}
+            ? "Únete a cientos de propietarios en el noreste de Florida que confían en Smooth Fence USA. Estimados gratis, sin presión."
+            : "Join hundreds of homeowners across Northeast Florida who trust Smooth Fence USA. Free estimates, no pressure."}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

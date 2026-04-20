@@ -85,13 +85,13 @@ export default function Header() {
           <Link href="/" className="flex shrink-0 items-center">
             <Image
               src="/logo.svg"
-              alt="SmoothFenceUSA logo"
+              alt="Smooth Fence USA logo"
               width={213}
               height={80}
               priority
               className="h-auto w-[150px] sm:w-[180px] lg:w-[200px]"
             />
-            <span className="sr-only">SmoothFenceUSA</span>
+            <span className="sr-only">Smooth Fence USA</span>
           </Link>
 
           {/* Desktop nav links */}

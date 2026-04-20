@@ -4,9 +4,9 @@ import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "Vinyl Fence Installation | SmoothFenceUSA — Northeast Florida",
+  title: "Vinyl Fence Installation | Smooth Fence USA — Northeast Florida",
   description:
-    "Professional PVC/vinyl fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties. Low maintenance, lifetime durability, HOA-approved styles. Free estimate from SmoothFenceUSA.",
+    "Professional PVC/vinyl fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties. Low maintenance, lifetime durability, HOA-approved styles. Free estimate from Smooth Fence USA.",
   robots: { index: false, follow: false },
 };
 

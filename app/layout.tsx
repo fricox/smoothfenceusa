@@ -22,9 +22,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SmoothFenceUSA | Northeast Florida Fence Installation",
+  title: "Smooth Fence USA | Northeast Florida Fence Installation",
   description:
-    "SmoothFenceUSA installs vinyl, aluminum, chain-link, and wood fences across Flagler, Volusia, St. Johns, Duval & Putnam counties with full HOA and permit support.",
+    "Smooth Fence USA installs vinyl, aluminum, chain-link, and wood fences across Flagler, Volusia, St. Johns, Duval & Putnam counties with full HOA and permit support.",
+  applicationName: "Smooth Fence USA",
+  openGraph: {
+    siteName: "Smooth Fence USA",
+    type: "website",
+    url: "https://smoothfenceusa.com",
+  },
+  icons: {
+    icon: [
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -42,7 +57,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FencingContractor",
-              name: "SmoothFenceUSA",
+              name: "Smooth Fence USA",
               url: "https://smoothfenceusa.com",
               telephone: "+1-386-403-9460",
               email: "info@smoothfenceusa.com",
@@ -61,6 +76,19 @@ export default function RootLayout({
                 { "@type": "AdministrativeArea", name: "Putnam County, FL" },
               ],
               priceRange: "$$",
+            }),
+          }}
+        />
+        {/* WebSite structured data — canonical brand name for Google SERP site name */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Smooth Fence USA",
+              alternateName: "SmoothFenceUSA",
+              url: "https://smoothfenceusa.com",
             }),
           }}
         />

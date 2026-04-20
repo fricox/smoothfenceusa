@@ -4,9 +4,9 @@ import QuickContactForm from "@/components/forms/QuickContactForm";
 import FinancingBanner from "@/components/sections/FinancingBanner";
 
 export const metadata: Metadata = {
-  title: "Free Fence Estimate | SmoothFenceUSA — Northeast Florida",
+  title: "Free Fence Estimate | Smooth Fence USA — Northeast Florida",
   description:
-    "Get a free, no-obligation fence estimate from SmoothFenceUSA. Vinyl, aluminum, wood, and chain-link fences across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida.",
+    "Get a free, no-obligation fence estimate from Smooth Fence USA. Vinyl, aluminum, wood, and chain-link fences across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida.",
   robots: { index: false, follow: false },
 };
 

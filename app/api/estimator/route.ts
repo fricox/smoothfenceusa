@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
   const clientHtml = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#125036">
       <div style="background:#125036;padding:32px;text-align:center;border-radius:16px 16px 0 0">
-        <h1 style="color:#f8cf2b;margin:0;font-size:28px">SmoothFenceUSA</h1>
+        <h1 style="color:#f8cf2b;margin:0;font-size:28px">Smooth Fence USA</h1>
         <p style="color:#fff;margin:8px 0 0;font-size:14px">Your Fence Estimate is Ready</p>
       </div>
       <div style="background:#fff;padding:32px;border-radius:0 0 16px 16px;border:1px solid #b2cf7f">
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
         <p style="font-size:14px;color:#666">Or call us directly: <a href="tel:+13864039460" style="color:#125036;font-weight:700">(386) 403-9460</a></p>
 
         <hr style="border:none;border-top:1px solid #b2cf7f;margin:24px 0">
-        <p style="font-size:12px;color:#999;text-align:center">SmoothFenceUSA · Palm Coast, FL · info@smoothfenceusa.com</p>
+        <p style="font-size:12px;color:#999;text-align:center">Smooth Fence USA · Palm Coast, FL · info@smoothfenceusa.com</p>
       </div>
     </div>
   `;
@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
     resend.emails.send({
       from: emailFrom,
       to: [email],
-      subject: `Your SmoothFenceUSA Estimate: ${fmt(estimateLow)} – ${fmt(estimateHigh)}`,
+      subject: `Your Smooth Fence USA Estimate: ${fmt(estimateLow)} – ${fmt(estimateHigh)}`,
       replyTo: leadsToEmail,
       html: clientHtml,
     }),
