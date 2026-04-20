@@ -12,6 +12,7 @@ export default function Footer() {
     { label: tr.nav.services, href: "/services" },
     { label: tr.nav.gallery, href: "/gallery" },
     { label: tr.nav.estimator, href: "/estimator" },
+    { label: tr.nav.faq, href: "/faq" },
     { label: tr.nav.contact, href: "/contact" },
   ];
 

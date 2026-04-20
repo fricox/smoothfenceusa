@@ -1,7 +1,9 @@
+import { FAQ_CATEGORIES_EN, FAQ_CATEGORIES_ES, type FAQCategory } from "./faq-data";
+
 export type Lang = "en" | "es";
 
 export type Translation = {
-  nav: { home: string; services: string; gallery: string; estimator: string; about: string; hoaPermits: string; financing: string; contact: string; getFreeQuote: string };
+  nav: { home: string; services: string; gallery: string; estimator: string; about: string; hoaPermits: string; financing: string; contact: string; faq: string; getFreeQuote: string };
   topbar: { hours: string; callUs: string; email: string };
   hero: { tagline: string; heading: string; subheading: string; cta: string; schedule: string; siteVisit24h: string };
   lpTrustStrip: { siteVisit24h: string; licensed: string; financing: string };
@@ -60,6 +62,11 @@ export type Translation = {
       disclaimer: string;
     };
   };
+  faqPage: {
+    hero: { tagline: string; heading: string; sub: string };
+    categories: FAQCategory[];
+    cta: { heading: string; sub: string; btn: string };
+  };
 };
 
 export const t: Record<Lang, Translation> = {
@@ -74,6 +81,7 @@ export const t: Record<Lang, Translation> = {
       hoaPermits: "HOA & Permits",
       financing: "Financing",
       contact: "Contact",
+      faq: "FAQ",
       getFreeQuote: "Get a Free Quote",
     },
     // Header top bar
@@ -284,6 +292,19 @@ export const t: Record<Lang, Translation> = {
         disclaimer: "Opens in a new tab at Hearth.",
       },
     },
+    faqPage: {
+      hero: {
+        tagline: "Knowledge Base",
+        heading: "Frequently Asked Questions",
+        sub: "Everything about vinyl, aluminum, wood, and chain-link fence installation across Flagler, Volusia, St. Johns, Duval, and Putnam counties.",
+      },
+      categories: FAQ_CATEGORIES_EN,
+      cta: {
+        heading: "Still have a question?",
+        sub: "Get your free on-site estimate in minutes — no obligation, licensed and insured.",
+        btn: "Get a Free Estimate →",
+      },
+    },
   },
   es: {
     nav: {
@@ -295,6 +316,7 @@ export const t: Record<Lang, Translation> = {
       hoaPermits: "HOA & Permisos",
       financing: "Financiamiento",
       contact: "Contacto",
+      faq: "FAQ",
       getFreeQuote: "Cotización Gratis",
     },
     topbar: {
@@ -493,6 +515,19 @@ export const t: Record<Lang, Translation> = {
         benefit3: "Con tecnología Hearth — usado por 40,000+ contratistas",
         cta: "Ver mi pago mensual →",
         disclaimer: "Se abre en una nueva pestaña en Hearth.",
+      },
+    },
+    faqPage: {
+      hero: {
+        tagline: "Centro de Ayuda",
+        heading: "Preguntas Frecuentes",
+        sub: "Todo sobre instalación de cercas de vinyl, aluminio, madera y chain-link en Flagler, Volusia, St. Johns, Duval y Putnam.",
+      },
+      categories: FAQ_CATEGORIES_ES,
+      cta: {
+        heading: "¿Más preguntas?",
+        sub: "Obtené tu estimado gratis en minutos — sin compromiso, con licencia y seguro.",
+        btn: "Estimado Gratis →",
       },
     },
   },
