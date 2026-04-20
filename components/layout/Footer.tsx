@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackClickToContact } from "@/lib/track-click";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -35,12 +36,12 @@ export default function Footer() {
           </p>
           <ul className="mt-3 space-y-1 text-sm text-brand-cream/80">
             <li>
-              <a href="tel:+13864039460" className="transition-colors hover:text-brand-yellow">
+              <a href="tel:+13864039460" onClick={() => trackClickToContact("tel", "footer")} className="transition-colors hover:text-brand-yellow">
                 (386) 403-9460
               </a>
             </li>
             <li>
-              <a href="sms:+13864039460" className="transition-colors hover:text-brand-yellow">
+              <a href="sms:+13864039460" onClick={() => trackClickToContact("sms", "footer")} className="transition-colors hover:text-brand-yellow">
                 SMS / Text us
               </a>
             </li>

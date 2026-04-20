@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackClickToContact } from "@/lib/track-click";
 import { galleryPhotos } from "./data";
 import type { FenceType, PhotoTag } from "./types";
 
@@ -203,7 +204,7 @@ export default function GalleryClient() {
         </div>
         <p className="mt-6 text-brand-cream/60 text-sm">
           {" "}
-          <a href="tel:+13864039460" className="text-brand-yellow font-semibold hover:underline">
+          <a href="tel:+13864039460" onClick={() => trackClickToContact("tel", "gallery_cta")} className="text-brand-yellow font-semibold hover:underline">
             (386) 403-9460
           </a>
         </p>

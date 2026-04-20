@@ -4,6 +4,7 @@ import Link from "next/link";
 import CTA from "@/components/layout/CTA";
 import QuickContactForm from "@/components/forms/QuickContactForm";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackClickToContact } from "@/lib/track-click";
 
 export default function ContactPage() {
   const { lang } = useLanguage();
@@ -107,6 +108,7 @@ export default function ContactPage() {
                     <p className="text-xs font-semibold uppercase text-brand-deep/50">{t.callUs}</p>
                     <a
                       href="tel:+13864039460"
+                      onClick={() => trackClickToContact("tel", "contact_card")}
                       className="text-lg font-extrabold text-brand-deep hover:text-brand-green"
                     >
                       (386) 403-9460
@@ -136,12 +138,14 @@ export default function ContactPage() {
               <div className="grid grid-cols-2 gap-3">
                 <a
                   href="tel:+13864039460"
+                  onClick={() => trackClickToContact("tel", "contact_quick_action")}
                   className="flex items-center justify-center gap-2 rounded-full bg-brand-green px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-brand-deep"
                 >
                   📞 {isEs ? "Llamar" : "Call"}
                 </a>
                 <a
                   href="sms:+13864039460"
+                  onClick={() => trackClickToContact("sms", "contact_quick_action")}
                   className="flex items-center justify-center gap-2 rounded-full bg-brand-yellow px-4 py-3 text-sm font-bold text-brand-deep shadow-sm transition-colors hover:bg-brand-light"
                 >
                   💬 {isEs ? "Texto" : "Text"}
