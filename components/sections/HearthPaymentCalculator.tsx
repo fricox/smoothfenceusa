@@ -1,76 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HEARTH_APPLY_URL } from "@/lib/financing";
 
-const HEARTH_SCRIPT_SRC = "https://widget.gethearth.com/script.js";
+const CheckIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    strokeWidth={2.2}
+    stroke="currentColor"
+    className="h-5 w-5 flex-shrink-0 text-brand-green"
+    aria-hidden="true"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+  </svg>
+);
 
 export default function HearthPaymentCalculator() {
   const { tr } = useLanguage();
   const t = tr.financing.calculator;
-
-  // Bumped on mount and whenever the tab becomes visible again.
-  // Drives both the script re-injection effect and the iframe re-mount key,
-  // so the widget reliably re-initialises after SPA navigation or tab switching.
-  const [mountKey, setMountKey] = useState(0);
-
-  useEffect(() => {
-    const onVisible = () => {
-      if (document.visibilityState === "visible") {
-        setMountKey((k) => k + 1);
-      }
-    };
-    document.addEventListener("visibilitychange", onVisible);
-    return () => document.removeEventListener("visibilitychange", onVisible);
-  }, []);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = HEARTH_SCRIPT_SRC;
-    script.async = true;
-    script.setAttribute("data-orgid", "61334");
-    script.setAttribute("data-partner", "smooth-fence-usa");
-    document.body.appendChild(script);
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, [mountKey]);
+  const benefits = [t.benefit1, t.benefit2, t.benefit3];
 
   return (
-    <section
-      aria-label="Hearth Payment Calculator"
-      className="bg-slate-50 py-12"
-    >
+    <section aria-label="Hearth Payment Calculator" className="bg-slate-50 py-12">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="mb-6 text-center">
           <h2 className="text-xl font-bold text-brand-deep sm:text-2xl">{t.title}</h2>
           <p className="mt-2 text-sm text-brand-deep/70 sm:text-base">{t.sub}</p>
         </div>
 
-        <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
-          <iframe
-            key={mountKey}
-            id="hearth-widget_calculator_v1"
-            title="Hearth Payment Calculator"
-            style={{ width: "100%", minHeight: 420, border: 0, display: "block", margin: "0 auto" }}
-          />
+        <div className="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200 sm:p-10">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl">
+            <span role="img" aria-hidden="true">💰</span>
+          </div>
 
-          <p className="mt-4 text-center text-xs text-neutral-500">{t.poweredBy}</p>
+          <ul className="mx-auto mb-8 max-w-md space-y-3">
+            {benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-3 text-sm text-brand-deep sm:text-base">
+                <CheckIcon />
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
 
-          <p className="mt-2 text-center text-sm">
-            <a
-              href={HEARTH_APPLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-brand-green underline-offset-2 hover:underline"
-            >
-              {t.fallback}
-            </a>
-          </p>
+          <a
+            href={HEARTH_APPLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full rounded-full bg-amber-600 px-6 py-3 text-center text-lg font-semibold text-white shadow-sm transition-colors hover:bg-amber-500"
+          >
+            {t.cta}
+          </a>
+
+          <p className="mt-3 text-center text-xs text-neutral-500">{t.disclaimer}</p>
         </div>
       </div>
     </section>
