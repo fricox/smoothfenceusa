@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/pay/", "/pay/success/"],
+        disallow: ["/api/", "/pay/", "/pay/success/", "/financing/calculator/"],
       },
     ],
     sitemap: "https://www.smoothfenceusa.com/sitemap.xml",
