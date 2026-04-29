@@ -1,7 +1,7 @@
-import CountyLanding, { buildCountyMetadata } from "@/components/sections/CountyLanding";
+import AreaLanding, { buildAreaMetadata } from "@/components/sections/AreaLanding";
 
-export const metadata = buildCountyMetadata("putnam");
+export const metadata = buildAreaMetadata("putnam");
 
 export default function Page() {
-  return <CountyLanding slug="putnam" />;
+  return <AreaLanding slug="putnam" />;
 }

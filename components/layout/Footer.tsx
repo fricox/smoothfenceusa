@@ -1,12 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trackClickToContact } from "@/lib/track-click";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { tr } = useLanguage();
+  const pathname = usePathname();
+
+  // Paid landing pages (/lp/*) render their own minimal footer in app/lp/layout.tsx.
+  if (pathname?.startsWith("/lp/")) {
+    return null;
+  }
 
   const quickLinks = [
     { label: tr.nav.getFreeQuote, href: "/contact" },

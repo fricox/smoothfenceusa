@@ -16,6 +16,13 @@ export default function Header() {
   const pathname = usePathname();
   const { lang, setLang, tr } = useLanguage();
 
+  // Paid landing pages (/lp/*) render their own minimal header in app/lp/layout.tsx.
+  // Hiding the full site nav here is critical for conversion: ad visitors should
+  // not see links to /about, /gallery, etc. (2026-04-29 ads pivot).
+  if (pathname?.startsWith("/lp/")) {
+    return null;
+  }
+
   const navLinks = [
     { label: tr.nav.home, href: "/" },
     { label: tr.nav.services, href: "/services" },
