@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { trackClickToContact } from "@/lib/track-click";
 
 const PHONE = "13864039460";
@@ -9,6 +10,14 @@ const WA_MESSAGE = encodeURIComponent(
 );
 
 export default function FloatingButtons() {
+  const pathname = usePathname();
+
+  // Paid landing pages (/lp/*) keep ONLY the form and the in-header phone CTA
+  // to avoid distraction. No floating SMS/WhatsApp buttons.
+  if (pathname?.startsWith("/lp/")) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-3">
       {/* SMS Button */}
