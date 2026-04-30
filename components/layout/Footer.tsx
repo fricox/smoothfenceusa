@@ -78,9 +78,12 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <p className="px-4 py-6 text-center text-xs text-brand-cream/70">
-          © {currentYear} Smooth Fence USA. {tr.footer.rights}
-        </p>
+        <div className="flex flex-col items-center justify-center gap-2 px-4 py-6 text-xs text-brand-cream/70 sm:flex-row sm:gap-4">
+          <p>© {currentYear} Smooth Fence USA. {tr.footer.rights}</p>
+          <Link href="/privacy" className="transition-colors hover:text-brand-yellow">
+            Privacy Policy
+          </Link>
+        </div>
       </div>
     </footer>
   );
