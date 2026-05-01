@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HEARTH_APPLY_URL } from "@/lib/financing";
+import { trackFinancingClick } from "@/lib/track";
 
 export default function HearthWidgetEmbed() {
   const { tr } = useLanguage();
@@ -27,6 +28,7 @@ export default function HearthWidgetEmbed() {
             href={HEARTH_APPLY_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackFinancingClick("hearth", "hearth_widget_embed")}
             className="mt-4 block w-full rounded-full bg-amber-600 px-6 py-3 text-center text-base font-semibold text-white shadow-sm transition-colors hover:bg-amber-500"
           >
             {t.cta}

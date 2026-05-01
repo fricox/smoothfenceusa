@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import LpCallTracker from "./LpCallTracker";
+import TrackedLink from "@/components/ui/TrackedLink";
 
 // Paid landing pages share this minimal layout.
 // Goal: zero distraction. The site's full nav (Services / Gallery / About /
@@ -44,13 +45,21 @@ export default function LpLayout({ children }: { children: React.ReactNode }) {
             <strong>Smooth Fence USA</strong> · Licensed &amp; Insured · Florida
           </p>
           <p>
-            <a href="tel:+13864039460" className="font-semibold text-brand-deep hover:underline">
+            <TrackedLink
+              href="tel:+13864039460"
+              tracking={{ kind: "contact", channel: "tel", location: "lp_footer" }}
+              className="font-semibold text-brand-deep hover:underline"
+            >
               (386) 403-9460
-            </a>
+            </TrackedLink>
             {" · "}
-            <a href="mailto:info@smoothfenceusa.com" className="hover:underline">
+            <TrackedLink
+              href="mailto:info@smoothfenceusa.com"
+              tracking={{ kind: "contact", channel: "email", location: "lp_footer" }}
+              className="hover:underline"
+            >
               info@smoothfenceusa.com
-            </a>
+            </TrackedLink>
           </p>
           <p className="text-slate-400">© {new Date().getFullYear()} Smooth Fence USA. All rights reserved.</p>
         </div>

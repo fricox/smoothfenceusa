@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getAttribution } from "@/lib/attribution";
-import { trackLeadConversion } from "@/lib/gtag";
+import { trackLead } from "@/lib/track";
 
 /**
  * Tiny pre-estimator form for people who have a quick question.
@@ -68,13 +68,7 @@ export default function QuickContactForm() {
         throw new Error(data.error || "Network error");
       }
 
-      // Push GTM dataLayer event for conversion tracking
-      if (typeof window !== "undefined") {
-        const w = window as unknown as Record<string, unknown[]>;
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({ event: "lead_form_submit", form_type: "quick_contact", ...attribution });
-      }
-      trackLeadConversion();
+      trackLead("quick_contact", attribution);
 
       setStatus("ok");
       setFullName("");

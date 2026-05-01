@@ -118,6 +118,7 @@ export default function ContactPage() {
                     <p className="text-xs font-semibold uppercase text-brand-deep/50">{t.emailUs}</p>
                     <a
                       href="mailto:info@smoothfenceusa.com"
+                      onClick={() => trackClickToContact("email", "contact_card")}
                       className="break-all font-semibold text-brand-deep hover:text-brand-green"
                     >
                       info@smoothfenceusa.com
