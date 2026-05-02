@@ -4,8 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getAttribution } from "@/lib/attribution";
-import { trackLeadConversion } from "@/lib/gtag";
-import { trackClickToContact } from "@/lib/track-click";
+import { trackLead, trackContactClick } from "@/lib/track";
 
 /* ── Pricing data ─────────────────────────────────────────── */
 const MATERIALS = [
@@ -102,13 +101,10 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
       });
       if (!res.ok) throw new Error("Server error");
 
-      // Push GTM dataLayer event for conversion tracking
-      if (typeof window !== "undefined") {
-        const w = window as unknown as Record<string, unknown[]>;
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({ event: "lead_form_submit", form_type: "estimator", estimate_low: estimate?.low, estimate_high: estimate?.high, ...attribution });
-      }
-      trackLeadConversion();
+      trackLead("estimator", attribution, 50, {
+        estimate_low: estimate?.low,
+        estimate_high: estimate?.high,
+      });
 
       setStep(3);
     } catch {
@@ -336,7 +332,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
               <Link href="/" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
                 {e.backHome}
               </Link>
-              <a href="tel:+13864039460" onClick={() => trackClickToContact("tel", "estimator_success")} className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
+              <a href="tel:+13864039460" onClick={() => trackContactClick("tel", "estimator_success")} className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
                 {e.callNow}
               </a>
             </div>

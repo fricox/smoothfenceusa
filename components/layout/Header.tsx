@@ -65,6 +65,7 @@ export default function Header() {
               {tr.topbar.email}{" "}
               <a
                 href="mailto:info@smoothfenceusa.com"
+                onClick={() => trackClickToContact("email", "topbar")}
                 className="underline underline-offset-2 transition-colors hover:text-brand-yellow"
               >
                 info@smoothfenceusa.com

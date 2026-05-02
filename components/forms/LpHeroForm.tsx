@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getAttribution } from "@/lib/attribution";
-import { trackLeadConversion } from "@/lib/gtag";
+import { trackLead } from "@/lib/track";
 
 /**
  * Hero-form for paid landing pages. Designed to convert.
@@ -89,19 +89,10 @@ export default function LpHeroForm({ city, sourceSlug }: Props) {
         throw new Error(data.error || "Network error");
       }
 
-      // GTM dataLayer for conversion tracking
-      if (typeof window !== "undefined") {
-        const w = window as unknown as Record<string, unknown[]>;
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({
-          event: "lead_form_submit",
-          form_type: "lp_hero",
-          lp_slug: sourceSlug,
-          lp_city: city,
-          ...attribution,
-        });
-      }
-      trackLeadConversion();
+      trackLead("lp_hero", attribution, 50, {
+        lp_slug: sourceSlug,
+        lp_city: city,
+      });
 
       setStatus("ok");
       setFullName("");

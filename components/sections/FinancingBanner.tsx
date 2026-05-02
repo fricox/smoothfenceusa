@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackFinancingClick } from "@/lib/track";
 
 /* ──────────────────────────────────────────────
    FinancingBanner — reusable Hearth Financing CTA
@@ -82,6 +83,7 @@ export default function FinancingBanner({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackFinancingClick("hearth", `banner_inline_${source}`)}
             className="inline-flex shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-brand-deep shadow-sm transition-all hover:bg-brand-yellow hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-green sm:text-base"
           >
             {t.cta} →
@@ -128,6 +130,7 @@ export default function FinancingBanner({
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackFinancingClick("hearth", `banner_large_${source}`)}
                 className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-bold text-brand-deep shadow-md transition-all hover:bg-brand-yellow hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-green"
               >
                 {t.cta} →

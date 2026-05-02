@@ -5,6 +5,7 @@ import CTA from "@/components/layout/CTA";
 import HearthPaymentCalculator from "@/components/sections/HearthPaymentCalculator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { HEARTH_APPLY_URL } from "@/lib/financing";
+import { trackContactClick, trackFinancingClick } from "@/lib/track";
 
 /* ──────────────────────────────────────────────
    Constants — no magic values
@@ -210,6 +211,7 @@ export default function FinancingClient() {
                     href={p.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackFinancingClick(p.id, `financing_page_card_${p.id}`)}
                     className="block w-full rounded-full bg-brand-green px-6 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-brand-deep"
                   >
                     {isEs ? p.ctaEs : p.ctaEn} →
@@ -251,6 +253,7 @@ export default function FinancingClient() {
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
                 href={PHONE_HREF}
+                onClick={() => trackContactClick("tel", "financing_page_questions")}
                 className="rounded-full bg-brand-yellow px-6 py-3 text-sm font-bold text-brand-deep transition-colors hover:bg-brand-light"
               >
                 📞 {t.callBtn} — {PHONE}

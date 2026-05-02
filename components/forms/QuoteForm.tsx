@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { trackLeadConversion } from "@/lib/gtag";
+import { getAttribution } from "@/lib/attribution";
+import { trackLead } from "@/lib/track";
 
 type FormData = {
   fullName: string;
@@ -170,10 +171,7 @@ export default function QuoteForm() {
       setSubmitError(null);
       setStatus("success");
       setFormData(initialFormData);
-      const w = window as unknown as Record<string, unknown[]>;
-      w.dataLayer = w.dataLayer || [];
-      w.dataLayer.push({ event: "lead_form_submit" });
-      trackLeadConversion();
+      trackLead("quote", getAttribution());
     } catch (error) {
       console.error("Quote request failed:", error);
       setSubmitError("Something went wrong. Please try again in a moment.");

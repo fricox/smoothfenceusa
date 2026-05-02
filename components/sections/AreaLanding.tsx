@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import EstimatorClient from "@/app/estimator/EstimatorClient";
 import LpHeroForm from "@/components/forms/LpHeroForm";
+import TrackedLink from "@/components/ui/TrackedLink";
 import { getArea, LP_AREA_SLUGS } from "@/lib/lp-areas";
 
 const SITE_URL = "https://smoothfenceusa.com";
@@ -203,9 +204,13 @@ export default function AreaLanding({ slug }: Props) {
         </a>
         <p className="mt-4 text-sm opacity-80">
           or call{" "}
-          <a href="tel:+13864039460" className="font-bold underline">
+          <TrackedLink
+            href="tel:+13864039460"
+            tracking={{ kind: "contact", channel: "tel", location: "lp_inline_cta" }}
+            className="font-bold underline"
+          >
             (386) 403-9460
-          </a>
+          </TrackedLink>
         </p>
       </section>
     </>
