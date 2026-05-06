@@ -83,6 +83,7 @@ export default function Footer() {
           <Link href="/privacy" className="transition-colors hover:text-brand-yellow">
             Privacy Policy
           </Link>
+          <p>Smooth Fence USA is a trade name of FIKOX LLC.</p>
         </div>
       </div>
     </footer>
