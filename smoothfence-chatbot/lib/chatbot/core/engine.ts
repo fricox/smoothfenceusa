@@ -65,7 +65,7 @@ export async function runChatTurn(input: ChatTurnInput): Promise<ChatTurnResult>
     .order('created_at', { ascending: true })
     .limit(HISTORY_LIMIT);
 
-  const knowledge = await loadKnowledgeBase();
+  const knowledge = await loadKnowledgeBase(input.language);
   const system = buildSystemPrompt({
     language: input.language,
     knowledge,
