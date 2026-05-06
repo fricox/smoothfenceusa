@@ -42,6 +42,8 @@ function PayForm() {
 
   const numAmount = Math.max(0, Number(amount) || 0);
   const fromEstimate = prefilledAmount !== null;
+  const isTestMode =
+    (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "").startsWith("pk_test_");
 
   async function handlePay() {
     if (!name || !email || numAmount < 50) {
@@ -75,6 +77,14 @@ function PayForm() {
 
   return (
     <main className="min-h-screen bg-brand-cream">
+      {/* Test-mode banner — only shown when publishable key is pk_test_* */}
+      {isTestMode && (
+        <div className="bg-amber-400 text-amber-950 text-center text-xs sm:text-sm font-bold px-4 py-2 border-b-2 border-amber-600">
+          {isEs
+            ? "⚠️ MODO DE PRUEBA — No se cobrarán pagos reales. Usa tarjeta de test 4242 4242 4242 4242."
+            : "⚠️ TEST MODE — No real payments will be charged. Use test card 4242 4242 4242 4242."}
+        </div>
+      )}
       {/* Hero */}
       <section className="bg-brand-deep py-14 px-4 text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
