@@ -1,5 +1,7 @@
 # Execution Snapshot — Pivot Search Campaigns (2026-04-29)
 
+> 🧊 **FROZEN AS HISTORICAL 2026-05-06** — Este doc captura el journey completo del pivot del 2026-04-29 al 2026-05-06 (creación de campañas, journey de bid strategies MAX_CONV → TARGET_IMPRESSION_SHARE → MANUAL_CPC, cleanup del 2026-05-05, Meta MCP block). Conservado como histórico técnico/forensic. Estado actual y next steps en `docs/STATUS-2026-05-06.md`. **No actualizar más este archivo** — es snapshot del journey, no estado live.
+
 > Pre + Post snapshot del momento exacto en que ejecutamos las 5 mutations del pivot via MCP. Este doc se llena en dos pasadas:
 >
 > - **Pre-execution** (escrito antes de ejecutar): qué vamos a crear, con qué parámetros, en qué orden.
