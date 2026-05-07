@@ -2,7 +2,7 @@
 
 > ✅ **DONE 2026-05-06** — Meta Ads MCP fully activated ahead of schedule. Fede successfully created the System User (named `SmoothFenceAdsMCP` per Meta naming policy), generated long-lived token with 5 scopes, populated `~/.claude/mcp/meta-ads/.env`, and registered the MCP in `~/.claude.json`. Connectivity verified via direct Graph API calls. **Pending:** Fede close+reopen Claude Code so the MCP loads, then Code instance creates `Meta · Jacksonville · Fence Lead` campaign correctly via `meta_create_lead_campaign()`.
 >
-> **Important ID corrections from this journey:** ad account ID = **1383011116921424** (not 1047659888436717). Page ID = **993273483878852**. App ID = **947645468185855**.
+> **Important ID corrections from this journey:** ad account ID = **1383011116921424**. Page ID = **993273483878852**. App ID = **947645468185855**. (Older drafts of this doc and earlier `STATUS` notes referenced a different ad account ID by mistake — corrected during MCP setup verification.)
 >
 > **Setup gotchas captured in `~/.claude/projects/...GENAI/memory/reference_meta_ads_mcp.md`** — device flag, naming policy (no multi-hyphen), 3 levels of permissions (token scopes + system user assignment + app-to-ad-account connection).
 >
@@ -47,7 +47,7 @@ Click on the newly-created `SmoothFenceAdsMCP` → click **"Asignar activos"** (
 | Asset type | Specific asset | Permission |
 |---|---|---|
 | **Apps** | The Smooth Fence developer app (created on wife's account) | **"Control total"** or **"Manage app"** |
-| **Cuentas publicitarias** | `Smooth Fence Ads (1047659888436717)` | **"Control total"** |
+| **Cuentas publicitarias** | `Smooth Fence Ads (1383011116921424)` | **"Control total"** |
 | **Páginas** | Smooth Fence USA Page | **"Control total"** |
 
 Repeat the assign-assets dialog 3 times if needed (or do all 3 in one dialog if Meta UI allows).
@@ -81,7 +81,7 @@ Block to send:
 META_APP_ID=               # 16-digit App ID, top of developer app dashboard
 META_APP_SECRET=           # App Settings → Basic → App Secret → Show
 META_ACCESS_TOKEN=EAA...   # the long string from Step 3
-META_AD_ACCOUNT_ID=1047659888436717
+META_AD_ACCOUNT_ID=1383011116921424
 META_PAGE_ID=              # from Step 4
 META_INSTAGRAM_ACTOR_ID=   # optional, from Instagram business account if linked
 ```
