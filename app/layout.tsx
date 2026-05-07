@@ -43,7 +43,7 @@ export default function RootLayout({
         </LanguageProvider>
         {/* Fency AI chatbot widget — loads from separate Vercel deployment */}
         <Script
-          src="https://smoothfence-chatbot.vercel.app/api/widget.js"
+          src="https://smoothfence-chatbot.vercel.app/api/widget.js?v=2"
           strategy="lazyOnload"
         />
       </body>

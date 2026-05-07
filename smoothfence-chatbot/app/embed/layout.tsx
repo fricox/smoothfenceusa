@@ -1,7 +1,12 @@
 /**
- * Layout del embed: nada extra, hereda del root layout.
- * El fondo transparente lo aplica la página.
+ * Layout del embed: fuerza el body a transparente para que el iframe
+ * no muestre el fondo grisáceo de globals.css detrás del widget.
  */
 export default function EmbedLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <style>{`html, body { background: transparent !important; }`}</style>
+      {children}
+    </>
+  );
 }
