@@ -1,0 +1,90 @@
+{
+  "name": "SmoothFence — New Lead from Web",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "smoothfence-web-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook: Web Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\": \"ok\", \"message\": \"Lead received\"}"
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [450, 200]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "id", "value": "={{ $env.GOOGLE_SHEET_ID }}" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "Leads" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $now.format('yyyy-MM-dd HH:mm') }}",
+            "Source": "Web Chat",
+            "Name": "={{ $json.name }}",
+            "Phone": "={{ $json.phone }}",
+            "Email": "={{ $json.email }}",
+            "Address": "={{ $json.address || '' }}",
+            "Fence Type": "={{ $json.fenceType || '' }}",
+            "Message": "={{ $json.message || '' }}",
+            "Status": "New",
+            "UTM Source": "={{ $json.utm_source || '' }}",
+            "UTM Medium": "={{ $json.utm_medium || '' }}"
+          }
+        }
+      },
+      "id": "google-sheets",
+      "name": "Add to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [450, 400],
+      "credentials": { "googleSheetsOAuth2Api": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Google Sheets" } }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $env.OWNER_EMAIL }}",
+        "subject": "New Web Lead: {{ $json.name }}",
+        "emailType": "html",
+        "html": "<h2>New Lead from Website</h2><p><strong>Name:</strong> {{ $json.name }}<br><strong>Phone:</strong> <a href='tel:{{ $json.phone }}'>{{ $json.phone }}</a><br><strong>Email:</strong> {{ $json.email }}<br><strong>Fence Type:</strong> {{ $json.fenceType || 'Not specified' }}<br><strong>Message:</strong> {{ $json.message || 'None' }}</p>"
+      },
+      "id": "send-email",
+      "name": "Email to Owner",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "from": "={{ $env.TWILIO_PHONE }}",
+        "to": "={{ $json.phone }}",
+        "message": "Hi {{ $json.name }}! Thanks for contacting SmoothFenceUSA. We received your message and will get back to you shortly. Questions? Call us at (386) 403-9460."
+      },
+      "id": "sms-customer",
+      "name": "SMS to Customer",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [650, 500],
+      "credentials": { "twilioApi": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Twilio" } }
+    }
+  ],
+  "connections": {
+    "Webhook: Web Lead": { "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }, { "node": "Add to Google Sheets", "type": "main", "index": 0 }]] },
+    "Add to Google Sheets": { "main": [[{ "node": "Email to Owner", "type": "main", "index": 0 }, { "node": "SMS to Customer", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "SmoothFenceUSA" }]
+}

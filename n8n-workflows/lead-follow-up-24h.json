@@ -1,0 +1,72 @@
+{
+  "name": "SmoothFence — 24h Lead Follow-Up",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "hoursInterval": 4 }] }
+      },
+      "id": "schedule",
+      "name": "Every 4 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": { "__rl": true, "mode": "id", "value": "={{ $env.GOOGLE_SHEET_ID }}" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "Leads" },
+        "filters": {
+          "column": "Status",
+          "value": "New"
+        }
+      },
+      "id": "read-sheets",
+      "name": "Get New Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [450, 300],
+      "credentials": { "googleSheetsOAuth2Api": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Google Sheets" } }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false },
+          "combinator": "and",
+          "conditions": [
+            {
+              "leftValue": "={{ $now.diff($json.Date, 'hours') }}",
+              "rightValue": 24,
+              "operator": { "type": "number", "operation": "gte" }
+            }
+          ]
+        }
+      },
+      "id": "filter-24h",
+      "name": "Older Than 24h?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "from": "={{ $env.TWILIO_PHONE }}",
+        "to": "={{ $json.Phone }}",
+        "message": "Hi {{ $json.Name }}! This is SmoothFenceUSA following up on your fence inquiry. We'd love to help you get started. Reply here or call us at (386) 403-9460. Have a great day!"
+      },
+      "id": "sms-followup",
+      "name": "Send Follow-Up SMS",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": { "twilioApi": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Twilio" } }
+    }
+  ],
+  "connections": {
+    "Every 4 Hours": { "main": [[{ "node": "Get New Leads", "type": "main", "index": 0 }]] },
+    "Get New Leads": { "main": [[{ "node": "Older Than 24h?", "type": "main", "index": 0 }]] },
+    "Older Than 24h?": { "main": [[{ "node": "Send Follow-Up SMS", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "SmoothFenceUSA" }]
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-// Prevent static generation — admin pages require Supabase auth at runtime
+// Admin pages depend on runtime auth state and Supabase env vars — never prerender
 export const dynamic = 'force-dynamic';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

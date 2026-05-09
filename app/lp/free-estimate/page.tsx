@@ -1,0 +1,64 @@
+import type { Metadata } from "next";
+import EstimatorClient from "@/app/estimator/EstimatorClient";
+import QuickContactForm from "@/components/forms/QuickContactForm";
+import FinancingBanner from "@/components/sections/FinancingBanner";
+import LpTrustStrip from "@/components/sections/LpTrustStrip";
+
+export const metadata: Metadata = {
+  title: "Free Fence Estimate | Smooth Fence USA — Northeast Florida",
+  description:
+    "Get a free, no-obligation fence estimate from Smooth Fence USA. Vinyl, aluminum, wood, and chain-link fences across Flagler, Volusia, St. Johns, Duval, and Putnam counties in Northeast Florida.",
+  robots: { index: false, follow: false },
+};
+
+export default function FreeEstimateLandingPage() {
+  return (
+    <main className="min-h-screen bg-brand-cream">
+      {/* Hero */}
+      <section className="bg-brand-deep py-16 px-4 text-center">
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand-yellow mb-3">
+          Limited-Time Offer
+        </p>
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Get Your Free Fence Estimate Today
+        </h1>
+        <p className="mt-4 max-w-xl mx-auto text-brand-cream/80 text-base">
+          No obligation, no pressure. Tell us what you need and we&apos;ll get
+          back to you the same day with a personalized quote.
+        </p>
+      </section>
+
+      <LpTrustStrip />
+
+      {/* Primary CTA: instant estimator (P0-1) */}
+      <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+        <EstimatorClient inline />
+      </section>
+
+      <FinancingBanner variant="inline" source="lp_free_estimate" />
+
+      {/* Trust signals */}
+      <section className="bg-white py-12 px-4 text-center">
+        <div className="mx-auto max-w-3xl grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div>
+            <p className="text-3xl font-extrabold text-brand-deep">500+</p>
+            <p className="text-sm text-brand-deep/60 mt-1">Fences Installed</p>
+          </div>
+          <div>
+            <p className="text-3xl font-extrabold text-brand-deep">5-Star</p>
+            <p className="text-sm text-brand-deep/60 mt-1">Google Rating</p>
+          </div>
+          <div>
+            <p className="text-3xl font-extrabold text-brand-deep">Same Day</p>
+            <p className="text-sm text-brand-deep/60 mt-1">Response Guarantee</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Secondary: fallback form for visitors who don't want the estimator */}
+      <section className="mx-auto max-w-lg px-4 py-12 sm:px-6">
+        <QuickContactForm />
+      </section>
+    </main>
+  );
+}

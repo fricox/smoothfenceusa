@@ -1,9 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  trackContactClick,
+  trackPurchase,
+  trackCalendlyClick,
+} from "@/lib/track";
 
 // Add N business days to a date (skips Sat/Sun)
 function addBusinessDays(start: Date, days: number): Date {
@@ -20,10 +25,20 @@ function addBusinessDays(start: Date, days: number): Date {
 function SuccessContent() {
   const { lang } = useLanguage();
   const isEs = lang === "es";
-  const params = useSearchParams();
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id") ?? "";
+  const amount = parseFloat(searchParams.get("amount") ?? "0");
+  const fired = useRef(false);
 
-  const name  = params.get("name")  || "";
-  const email = params.get("email") || "";
+  // Fire `purchase` event once on mount when we have a valid session + amount.
+  // Guards: skip if no session_id (page accessed directly), skip if no amount
+  // (legacy bookmark), and use a ref to prevent double-fire under StrictMode.
+  useEffect(() => {
+    if (fired.current) return;
+    if (!sessionId || !amount || amount <= 0) return;
+    fired.current = true;
+    trackPurchase(sessionId, amount, "USD");
+  }, [sessionId, amount]);
 
   const earliest = addBusinessDays(new Date(), 5);
   const earliestStr = earliest.toLocaleDateString(isEs ? "es-US" : "en-US", {
@@ -33,12 +48,7 @@ function SuccessContent() {
     year: "numeric",
   });
 
-  // Prefill Calendly with name + email so the client doesn't have to retype it
-  const calendlyBase = "https://calendly.com/federico-smoothfenceusa/installation";
-  const calendlyUrl = `${calendlyBase}?${new URLSearchParams({
-    name,
-    email,
-  }).toString()}`;
+  const calendlyUrl = "https://calendly.com/federico-smoothfenceusa/installation";
 
   return (
     <main className="min-h-screen bg-brand-cream flex items-center justify-center px-4 py-12">
@@ -77,7 +87,7 @@ function SuccessContent() {
           <p className="text-sm font-semibold text-brand-deep">
             {isEs ? "¿Tienes preguntas?" : "Have questions?"}
           </p>
-          <a href="tel:+13864039460" className="text-brand-green font-bold hover:underline">
+          <a href="tel:+13864039460" onClick={() => trackContactClick("tel", "pay_success")} className="text-brand-green font-bold hover:underline">
             (386) 403-9460
           </a>
         </div>
@@ -87,6 +97,7 @@ function SuccessContent() {
             href={calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackCalendlyClick("pay_success")}
             className="w-full rounded-full bg-brand-yellow py-4 text-sm font-bold text-brand-deep shadow-lg transition-all hover:scale-105"
           >
             {isEs ? "📅 Agendar instalación ahora" : "📅 Schedule installation now"}

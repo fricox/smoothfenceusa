@@ -9,7 +9,7 @@ const MAX_TOKENS = 800;
 const HISTORY_LIMIT = 30; // últimos N mensajes que mandamos a Claude
 
 const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.ANTHROPIC_API_KEY?.trim(),
 });
 
 export interface ChatTurnInput {
@@ -65,7 +65,7 @@ export async function runChatTurn(input: ChatTurnInput): Promise<ChatTurnResult>
     .order('created_at', { ascending: true })
     .limit(HISTORY_LIMIT);
 
-  const knowledge = await loadKnowledgeBase();
+  const knowledge = await loadKnowledgeBase(input.language);
   const system = buildSystemPrompt({
     language: input.language,
     knowledge,
@@ -83,6 +83,7 @@ export async function runChatTurn(input: ChatTurnInput): Promise<ChatTurnResult>
   let leadCaptured = false;
   let finalText = '';
 
+  console.log('[engine] calling Anthropic model:', MODEL, 'session:', input.sessionId);
   for (let i = 0; i < 3; i++) {
     const response = await client.messages.create({
       model: MODEL,
@@ -125,6 +126,20 @@ export async function runChatTurn(input: ChatTurnInput): Promise<ChatTurnResult>
       continue; // otra vuelta para que Claude responda con el resultado
     }
     break;
+  }
+
+  // Si el loop agotó todas las iteraciones sin producir texto (tool_use loop infinito),
+  // forzar una respuesta de texto sin herramientas disponibles.
+  if (!finalText && messages[messages.length - 1]?.role === 'user') {
+    const recovery = await client.messages.create({
+      model: MODEL,
+      max_tokens: MAX_TOKENS,
+      system,
+      tools: [],
+      messages,
+    });
+    const textBlocks = recovery.content.filter((b): b is Anthropic.TextBlock => b.type === 'text');
+    finalText = textBlocks.map((b) => b.text).join('\n').trim();
   }
 
   // 5. guardar respuesta

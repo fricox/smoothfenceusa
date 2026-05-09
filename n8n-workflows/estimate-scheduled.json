@@ -1,0 +1,84 @@
+{
+  "name": "SmoothFence — Estimate Scheduled",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "smoothfence-estimate-booked",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-booked",
+      "name": "Webhook: Estimate Booked",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\": \"ok\"}"
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [450, 200]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "calendar": { "__rl": true, "mode": "id", "value": "primary" },
+        "summary": "Fence Estimate — {{ $json.name }}",
+        "description": "Address: {{ $json.address }}\nPhone: {{ $json.phone }}\nFence Type: {{ $json.fenceType || 'TBD' }}\nNotes: {{ $json.notes || 'None' }}",
+        "start": "={{ $json.date }}T{{ $json.time || '09:00' }}:00",
+        "end": "={{ $json.date }}T{{ $json.endTime || '10:00' }}:00",
+        "additionalFields": {
+          "reminders": { "reminderType": "popup", "minutes": 60 }
+        }
+      },
+      "id": "google-calendar",
+      "name": "Create Calendar Event",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.2,
+      "position": [450, 400],
+      "credentials": { "googleCalendarOAuth2Api": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Google Calendar" } }
+    },
+    {
+      "parameters": {
+        "from": "={{ $env.TWILIO_PHONE }}",
+        "to": "={{ $json.phone }}",
+        "message": "Your fence estimate with SmoothFenceUSA is confirmed for {{ $json.date }} at {{ $json.time || '9:00 AM' }}. Address: {{ $json.address }}. Questions? Call (386) 403-9460."
+      },
+      "id": "sms-confirm",
+      "name": "SMS Confirmation",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "credentials": { "twilioApi": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Twilio" } }
+    },
+    {
+      "parameters": {
+        "triggerAt": "={{ DateTime.fromISO($json.date + 'T08:00:00').minus({ days: 1 }).toISO() }}",
+        "message": {
+          "from": "={{ $env.TWILIO_PHONE }}",
+          "to": "={{ $json.phone }}",
+          "body": "Reminder: Your SmoothFenceUSA estimate is tomorrow at {{ $json.time || '9:00 AM' }}. See you at {{ $json.address }}! Call (386) 403-9460 if you need to reschedule."
+        }
+      },
+      "id": "sms-reminder",
+      "name": "SMS Reminder (1 day before)",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [650, 500],
+      "credentials": { "twilioApi": { "id": "REPLACE_WITH_CREDENTIAL_ID", "name": "Twilio" } },
+      "notes": "NOTE: For day-before reminders, use n8n Wait node or a separate scheduled workflow that reads upcoming calendar events"
+    }
+  ],
+  "connections": {
+    "Webhook: Estimate Booked": { "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }, { "node": "Create Calendar Event", "type": "main", "index": 0 }]] },
+    "Create Calendar Event": { "main": [[{ "node": "SMS Confirmation", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "SmoothFenceUSA" }]
+}

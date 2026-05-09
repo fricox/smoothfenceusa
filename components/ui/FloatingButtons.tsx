@@ -1,17 +1,29 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { trackClickToContact } from "@/lib/track-click";
+
 const PHONE = "13864039460";
 const PHONE_DISPLAY = "+1 (386) 403-9460";
 const WA_MESSAGE = encodeURIComponent(
-  "Hi! I'm interested in getting a fence quote from SmoothFenceUSA."
+  "Hi! I'm interested in getting a fence quote from Smooth Fence USA."
 );
 
 export default function FloatingButtons() {
+  const pathname = usePathname();
+
+  // Paid landing pages (/lp/*) keep ONLY the form and the in-header phone CTA
+  // to avoid distraction. No floating SMS/WhatsApp buttons.
+  if (pathname?.startsWith("/lp/")) {
+    return null;
+  }
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-3">
       {/* SMS Button */}
       <a
         href={`sms:+${PHONE}`}
+        onClick={() => trackClickToContact("sms", "floating_buttons")}
         aria-label={`Text us at ${PHONE_DISPLAY}`}
         title="Send us a text"
         className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-deep text-white shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-brand-deep/50 focus:ring-offset-2"
@@ -35,6 +47,7 @@ export default function FloatingButtons() {
       {/* WhatsApp Button */}
       <a
         href={`https://wa.me/${PHONE}?text=${WA_MESSAGE}`}
+        onClick={() => trackClickToContact("whatsapp", "floating_buttons")}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
+import { escapeHtml, rateLimit } from "@/lib/sanitize";
 
 type QuotePayload = {
   fullName: string;
@@ -12,28 +13,43 @@ type QuotePayload = {
   hoa: string;
   preferredDate?: string;
   message: string;
+  // Attribution (Track A) — all optional
+  gclid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 };
 
 type FieldErrors = Partial<Record<keyof QuotePayload, string>>;
 
 export const runtime = "nodejs";
 
-// Minimal required fields: the new short contact form only collects name,
-// phone and message. Everything else is optional so the legacy long form
-// keeps working for backward compatibility.
+// Minimal required fields: the new short contact form only collects name
+// and phone. Message is optional (P0-6) so the fallback form has the lowest
+// possible friction; empty messages are normalized before use.
 const requiredFields: Array<keyof QuotePayload> = [
   "fullName",
   "phone",
-  "message",
 ];
 
 const templateLine = (label: string, value?: string) =>
-  value ? `<p><strong>${label}:</strong> ${value}</p>` : "";
+  value ? `<p><strong>${label}:</strong> ${escapeHtml(value)}</p>` : "";
 
 const templateLineText = (label: string, value?: string) =>
   value ? `${label}: ${value}` : "";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  // ── Rate limiting ──
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (!rateLimit(ip, { maxRequests: 5, windowMs: 60_000 })) {
+    return NextResponse.json(
+      { ok: false, error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let payload: QuotePayload;
 
   try {
@@ -65,6 +81,8 @@ export async function POST(request: Request) {
     );
   }
 
+  const message = payload.message?.trim() ? payload.message.trim() : "(sin mensaje)";
+
   const resendApiKey = process.env.RESEND_API_KEY;
   const leadsToEmail = process.env.LEADS_TO_EMAIL;
   const emailFrom = process.env.EMAIL_FROM;
@@ -92,7 +110,15 @@ export async function POST(request: Request) {
     templateLineText("Fecha preferida", payload.preferredDate),
     "",
     "Mensaje:",
-    payload.message,
+    message,
+    "",
+    "--- Attribution ---",
+    templateLineText("gclid", payload.gclid),
+    templateLineText("utm_source", payload.utm_source),
+    templateLineText("utm_medium", payload.utm_medium),
+    templateLineText("utm_campaign", payload.utm_campaign),
+    templateLineText("utm_term", payload.utm_term),
+    templateLineText("utm_content", payload.utm_content),
   ]
     .filter(Boolean)
     .join("\n");
@@ -109,7 +135,15 @@ export async function POST(request: Request) {
       ${templateLine("HOA", payload.hoa)}
       ${templateLine("Fecha preferida", payload.preferredDate)}
       <p><strong>Mensaje:</strong></p>
-      <p>${payload.message}</p>
+      <p>${escapeHtml(message)}</p>
+      <hr>
+      <p style="color:#999;font-size:12px"><strong>Attribution</strong></p>
+      ${templateLine("gclid", payload.gclid)}
+      ${templateLine("utm_source", payload.utm_source)}
+      ${templateLine("utm_medium", payload.utm_medium)}
+      ${templateLine("utm_campaign", payload.utm_campaign)}
+      ${templateLine("utm_term", payload.utm_term)}
+      ${templateLine("utm_content", payload.utm_content)}
     </div>
   `;
 
@@ -143,7 +177,13 @@ export async function POST(request: Request) {
     linearFeet: payload.linearFeet,
     hoa: payload.hoa,
     preferredDate: payload.preferredDate,
-    message: payload.message,
+    message,
+    gclid: payload.gclid,
+    utm_source: payload.utm_source,
+    utm_medium: payload.utm_medium,
+    utm_campaign: payload.utm_campaign,
+    utm_term: payload.utm_term,
+    utm_content: payload.utm_content,
   });
 
   return NextResponse.json({ ok: true }, { status: 200 });

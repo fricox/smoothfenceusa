@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getAttribution } from "@/lib/attribution";
+import { trackLead } from "@/lib/track";
 
 /**
  * Tiny pre-estimator form for people who have a quick question.
@@ -10,7 +12,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
  * The real lead capture is the estimator — this form is a safety net.
  */
 export default function QuickContactForm() {
-  const { lang } = useLanguage();
+  const { lang, tr } = useLanguage();
   const isEs = lang === "es";
 
   const [fullName, setFullName] = useState("");
@@ -28,10 +30,10 @@ export default function QuickContactForm() {
     name: isEs ? "Nombre" : "Name",
     phone: isEs ? "Teléfono" : "Phone",
     email: isEs ? "Correo (opcional)" : "Email (optional)",
-    message: isEs ? "¿En qué te podemos ayudar?" : "How can we help?",
+    message: isEs ? "Mensaje (opcional)" : "Message (optional)",
     submit: isEs ? "Enviar pregunta" : "Send question",
     sending: isEs ? "Enviando..." : "Sending...",
-    ok: isEs ? "¡Recibido! Te contactamos pronto." : "Got it! We'll reach out shortly.",
+    ok: tr.form.success24h,
     error: isEs ? "No se pudo enviar. Llámanos directo." : "Couldn't send. Please call us directly.",
     useEstimator: isEs ? "¿Listo para un estimado?" : "Ready for an estimate?",
     goEstimator: isEs ? "Usa el estimador →" : "Use the estimator →",
@@ -43,6 +45,7 @@ export default function QuickContactForm() {
     setErrorMsg("");
 
     try {
+      const attribution = getAttribution();
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -56,6 +59,7 @@ export default function QuickContactForm() {
           hoa: "",
           preferredDate: "",
           message,
+          ...attribution,
         }),
       });
 
@@ -63,6 +67,8 @@ export default function QuickContactForm() {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Network error");
       }
+
+      trackLead("quick_contact", attribution);
 
       setStatus("ok");
       setFullName("");
@@ -128,15 +134,14 @@ export default function QuickContactForm() {
             {t.message}
           </label>
           <textarea
-            required
             rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="mt-1 w-full rounded-xl border border-brand-light bg-white px-4 py-3 text-brand-deep placeholder:text-brand-deep/40 focus:border-brand-green focus:outline-none"
             placeholder={
               isEs
-                ? "Ej: ¿Trabajan en mi zona? ¿Cuánto cuesta una puerta extra?"
-                : "e.g. Do you work in my area? What does an extra gate cost?"
+                ? "Contanos si necesitás algo puntual"
+                : "Tell us if you need something specific"
             }
           />
         </div>

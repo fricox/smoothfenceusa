@@ -7,6 +7,7 @@ type Msg = { role: 'user' | 'assistant'; content: string };
 
 const SESSION_KEY = 'sf_chat_session_id';
 const AUTO_OPEN_MS = 5000;
+const CALENDLY_URL = 'https://calendly.com/federico-smoothfenceusa/30min';
 
 interface ChatWidgetProps {
   apiBase?: string; // para uso embebido en otro dominio
@@ -25,6 +26,7 @@ export default function ChatWidget({
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState<'es' | 'en'>('en');
+  const [showCalendly, setShowCalendly] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Sesión persistente + auto-abre 5s + carga historial
@@ -54,6 +56,13 @@ export default function ChatWidget({
     const timer = setTimeout(() => setOpen(true), AUTO_OPEN_MS);
     return () => clearTimeout(timer);
   }, [apiBase]);
+
+  // Notify parent frame (widget.js) when chat opens/closes so it can resize
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.parent !== window) {
+      window.parent.postMessage({ type: 'fency-resize', open }, '*');
+    }
+  }, [open]);
 
   // auto-scroll al fondo
   useEffect(() => {
@@ -86,8 +95,11 @@ export default function ChatWidget({
         body: JSON.stringify({ sessionId, message: text, language }),
       });
       const data = await r.json();
+      if (!r.ok || !data.reply) {
+        throw new Error(data.detail || data.error || 'API error');
+      }
       if (data.language && data.language !== language) setLanguage(data.language);
-      setMessages((m) => [...m, { role: 'assistant', content: data.reply ?? '...' }]);
+      setMessages((m) => [...m, { role: 'assistant', content: data.reply }]);
     } catch {
       setMessages((m) => [
         ...m,
@@ -101,12 +113,19 @@ export default function ChatWidget({
     }
   }
 
-  const waHref = whatsapp
-    ? `https://wa.me/${whatsapp.replace(/[^\d]/g, '')}?text=${encodeURIComponent(
-        language === 'es' ? 'Hola, quiero un estimado de cerca' : 'Hi, I want a fence estimate'
-      )}`
-    : '';
+  const waNumber = whatsapp ? whatsapp.replace(/[^\d]/g, '') : '';
   const telHref = phone ? `tel:${phone.replace(/[^+\d]/g, '')}` : '';
+
+  function openWhatsApp() {
+    if (!waNumber) return;
+    const text = buildWhatsAppMessage(messages, language);
+    window.open(
+      `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`,
+      '_blank',
+      'noreferrer'
+    );
+  }
+
 
   return (
     <div className="fixed bottom-5 right-5 z-[9999] font-sans">
@@ -149,57 +168,87 @@ export default function ChatWidget({
             </button>
           </div>
 
-          {/* Mensajes */}
-          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-gray-50 px-3 py-3">
-            {messages.map((m, i) => (
-              <div
-                key={i}
-                className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm leading-snug ${
-                    m.role === 'user'
-                      ? 'rounded-br-sm bg-brand-600 text-white'
-                      : 'rounded-bl-sm bg-white text-gray-800 shadow-sm'
-                  }`}
+          {/* Área principal: mensajes o iframe de Calendly */}
+          {showCalendly ? (
+            <div className="flex flex-1 flex-col overflow-hidden">
+              <div className="flex items-center gap-2 border-b border-gray-100 bg-white px-3 py-2">
+                <button
+                  onClick={() => setShowCalendly(false)}
+                  className="flex items-center gap-1 text-sm font-medium text-brand-600 hover:text-brand-700"
                 >
-                  {m.content}
-                </div>
+                  ← {language === 'es' ? 'Volver al chat' : 'Back to chat'}
+                </button>
               </div>
-            ))}
-            {loading && (
-              <div className="flex justify-start">
-                <div className="rounded-2xl rounded-bl-sm bg-white px-3 py-2 text-sm text-gray-500 shadow-sm">
-                  <span className="inline-block animate-pulse">●●●</span>
-                </div>
+              <iframe
+                src={CALENDLY_URL}
+                title="Schedule a visit"
+                className="flex-1 border-0 bg-white w-full"
+                allow="camera; microphone; payment"
+              />
+            </div>
+          ) : (
+            <>
+              <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-gray-50 px-3 py-3">
+                {messages.map((m, i) => (
+                  <div
+                    key={i}
+                    className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[80%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm leading-snug ${
+                        m.role === 'user'
+                          ? 'rounded-br-sm bg-brand-600 text-white'
+                          : 'rounded-bl-sm bg-white text-gray-800 shadow-sm'
+                      }`}
+                    >
+                      {m.content}
+                    </div>
+                  </div>
+                ))}
+                {loading && (
+                  <div className="flex justify-start">
+                    <div className="rounded-2xl rounded-bl-sm bg-white px-3 py-2 text-sm text-gray-500 shadow-sm">
+                      <span className="inline-block animate-pulse">●●●</span>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          {/* Handoff bar */}
-          <div className="flex items-center justify-center gap-2 border-t border-gray-100 bg-white px-3 py-1.5 text-xs">
-            <span className="text-gray-500">
-              {language === 'es' ? 'Hablar con humano:' : 'Talk to a human:'}
-            </span>
-            {waHref && (
-              <a
-                href={waHref}
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-brand-600 hover:underline"
-              >
-                WhatsApp
-              </a>
-            )}
-            {telHref && (
-              <>
-                <span className="text-gray-300">·</span>
-                <a href={telHref} className="font-medium text-brand-600 hover:underline">
-                  {language === 'es' ? 'Llamar' : 'Call'}
-                </a>
-              </>
-            )}
-          </div>
+              {/* Botón Agendar cita */}
+              <div className="border-t border-gray-100 bg-brand-50 px-3 py-2">
+                <button
+                  onClick={() => setShowCalendly(true)}
+                  className="w-full rounded-xl bg-brand-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 active:scale-[0.98]"
+                >
+                  📅 {language === 'es' ? 'Agendar visita gratuita' : 'Schedule free visit'}
+                </button>
+              </div>
+            </>
+          )}
+
+          {/* Handoff bar + Input — ocultos cuando Calendly está abierto */}
+          {!showCalendly && <>
+            <div className="flex items-center justify-center gap-2 border-t border-gray-100 bg-white px-3 py-1.5 text-xs">
+              <span className="text-gray-500">
+                {language === 'es' ? 'Hablar con humano:' : 'Talk to a human:'}
+              </span>
+              {waNumber && (
+                <button
+                  onClick={openWhatsApp}
+                  className="font-medium text-brand-600 hover:underline"
+                >
+                  WhatsApp
+                </button>
+              )}
+              {telHref && (
+                <>
+                  <span className="text-gray-300">·</span>
+                  <a href={telHref} className="font-medium text-brand-600 hover:underline">
+                    {language === 'es' ? 'Llamar' : 'Call'}
+                  </a>
+                </>
+              )}
+            </div>
 
           {/* Input */}
           <div className="flex items-center gap-2 border-t border-gray-100 bg-white p-2">
@@ -226,10 +275,51 @@ export default function ChatWidget({
               {language === 'es' ? 'Enviar' : 'Send'}
             </button>
           </div>
+          </>}
         </div>
       )}
     </div>
   );
+}
+
+/**
+ * Builds a WhatsApp message with the full conversation transcript.
+ * Skips the auto welcome message (first bot message), takes last 8 exchanges,
+ * truncates bot replies to keep URLs under ~1500 chars total.
+ */
+function buildWhatsAppMessage(msgs: Msg[], language: 'es' | 'en'): string {
+  // Skip the initial welcome message (index 0, role assistant)
+  const conversation = msgs.slice(msgs[0]?.role === 'assistant' ? 1 : 0);
+
+  if (conversation.length === 0) {
+    return language === 'es'
+      ? 'Hola, me gustaría un estimado de cerca'
+      : 'Hi, I would like a fence estimate';
+  }
+
+  const header = language === 'es'
+    ? 'Hola, estuve chateando con Fency en el sitio de Smooth Fence USA. Acá va el resumen:\n\n'
+    : 'Hi, I was chatting with Fency on the Smooth Fence USA website. Here\'s the summary:\n\n';
+
+  // Take last 8 messages, format as transcript
+  const recent = conversation.slice(-8);
+  const lines = recent.map((m) => {
+    const prefix = m.role === 'user' ? '👤' : '🤖';
+    // Truncate long bot replies to 100 chars to keep URL short
+    const content = m.role === 'assistant' && m.content.length > 100
+      ? m.content.slice(0, 97) + '…'
+      : m.content;
+    return `${prefix}: ${content}`;
+  });
+
+  const transcript = lines.join('\n');
+  const full = header + transcript;
+
+  // WhatsApp URL has a practical ~1500 char limit on the text param
+  if (full.length > 1400) {
+    return full.slice(0, 1397) + '…';
+  }
+  return full;
 }
 
 /** Ícono de cerca personalizado, SVG inline. */

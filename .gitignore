@@ -40,3 +40,39 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
+
+# claude worktrees & old build cache
+.claude/
+.next_old/
+gbp-photos-seo/
+smoothfence-chatbot/
+Preview engine/
+DISPATCH_INTEGRATION.md
+
+# Operational docs (NOT for public repo)
+memory/
+PLAN_CLICK_TO_LEAD_*.md
+
+# --- Operational docs (NEVER commit) ---
+/CLAUDE.md
+/AUDIT_*.md
+/BACKUP_*.md
+/BRIEF_*.md
+/CONTINUAR_*.md
+/PLAN_*.md
+/HEARTH_KB_*
+/INFORME_*
+/ASSETS_CHECKLIST*
+/CALENDLY_HEARTH_DECISION_*.md
+/DISPATCH_INTEGRATION.md
+/SETUP_CRM.md
+/lead-conversion-audit-*.md
+/smoothfence-preview-lab-*.md
+/website-audit-report.docx
+/gallery-review.xlsx
+/review-*.jpg
+/*.docx
+/*.xlsx
+/*.pdf
+/backups/
+/memory/

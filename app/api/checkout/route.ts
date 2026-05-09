@@ -32,7 +32,9 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://smoothfenceusa.com"}/pay/success?session_id={CHECKOUT_SESSION_ID}&name=${encodeURIComponent(customerName || "")}&email=${encodeURIComponent(customerEmail || "")}`,
+      // `amount` is appended (in dollars) so /pay/success can fire the
+      // `purchase` GTM/Google Ads conversion with the real paid value.
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://smoothfenceusa.com"}/pay/success?session_id={CHECKOUT_SESSION_ID}&amount=${amount}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://smoothfenceusa.com"}/pay`,
       metadata: {
         customerName: customerName || "",

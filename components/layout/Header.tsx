@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { Lang } from "@/lib/translations";
+import { trackClickToContact } from "@/lib/track-click";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,12 +16,21 @@ export default function Header() {
   const pathname = usePathname();
   const { lang, setLang, tr } = useLanguage();
 
+  // Paid landing pages (/lp/*) render their own minimal header in app/lp/layout.tsx.
+  // Hiding the full site nav here is critical for conversion: ad visitors should
+  // not see links to /about, /gallery, etc. (2026-04-29 ads pivot).
+  if (pathname?.startsWith("/lp/")) {
+    return null;
+  }
+
   const navLinks = [
     { label: tr.nav.home, href: "/" },
     { label: tr.nav.services, href: "/services" },
     { label: tr.nav.gallery, href: "/gallery" },
     { label: tr.nav.about, href: "/about" },
     { label: tr.nav.hoaPermits, href: "/hoas-permits" },
+    { label: tr.nav.financing, href: "/financing" },
+    { label: tr.nav.faq, href: "/faq" },
     { label: tr.nav.contact, href: "/contact" },
   ];
 
@@ -55,6 +65,7 @@ export default function Header() {
               {tr.topbar.email}{" "}
               <a
                 href="mailto:info@smoothfenceusa.com"
+                onClick={() => trackClickToContact("email", "topbar")}
                 className="underline underline-offset-2 transition-colors hover:text-brand-yellow"
               >
                 info@smoothfenceusa.com
@@ -69,6 +80,7 @@ export default function Header() {
             <span className="hidden lg:inline">{tr.topbar.callUs}</span>
             <a
               href="tel:+13864039460"
+              onClick={() => trackClickToContact("tel", "topbar")}
               className="rounded-full bg-brand-yellow px-3 py-1 font-semibold text-brand-deep transition-colors hover:bg-brand-light"
             >
               (386) 403-9460
@@ -84,13 +96,13 @@ export default function Header() {
           <Link href="/" className="flex shrink-0 items-center">
             <Image
               src="/logo.svg"
-              alt="SmoothFenceUSA logo"
+              alt="Smooth Fence USA logo"
               width={213}
               height={80}
               priority
               className="h-auto w-[150px] sm:w-[180px] lg:w-[200px]"
             />
-            <span className="sr-only">SmoothFenceUSA</span>
+            <span className="sr-only">Smooth Fence USA</span>
           </Link>
 
           {/* Desktop nav links */}
@@ -172,6 +184,7 @@ export default function Header() {
             {/* Call button */}
             <a
               href="tel:+13864039460"
+              onClick={() => trackClickToContact("tel", "header_mobile")}
               aria-label="Call (386) 403-9460"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green text-white shadow-sm transition-colors hover:bg-brand-deep"
             >
@@ -254,7 +267,7 @@ export default function Header() {
             <div className="mt-2 grid grid-cols-2 gap-2">
               <a
                 href="tel:+13864039460"
-                onClick={closeMenu}
+                onClick={() => { trackClickToContact("tel", "header_mobile_menu"); closeMenu(); }}
                 className="flex items-center justify-center gap-2 rounded-full bg-brand-green px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-brand-deep"
               >
                 📞 {lang === "es" ? "Llamar" : "Call"}

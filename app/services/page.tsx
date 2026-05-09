@@ -1,6 +1,7 @@
 "use client";
 
 import CTA from "@/components/layout/CTA";
+import FinancingBanner from "@/components/sections/FinancingBanner";
 import ServicesSection from "@/components/sections/Services";
 import ServicesFAQ from "@/components/sections/ServicesFAQ";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -27,6 +28,8 @@ export default function ServicesPage() {
         <div className="mb-16 lg:mb-20">
           <ServicesSection />
         </div>
+
+        <FinancingBanner variant="inline" source="services_page" />
 
         <section className="border-t border-brand-light/60 pt-10 lg:pt-12">
           <ServicesFAQ />

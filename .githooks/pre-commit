@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Pre-commit guard: block leaking operational docs / PII to public repo.
+# Patterns derived from .gitignore hardening after incident 7a32936 (2026-04-20).
+# Bypass with --no-verify ONLY if you know what you're doing.
+
+set -euo pipefail
+
+staged="$(git diff --cached --name-only --diff-filter=AM || true)"
+[ -z "$staged" ] && exit 0
+
+forbidden_regex='^(CLAUDE\.md|AUDIT_.*\.md|BACKUP_.*\.md|CONTINUAR_.*\.md|PLAN_.*\.md|HEARTH_KB_.*|INFORME_.*|ASSETS_CHECKLIST.*|CALENDLY_HEARTH_DECISION_.*\.md|DISPATCH_INTEGRATION\.md|SETUP_CRM\.md|lead-conversion-audit-.*\.md|smoothfence-preview-lab-.*\.md|website-audit-report\.docx|gallery-review\.xlsx|review-.*\.jpg|[^/]+\.docx|[^/]+\.xlsx|[^/]+\.pdf|backups/.*|memory/.*|\.env(\..+)?)$'
+
+matches="$(echo "$staged" | grep -E "$forbidden_regex" || true)"
+
+if [ -n "$matches" ]; then
+  echo ""
+  echo "✖ pre-commit: staged files match forbidden patterns (ops docs / PII / secrets)."
+  echo ""
+  echo "$matches" | sed 's/^/  - /'
+  echo ""
+  echo "This project had a PII leak via \`git add -A\` (commit 7a32936 on 2026-04-20)."
+  echo "These paths are blocked by policy. Unstage them:"
+  echo ""
+  echo "  git restore --staged <path>"
+  echo ""
+  echo "If you are ABSOLUTELY sure this is a false positive, bypass with:"
+  echo ""
+  echo "  git commit --no-verify"
+  echo ""
+  exit 1
+fi
+
+exit 0

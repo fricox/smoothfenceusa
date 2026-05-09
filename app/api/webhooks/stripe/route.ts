@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
+import { escapeHtml } from "@/lib/sanitize";
 
 export const runtime = "nodejs";
 
@@ -81,18 +82,18 @@ export async function POST(req: NextRequest) {
       const clientHtml = `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#125036">
           <div style="background:#125036;padding:32px;text-align:center;border-radius:16px 16px 0 0">
-            <h1 style="color:#f8cf2b;margin:0;font-size:28px">SmoothFenceUSA</h1>
+            <h1 style="color:#f8cf2b;margin:0;font-size:28px">Smooth Fence USA</h1>
             <p style="color:#fff;margin:8px 0 0;font-size:14px">Payment Confirmation</p>
           </div>
           <div style="background:#fff;padding:32px;border-radius:0 0 16px 16px;border:1px solid #b2cf7f">
             <div style="text-align:center;font-size:48px;margin-bottom:8px">✅</div>
             <h2 style="color:#125036;text-align:center;margin:0 0 8px">Payment Received</h2>
-            <p style="text-align:center;color:#666;margin:0 0 24px">Thank you for your deposit, ${customerName}!</p>
+            <p style="text-align:center;color:#666;margin:0 0 24px">Thank you for your deposit, ${escapeHtml(customerName)}!</p>
 
             <div style="background:#125036;border-radius:12px;padding:28px;text-align:center;margin:20px 0">
               <p style="color:#b2cf7f;margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:2px">Amount Paid</p>
               <p style="color:#f8cf2b;font-size:42px;font-weight:900;margin:0">${fmt(amount)}</p>
-              <p style="color:#fff;font-size:12px;margin:8px 0 0">${description}</p>
+              <p style="color:#fff;font-size:12px;margin:8px 0 0">${escapeHtml(description)}</p>
             </div>
 
             <div style="background:#fbfcf9;border:1px solid #b2cf7f;border-radius:12px;padding:20px;margin:20px 0">
@@ -122,7 +123,7 @@ export async function POST(req: NextRequest) {
             <p style="font-size:14px;color:#666;text-align:center">Questions? Call us at <a href="tel:+13864039460" style="color:#125036;font-weight:700">(386) 403-9460</a></p>
 
             <hr style="border:none;border-top:1px solid #b2cf7f;margin:24px 0">
-            <p style="font-size:12px;color:#999;text-align:center">SmoothFenceUSA · Palm Coast, FL · info@smoothfenceusa.com</p>
+            <p style="font-size:12px;color:#999;text-align:center">Smooth Fence USA · Palm Coast, FL · info@smoothfenceusa.com</p>
           </div>
         </div>
       `;
@@ -139,9 +140,9 @@ export async function POST(req: NextRequest) {
               <p style="margin:4px 0 0;font-size:36px;font-weight:900">${fmt(amount)}</p>
             </div>
             <table style="width:100%;font-size:14px;border-collapse:collapse">
-              <tr><td style="padding:8px;color:#666;width:40%">Customer</td><td style="font-weight:700">${customerName}</td></tr>
-              <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Email</td><td style="font-weight:700"><a href="mailto:${customerEmail}">${customerEmail}</a></td></tr>
-              <tr><td style="padding:8px;color:#666">Description</td><td style="font-weight:700">${description}</td></tr>
+              <tr><td style="padding:8px;color:#666;width:40%">Customer</td><td style="font-weight:700">${escapeHtml(customerName)}</td></tr>
+              <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Email</td><td style="font-weight:700"><a href="mailto:${escapeHtml(customerEmail)}">${escapeHtml(customerEmail)}</a></td></tr>
+              <tr><td style="padding:8px;color:#666">Description</td><td style="font-weight:700">${escapeHtml(description)}</td></tr>
               <tr style="background:#f8f8f8"><td style="padding:8px;color:#666">Date</td><td style="font-weight:700">${new Date(paidAt).toLocaleString("en-US")}</td></tr>
               <tr><td style="padding:8px;color:#666">Stripe Session</td><td style="font-weight:700;font-family:monospace;font-size:11px">${sessionId}</td></tr>
               <tr style="background:#f8cf2b"><td style="padding:12px 8px;color:#125036;font-weight:700">📅 Earliest Install</td><td style="padding:12px 8px;font-weight:900;color:#125036">${earliestStr}</td></tr>
@@ -159,7 +160,7 @@ export async function POST(req: NextRequest) {
           resend.emails.send({
             from: emailFrom,
             to: [customerEmail],
-            subject: `Payment Confirmation: ${fmt(amount)} — SmoothFenceUSA`,
+            subject: `Payment Confirmation: ${fmt(amount)} — Smooth Fence USA`,
             replyTo: leadsToEmail,
             html: clientHtml,
           }),

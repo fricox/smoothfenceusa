@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getAttribution } from "@/lib/attribution";
+import { trackLead, trackContactClick } from "@/lib/track";
 
 /* ── Pricing data ─────────────────────────────────────────── */
 const MATERIALS = [
@@ -80,6 +82,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
     setSending(true);
     setError("");
     try {
+      const attribution = getAttribution();
       const res = await fetch("/api/estimator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,9 +96,16 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
           premium,
           estimateLow:  estimate?.low,
           estimateHigh: estimate?.high,
+          ...attribution,
         }),
       });
       if (!res.ok) throw new Error("Server error");
+
+      trackLead("estimator", attribution, 50, {
+        estimate_low: estimate?.low,
+        estimate_high: estimate?.high,
+      });
+
       setStep(3);
     } catch {
       setError("Something went wrong. Please try again.");
@@ -290,9 +300,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
           <div className="bg-white rounded-3xl shadow-xl ring-1 ring-brand-light p-8 text-center space-y-6">
             <div className="text-5xl">🎉</div>
             <h2 className="text-2xl font-extrabold text-brand-deep">{e.confirmTitle}</h2>
-            <p className="text-brand-deep/70">
-              {e.confirmSub} <strong>{email}</strong>.
-            </p>
+            <p className="text-brand-deep/70">{e.success24h}</p>
 
             {estimate && (
               <div className="rounded-2xl bg-brand-deep text-white p-5">
@@ -324,7 +332,7 @@ export default function EstimatorClient({ inline = false }: { inline?: boolean }
               <Link href="/" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
                 {e.backHome}
               </Link>
-              <a href="tel:+13864039460" className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
+              <a href="tel:+13864039460" onClick={() => trackContactClick("tel", "estimator_success")} className="flex-1 rounded-full border border-brand-light py-3 text-sm font-semibold text-brand-deep transition-colors hover:bg-brand-cream text-center">
                 {e.callNow}
               </a>
             </div>

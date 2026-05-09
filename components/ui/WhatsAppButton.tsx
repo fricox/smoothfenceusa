@@ -1,14 +1,17 @@
 "use client";
 
+import { trackClickToContact } from "@/lib/track-click";
+
 const PHONE = "13864039460";
 const MESSAGE = encodeURIComponent(
-  "Hi! I'm interested in getting a fence quote from SmoothFenceUSA."
+  "Hi! I'm interested in getting a fence quote from Smooth Fence USA."
 );
 
 export default function WhatsAppButton() {
   return (
     <a
       href={`https://wa.me/${PHONE}?text=${MESSAGE}`}
+      onClick={() => trackClickToContact("whatsapp", "whatsapp_button")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

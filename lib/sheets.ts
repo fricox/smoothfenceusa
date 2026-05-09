@@ -78,6 +78,14 @@ export interface LeadEvent {
   /* Freeform */
   notes?: string;
   message?: string;
+
+  /* Attribution (Track A) */
+  gclid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
 }
 
 /**
@@ -130,15 +138,60 @@ export async function pushLeadEvent(event: LeadEvent): Promise<void> {
     // Freeform
     notes: event.notes || "",
     message: event.message || "",
+
+    // Attribution (Track A)
+    gclid: event.gclid || "",
+    utm_source: event.utm_source || "",
+    utm_medium: event.utm_medium || "",
+    utm_campaign: event.utm_campaign || "",
+    utm_term: event.utm_term || "",
+    utm_content: event.utm_content || "",
   };
 
+  // Retry with exponential backoff. If all attempts fail, write to a local
+  // fallback file so the lead is not silently lost — a future operator can
+  // replay /tmp/leads-fallback.jsonl into the Sheet manually.
+  const MAX_ATTEMPTS = 3;
+  const body = JSON.stringify(payload);
+  let lastErr: unknown;
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
+      // Apps Script returns 200/302 on success; treat 4xx/5xx as retryable.
+      if (res.ok || res.status === 302) return;
+      lastErr = new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      lastErr = err;
+    }
+    if (attempt < MAX_ATTEMPTS) {
+      // 500ms, then 1500ms — total worst-case added latency ~2s.
+      await new Promise((r) => setTimeout(r, 500 * Math.pow(3, attempt - 1)));
+    }
+  }
+
+  console.error(
+    `[sheets] pushLeadEvent failed after ${MAX_ATTEMPTS} attempts:`,
+    lastErr,
+  );
+
+  // Fallback: append to a JSONL file. Only works on runtimes with fs access
+  // (Node, not Edge). `appendFile` is imported dynamically so this module
+  // stays Edge-compatible at import time.
   try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-  } catch (err) {
-    console.error("[sheets] pushLeadEvent failed:", err);
+    const { appendFile } = await import("node:fs/promises");
+    const line = JSON.stringify({
+      failedAt: new Date().toISOString(),
+      error: lastErr instanceof Error ? lastErr.message : String(lastErr),
+      payload,
+    }) + "\n";
+    await appendFile("/tmp/leads-fallback.jsonl", line, "utf8");
+  } catch (fsErr) {
+    // Edge runtime or FS unavailable — nothing else we can do here besides log.
+    console.error("[sheets] fallback file write also failed:", fsErr);
   }
 }
