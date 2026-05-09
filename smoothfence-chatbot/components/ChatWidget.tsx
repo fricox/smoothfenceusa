@@ -128,7 +128,10 @@ export default function ChatWidget({
 
 
   return (
-    <div className="fixed bottom-5 right-5 z-[9999] font-sans">
+    <div
+      className="fixed bottom-5 right-5 z-[9999] font-sans flex flex-col justify-end"
+      style={open ? undefined : { height: '90px' }}
+    >
       {/* Burbuja flotante */}
       {!open && (
         <button

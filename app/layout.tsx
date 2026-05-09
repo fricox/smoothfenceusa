@@ -149,7 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </LanguageProvider>
         {/* Fency AI chatbot widget — loads from separate Vercel deployment */}
         <Script
-          src="https://smoothfence-chatbot.vercel.app/api/widget.js"
+          src="https://smoothfence-chatbot.vercel.app/api/widget.js?v=2"
           strategy="lazyOnload"
         />
       </body>
