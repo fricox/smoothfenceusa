@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
 import { escapeHtml, rateLimit } from "@/lib/sanitize";
+import {
+  dispatchMetaCapiEvent,
+  extractMetaIds,
+  extractClientIdentity,
+} from "@/lib/meta-capi";
 
 type QuotePayload = {
   fullName: string;
@@ -185,6 +190,39 @@ export async function POST(request: NextRequest) {
     utm_term: payload.utm_term,
     utm_content: payload.utm_content,
   });
+
+  // ── Meta CAPI Lead event (fire-and-forget, never blocks user response) ──
+  // Silent no-op if META_PIXEL_ID/META_CAPI_TOKEN not configured.
+  // Pixel-CAPI deduplication via event_id when Pixel is installed.
+  {
+    const nameParts = payload.fullName.trim().split(/\s+/);
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(" ") || undefined;
+    const { fbc, fbp } = extractMetaIds(request);
+    const { ip, userAgent } = extractClientIdentity(request);
+    dispatchMetaCapiEvent({
+      eventName: "Lead",
+      actionSource: "website",
+      eventSourceUrl: request.headers.get("referer") || "https://smoothfenceusa.com/contact",
+      userData: {
+        firstName,
+        lastName,
+        email: payload.email,
+        phone: payload.phone,
+        country: "us",
+        ip,
+        userAgent,
+        fbc,
+        fbp,
+      },
+      customData: {
+        value: 50,
+        currency: "USD",
+        contentName: "Quote Request",
+        contentCategory: "fence_install_estimate",
+      },
+    }).catch((err) => console.error("CAPI Lead dispatch failed:", err));
+  }
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }

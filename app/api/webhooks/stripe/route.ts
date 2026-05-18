@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
 import { escapeHtml } from "@/lib/sanitize";
+import { dispatchMetaCapiEvent } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
 
@@ -190,6 +191,42 @@ export async function POST(req: NextRequest) {
       earliestInstallDate: earliestStr,
       notes: `💰 DEPOSIT PAID: ${fmt(amount)} — ${description}`,
     });
+
+    // ── Meta CAPI Purchase event (fire-and-forget) ───────────────
+    // Real revenue → Meta uses this for ROAS reporting + Advantage+ optimization.
+    // Silent no-op if META_PIXEL_ID/META_CAPI_TOKEN unset.
+    {
+      const nameParts = customerName.trim().split(/\s+/);
+      const firstName = nameParts[0];
+      const lastName = nameParts.slice(1).join(" ") || undefined;
+      const stripePhone = session.customer_details?.phone || undefined;
+      const stripeAddress = session.customer_details?.address || undefined;
+      dispatchMetaCapiEvent({
+        eventName: "Purchase",
+        actionSource: "website",
+        eventTime: session.created || undefined,
+        eventId: `stripe-${sessionId}`,
+        eventSourceUrl: "https://smoothfenceusa.com/pay/success",
+        userData: {
+          firstName,
+          lastName,
+          email: customerEmail || undefined,
+          phone: stripePhone,
+          zip: stripeAddress?.postal_code || undefined,
+          city: stripeAddress?.city || undefined,
+          state: stripeAddress?.state || undefined,
+          country: stripeAddress?.country?.toLowerCase() || "us",
+          externalId: sessionId,
+        },
+        customData: {
+          value: amount,
+          currency: (session.currency || "USD").toUpperCase(),
+          contentName: description,
+          contentCategory: "fence_install_deposit",
+          orderId: sessionId,
+        },
+      }).catch((err) => console.error("CAPI Purchase dispatch failed:", err));
+    }
   }
 
   return NextResponse.json({ received: true });

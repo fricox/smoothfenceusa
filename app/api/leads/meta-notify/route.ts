@@ -16,6 +16,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { pushLeadEvent } from "@/lib/sheets";
 import { escapeHtml, rateLimit } from "@/lib/sanitize";
+import { dispatchMetaCapiEvent } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
 
@@ -183,10 +184,54 @@ export async function POST(request: NextRequest) {
     console.error("Meta lead Sheets push error:", err);
   }
 
+  // ── CAPI Lead event (fire-and-forget) ───────────────────────
+  // Splits "John Doe" → firstName="John" lastName="Doe" for hashing.
+  const nameParts = name.split(/\s+/);
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(" ") || undefined;
+  let capiOk = false;
+  let capiError: string | null = null;
+  try {
+    const capiResult = await dispatchMetaCapiEvent({
+      eventName: "Lead",
+      // action_source = system_generated: the lead originated in Meta's lead
+      // form UI (not on smoothfenceusa.com), so don't claim it's a website event.
+      actionSource: "system_generated",
+      eventTime: payload.created_time
+        ? Math.floor(new Date(payload.created_time).getTime() / 1000)
+        : undefined,
+      eventId: `meta-lead-${payload.lead_id}`,
+      userData: {
+        firstName,
+        lastName,
+        email,
+        phone,
+        zip: zipcode,
+        city,
+        state,
+        country: "us",
+        externalId: payload.lead_id,
+      },
+      customData: {
+        value: 50,
+        currency: "USD",
+        contentName: "Meta Lead Form Submission",
+        contentCategory: "fence_install_estimate",
+      },
+    });
+    capiOk = capiResult.ok;
+    capiError = capiResult.reason || null;
+  } catch (err) {
+    capiError = err instanceof Error ? err.message : String(err);
+    console.error("Meta CAPI dispatch error:", err);
+  }
+
   return NextResponse.json({
     ok: true,
     email_sent: emailOk,
     email_error: emailError,
     sheets_pushed: sheetsOk,
+    capi_dispatched: capiOk,
+    capi_error: capiError,
   });
 }
