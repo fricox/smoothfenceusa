@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.1-lufer",
+  "name": "Smooth Fence USA",
+  "description": "Fence installation and repair contractor based in Palm Coast, Florida. Serves Flagler, Volusia, St. Johns, Duval, and Putnam counties.",
+  "url": "https://www.smoothfenceusa.com",
+  "vendor": {
+    "name": "Smooth Fence USA",
+    "url": "https://www.smoothfenceusa.com"
+  },
+  "contact": {
+    "email": "info@smoothfenceusa.com",
+    "phone": "+1-386-403-9460",
+    "hours": "Mon-Sat 08:00-18:00 America/New_York"
+  },
+  "supportedInterfaces": [
+    {
+      "type": "http",
+      "url": "https://www.smoothfenceusa.com",
+      "description": "Public website. Serves HTML pages with structured-data LocalBusiness JSON-LD."
+    },
+    {
+      "type": "markdown",
+      "url": "https://www.smoothfenceusa.com/index.md",
+      "pattern": "/<slug>.md",
+      "description": "Markdown twins of public pages. Each main HTML page has a sibling .md file with the same content rendered as markdown for agent consumption.",
+      "pages": [
+        "https://www.smoothfenceusa.com/index.md",
+        "https://www.smoothfenceusa.com/about.md",
+        "https://www.smoothfenceusa.com/services.md",
+        "https://www.smoothfenceusa.com/gallery.md",
+        "https://www.smoothfenceusa.com/faq.md",
+        "https://www.smoothfenceusa.com/hoas-permits.md",
+        "https://www.smoothfenceusa.com/financing.md",
+        "https://www.smoothfenceusa.com/contact.md",
+        "https://www.smoothfenceusa.com/privacy.md"
+      ]
+    },
+    {
+      "type": "skill",
+      "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/SKILL.md",
+      "description": "Agent Skill describing Smooth Fence USA — services, areas, pricing approach, financing, warranty, and quote process."
+    },
+    {
+      "type": "llms-txt",
+      "url": "https://www.smoothfenceusa.com/llms.txt",
+      "description": "llmstxt.org-formatted summary for LLM crawlers."
+    },
+    {
+      "type": "openapi",
+      "url": null,
+      "description": "No public OpenAPI surface in Phase A. A business-side MCP server is planned for the agent.smoothfenceusa.com subdomain in Phase B."
+    }
+  ],
+  "capabilities": {
+    "a2a": false,
+    "streaming": false,
+    "tasks": false,
+    "tools": false,
+    "memory": false
+  },
+  "languages": ["en", "es"],
+  "status": "live",
+  "docs": "https://www.smoothfenceusa.com",
+  "license": "All rights reserved — content is for agent reading and search indexing. See /privacy for policy.",
+  "updated": "2026-05-18"
+}

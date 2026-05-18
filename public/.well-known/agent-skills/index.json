@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1-lufer",
+  "vendor": "Smooth Fence USA",
+  "updated": "2026-05-18",
+  "skills": [
+    {
+      "id": "smoothfenceusa",
+      "name": "Smooth Fence USA — Fence installation & repair",
+      "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/SKILL.md",
+      "digest": "sha256:4e1493b2fda5351e776e59c5c36e6ae4136c0d6e7b96e683b37a34691b15722d",
+      "media_type": "text/markdown",
+      "version": "0.1",
+      "languages": ["en"],
+      "references": [
+        {
+          "id": "services",
+          "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/references/services.md"
+        },
+        {
+          "id": "areas",
+          "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/references/areas.md"
+        },
+        {
+          "id": "process",
+          "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/references/process.md"
+        },
+        {
+          "id": "permits",
+          "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/references/permits.md"
+        }
+      ]
+    }
+  ]
+}
