@@ -1,0 +1,84 @@
+# Smooth Fence USA
+
+> Fence installation and repair contractor based in Palm Coast, Florida.
+> Serving Flagler, Volusia, St. Johns, Duval, and Putnam counties since 2015+.
+> Licensed and insured in Florida. Owner-operated, no subcontracting.
+
+## What we do
+
+Smooth Fence USA installs and repairs residential fences across Northeast
+Florida. We work with four materials: vinyl, aluminum, chain-link, and wood.
+We also handle storm damage repair, HOA approval support, and city/county
+permits coordination.
+
+## Services
+
+- Vinyl fence installation (privacy, semi-privacy, picket; virgin vinyl)
+- Aluminum fence installation (pool-code compliant hardware available)
+- Chain-link fence installation (cost-effective; visibility)
+- Wood fence installation (modern hardware + proper post setting)
+- Fence repair and storm damage
+- HOA & permits assistance
+- Custom gates (standard 4ft/5ft walk-gates + custom sizes; manual only,
+  no automation)
+
+## Service area
+
+Five Northeast Florida counties:
+
+- Flagler County (Palm Coast, Bunnell, Flagler Beach)
+- Volusia County (Daytona Beach, Deltona, Ormond Beach, Port Orange)
+- St. Johns County (St. Augustine, Ponte Vedra, St. Johns)
+- Duval County (Jacksonville, Atlantic Beach, Jacksonville Beach)
+- Putnam County (Palatka, Interlachen, Crescent City)
+
+Nearby addresses evaluated case by case.
+
+## How to get a quote
+
+1. Instant estimator (30 sec): https://www.smoothfenceusa.com/estimator
+2. Free on-site visit within 24 hours
+3. Written proposal with materials, permits, and scheduling
+
+Contact: (386) 403-9460 · info@smoothfenceusa.com · Mon–Sat 8 AM – 6 PM
+
+## Financing
+
+Available through GetHearth (up to $100K, 2–12 year terms, soft credit pull,
+no impact on score). Affirm, Afterpay, and Klarna available at deposit
+checkout.
+
+## Warranty
+
+5-year workmanship warranty on every residential installation. Manufacturer
+warranties vary by material (vinyl typically limited lifetime; aluminum 10–20
+years). Workmanship warranty is non-transferable.
+
+## Bilingual
+
+The website is fully bilingual EN/ES with in-page language toggle. The owner
+is bilingual.
+
+## For AI agents
+
+- Agent Card: https://www.smoothfenceusa.com/.well-known/agent-card.json
+- Skill manifest: https://www.smoothfenceusa.com/.well-known/skills.json
+- Full agent skill: https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/SKILL.md
+- All public pages have markdown twins at `<slug>.md` (e.g. /services.md)
+- HTTP `Link` headers point to twin and descriptors
+
+## What we don't offer
+
+- Gate automation, keypad, or card-reader access control
+- Specific hardware brand commitments (chosen per project; preference accepted)
+- Pricing without an on-site visit (estimator gives range; visit confirms)
+- Commercial fencing (residential only)
+
+## MCP server
+
+A business-side MCP server is in development for the `agent.smoothfenceusa.com`
+subdomain. Phase B target. Not live yet at the time of writing.
+
+---
+
+Updated: 2026-05-18. Source: https://www.smoothfenceusa.com

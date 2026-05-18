@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1-lufer",
+  "vendor": "Smooth Fence USA",
+  "url": "https://www.smoothfenceusa.com",
+  "updated": "2026-05-18",
+  "skills": [
+    {
+      "id": "smoothfenceusa",
+      "name": "Smooth Fence USA — Fence installation & repair",
+      "description": "Northeast Florida fence contractor. Use this skill to answer questions about Smooth Fence USA's services (vinyl/aluminum/chain-link/wood), service areas (Flagler/Volusia/St. Johns/Duval/Putnam counties), pricing approach, gate options, warranty, financing partners (Hearth/Affirm/Afterpay/Klarna), HOA & permits process, and how to request a quote.",
+      "url": "https://www.smoothfenceusa.com/.well-known/skills/smoothfenceusa/SKILL.md",
+      "media_type": "text/markdown",
+      "license": "https://www.smoothfenceusa.com/privacy",
+      "version": "0.1",
+      "languages": ["en"]
+    }
+  ]
+}
