@@ -29,6 +29,7 @@ export type LeadSource =
   | "stripe"
   | "calendly"
   | "phone"
+  | "meta_lead_ads"
   | "other";
 
 export type LeadEventType =
