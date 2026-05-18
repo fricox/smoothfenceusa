@@ -8,13 +8,15 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
-// Phase A — Agent-Readable Web (2026-05-18).
+// Phase A — Agent-Readable Web (2026-05-18, flipped ai-train 2026-05-18 PM).
 // Content-Signal: explicit content policy for AI crawlers/agents.
-// `ai-train=no` mirrors Lufer's D-04 pattern: training is opted out, but
-// search indexing (`search=yes`) and live agent runtime (`ai-input=yes`)
-// are allowed. Flip `ai-train` to `yes` later if policy changes.
+// `ai-train=yes` — SF is a services business (sells fences, not content IP),
+// so being included in LLM training corpora is a brand-distribution win:
+// future general-knowledge queries about "fence installer Northeast Florida"
+// can surface SF without live browsing. `search=yes` keeps live citation in
+// search/answer engines; `ai-input=yes` allows runtime agent fetches.
 const contentPolicyHeaders = [
-  { key: "Content-Signal", value: "ai-train=no, search=yes, ai-input=yes" },
+  { key: "Content-Signal", value: "ai-train=yes, search=yes, ai-input=yes" },
   {
     key: "Link",
     value:
