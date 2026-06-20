@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
  *
  * Printed assets (business cards, truck magnets, flyers, yard signs) encode a
  * QR pointing at `/c?v=<variant>`. This handler:
- *   1. Redirects the visitor to the website (homepage — the hero leads with the
- *      free-estimate form, matching the card's "Scan for a free quote" promise).
+ *   1. Redirects the visitor straight to the free-estimate form (homepage
+ *      #estimator anchor), matching the card's "Scan for a free quote" promise.
  *   2. Tags the visit with UTM params so it flows through the existing
  *      attribution pipeline (lib/attribution.ts -> CRM in lib/sheets.ts) and
  *      shows up in GA4 acquisition reports — closing the loop scan -> lead.
@@ -30,8 +30,10 @@ const SOURCE_BY_VARIANT: Record<string, string> = {
   yard: "yard_sign",
 };
 
-// Where scans land. The homepage hero leads with the free-estimate form.
+// Where scans land: the homepage estimator. "/estimator" already redirects to
+// this same anchor, so it's the established free-quote entry point.
 const DESTINATION_PATH = "/";
+const DESTINATION_HASH = "estimator";
 
 export function GET(req: NextRequest) {
   const raw = req.nextUrl.searchParams.get("v") ?? "qr";
@@ -45,6 +47,7 @@ export function GET(req: NextRequest) {
   dest.searchParams.set("utm_source", source);
   dest.searchParams.set("utm_medium", "qr");
   dest.searchParams.set("utm_campaign", variant);
+  dest.hash = DESTINATION_HASH;
 
   // Server-side scan log — a guaranteed count even if the visitor bounces.
   const h = req.headers;
